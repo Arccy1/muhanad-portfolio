@@ -1,0 +1,99 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-ink text-zinc-300 antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    @apply bg-brand-600/80 text-white;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0a0a0a;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #3f0207, #74030a);
+    border-radius: 8px;
+    border: 2px solid #0a0a0a;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #74030a, #e50914);
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-brand-500/70 ring-offset-2 ring-offset-ink;
+  }
+}
+
+@layer components {
+  /* Glassmorphism surface */
+  .glass {
+    @apply border border-white/10 bg-white/[0.04] backdrop-blur-md;
+  }
+
+  /* Dark red gradient headline text */
+  .text-gradient {
+    @apply bg-gradient-to-r from-brand-500 via-brand-400 to-[#FF8A5C] bg-clip-text text-transparent;
+  }
+
+  .heading-display {
+    @apply font-display uppercase tracking-wide leading-[0.95];
+  }
+
+  .section-kicker {
+    @apply inline-flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.35em] text-brand-400;
+  }
+  .section-kicker::before {
+    content: "";
+    @apply h-px w-10 bg-gradient-to-r from-brand-500 to-transparent;
+  }
+
+  /* Subtle film-grain overlay for cinematic surfaces */
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+@layer utilities {
+  .text-stroke {
+    -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.22);
+    color: transparent;
+  }
+  .text-stroke-red {
+    -webkit-text-stroke: 1.5px rgba(229, 9, 20, 0.55);
+    color: transparent;
+  }
+  .pause-on-hover:hover .animate-marquee {
+    animation-play-state: paused;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,136 @@
+{
+  "thumbs": {
+    "neon-nights": "/images/thumb-neon-nights.svg",
+    "street-style-reels": "/images/thumb-street-style-reels.svg",
+    "echoes-of-the-desert": "/images/thumb-echoes-of-the-desert.svg",
+    "founders-journey": "/images/thumb-founders-journey.svg",
+    "pulse-energy-ad": "/images/thumb-pulse-energy-ad.svg",
+    "aurora-skincare": "/images/thumb-aurora-skincare.svg",
+    "mwm-logo-reveal": "/images/thumb-mwm-logo-reveal.svg",
+    "kinetic-typography": "/images/thumb-kinetic-typography.svg",
+    "valorant-ace-montage": "/images/thumb-valorant-ace-montage.svg",
+    "fps-highlight-reel": "/images/thumb-fps-highlight-reel.svg",
+    "ramadan-campaign": "/images/thumb-ramadan-campaign.svg",
+    "launch-promo-pack": "/images/thumb-launch-promo-pack.svg"
+  },
+  "gallery": {
+    "neon-nights": [
+      "/images/gallery-neon-nights-1.svg",
+      "/images/gallery-neon-nights-2.svg",
+      "/images/gallery-neon-nights-3.svg"
+    ],
+    "street-style-reels": [
+      "/images/gallery-street-style-reels-1.svg",
+      "/images/gallery-street-style-reels-2.svg",
+      "/images/gallery-street-style-reels-3.svg"
+    ],
+    "echoes-of-the-desert": [
+      "/images/gallery-echoes-of-the-desert-1.svg",
+      "/images/gallery-echoes-of-the-desert-2.svg",
+      "/images/gallery-echoes-of-the-desert-3.svg"
+    ],
+    "founders-journey": [
+      "/images/gallery-founders-journey-1.svg",
+      "/images/gallery-founders-journey-2.svg",
+      "/images/gallery-founders-journey-3.svg"
+    ],
+    "pulse-energy-ad": [
+      "/images/gallery-pulse-energy-ad-1.svg",
+      "/images/gallery-pulse-energy-ad-2.svg",
+      "/images/gallery-pulse-energy-ad-3.svg"
+    ],
+    "aurora-skincare": [
+      "/images/gallery-aurora-skincare-1.svg",
+      "/images/gallery-aurora-skincare-2.svg",
+      "/images/gallery-aurora-skincare-3.svg"
+    ],
+    "mwm-logo-reveal": [
+      "/images/gallery-mwm-logo-reveal-1.svg",
+      "/images/gallery-mwm-logo-reveal-2.svg",
+      "/images/gallery-mwm-logo-reveal-3.svg"
+    ],
+    "kinetic-typography": [
+      "/images/gallery-kinetic-typography-1.svg",
+      "/images/gallery-kinetic-typography-2.svg",
+      "/images/gallery-kinetic-typography-3.svg"
+    ],
+    "valorant-ace-montage": [
+      "/images/gallery-valorant-ace-montage-1.svg",
+      "/images/gallery-valorant-ace-montage-2.svg",
+      "/images/gallery-valorant-ace-montage-3.svg"
+    ],
+    "fps-highlight-reel": [
+      "/images/gallery-fps-highlight-reel-1.svg",
+      "/images/gallery-fps-highlight-reel-2.svg",
+      "/images/gallery-fps-highlight-reel-3.svg"
+    ],
+    "ramadan-campaign": [
+      "/images/gallery-ramadan-campaign-1.svg",
+      "/images/gallery-ramadan-campaign-2.svg",
+      "/images/gallery-ramadan-campaign-3.svg"
+    ],
+    "launch-promo-pack": [
+      "/images/gallery-launch-promo-pack-1.svg",
+      "/images/gallery-launch-promo-pack-2.svg",
+      "/images/gallery-launch-promo-pack-3.svg"
+    ]
+  },
+  "beforeAfter": {
+    "neon-nights": {
+      "before": "/images/ba-neon-nights-before.svg",
+      "after": "/images/ba-neon-nights-after.svg"
+    },
+    "street-style-reels": {
+      "before": "/images/ba-street-style-reels-before.svg",
+      "after": "/images/ba-street-style-reels-after.svg"
+    },
+    "echoes-of-the-desert": {
+      "before": "/images/ba-echoes-of-the-desert-before.svg",
+      "after": "/images/ba-echoes-of-the-desert-after.svg"
+    },
+    "founders-journey": {
+      "before": "/images/ba-founders-journey-before.svg",
+      "after": "/images/ba-founders-journey-after.svg"
+    },
+    "pulse-energy-ad": {
+      "before": "/images/ba-pulse-energy-ad-before.svg",
+      "after": "/images/ba-pulse-energy-ad-after.svg"
+    },
+    "aurora-skincare": {
+      "before": "/images/ba-aurora-skincare-before.svg",
+      "after": "/images/ba-aurora-skincare-after.svg"
+    },
+    "mwm-logo-reveal": {
+      "before": "/images/ba-mwm-logo-reveal-before.svg",
+      "after": "/images/ba-mwm-logo-reveal-after.svg"
+    },
+    "kinetic-typography": {
+      "before": "/images/ba-kinetic-typography-before.svg",
+      "after": "/images/ba-kinetic-typography-after.svg"
+    },
+    "valorant-ace-montage": {
+      "before": "/images/ba-valorant-ace-montage-before.svg",
+      "after": "/images/ba-valorant-ace-montage-after.svg"
+    },
+    "fps-highlight-reel": {
+      "before": "/images/ba-fps-highlight-reel-before.svg",
+      "after": "/images/ba-fps-highlight-reel-after.svg"
+    },
+    "ramadan-campaign": {
+      "before": "/images/ba-ramadan-campaign-before.svg",
+      "after": "/images/ba-ramadan-campaign-after.svg"
+    },
+    "launch-promo-pack": {
+      "before": "/images/ba-launch-promo-pack-before.svg",
+      "after": "/images/ba-launch-promo-pack-after.svg"
+    }
+  },
+  "avatars": [
+    "/images/avatar-1.svg",
+    "/images/avatar-2.svg",
+    "/images/avatar-3.svg",
+    "/images/avatar-4.svg",
+    "/images/avatar-5.svg",
+    "/images/avatar-6.svg"
+  ]
+}

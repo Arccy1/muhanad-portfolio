@@ -1,0 +1,112 @@
+// Data model for the Muhanad Wael Mahdy portfolio.
+// Default provider is SQLite so the project runs locally out of the box.
+// To switch to PostgreSQL: change provider below to "postgresql" and update
+// DATABASE_URL in .env (see README), then run: npm run db:push && npm run db:seed
+// NOTE: JSON-shaped fields (arrays/objects) are stored as JSON strings to stay
+// portable across SQLite and PostgreSQL.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model AdminUser {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  name         String   @default("Admin")
+  createdAt    DateTime @default(now())
+}
+
+model Category {
+  id            String    @id @default(cuid())
+  name          String    @unique
+  slug          String    @unique
+  description   String    @default("")
+  // JSON string array, e.g. "[\"TikTok\",\"Instagram Reels\"]"
+  subcategories String    @default("[]")
+  order         Int       @default(0)
+  createdAt     DateTime  @default(now())
+  projects      Project[]
+}
+
+model Project {
+  id               String   @id @default(cuid())
+  title            String
+  slug             String   @unique
+  shortDescription String   @default("")
+  description      String   @default("")
+  categoryId       String?
+  category         Category? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  duration         String   @default("")
+  // JSON string array of software names
+  software         String   @default("[]")
+  videoUrl         String   @default("")
+  thumbnailUrl     String   @default("")
+  // JSON string array of image URLs
+  gallery          String   @default("[]")
+  // JSON string object { "before": url, "after": url }
+  beforeAfter      String   @default("{}")
+  // JSON string array of { title, description } steps
+  process          String   @default("[]")
+  // JSON string array of tags
+  tags             String   @default("[]")
+  client           String   @default("")
+  year             String   @default("")
+  featured         Boolean  @default(false)
+  published        Boolean  @default(true)
+  order            Int      @default(0)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model Service {
+  id          String   @id @default(cuid())
+  title       String
+  description String   @default("")
+  // lucide-react icon name key, e.g. "film"
+  icon        String   @default("film")
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+}
+
+model Skill {
+  id    String @id @default(cuid())
+  name  String
+  level Int    @default(80) // 0 - 100
+  order Int    @default(0)
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  name      String
+  role      String   @default("")
+  avatarUrl String   @default("")
+  rating    Int      @default(5)
+  content   String   @default("")
+  order     Int      @default(0)
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+}
+
+model ContactMessage {
+  id          String   @id @default(cuid())
+  name        String
+  email       String
+  projectType String   @default("")
+  budget      String   @default("")
+  message     String   @default("")
+  read        Boolean  @default(false)
+  createdAt   DateTime @default(now())
+}
+
+model SiteContent {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String   @default("")
+  updatedAt DateTime @updatedAt
+}
