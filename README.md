@@ -185,18 +185,23 @@ start.bat                    # one-double-click launcher (Windows)
 
 ## Git & Pushing to GitHub
 
-This folder is a git repository. To publish it to your own GitHub account:
+This folder is already a git repository with everything committed. To publish it to
+your own GitHub account, use the included helper:
 
 1. Create an empty repository on [github.com/new](https://github.com/new)
    (don't add a README/license — this repo already has them).
-2. From the project folder:
+2. Double-click **`push-to-github.bat`** in the project folder.
+3. Paste your repository URL when asked (e.g.
+   `https://github.com/<your-username>/muhanad-portfolio.git`).
+4. A browser window opens to sign in to GitHub once — after that, every push is
+   one double-click away.
 
-   ```bash
-   git remote add origin https://github.com/<your-username>/muhanad-portfolio.git
-   git push -u origin main
-   ```
+Or manually:
 
-3. The first push will ask you to sign in to GitHub (browser window pops up).
+```bash
+git remote add origin https://github.com/<your-username>/muhanad-portfolio.git
+git push -u origin main
+```
 
 `.env`, the database file, `node_modules`, and uploaded media are gitignored — the
 repo contains everything else needed to run the site from scratch.
