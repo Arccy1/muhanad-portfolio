@@ -22,7 +22,7 @@ export const DEFAULT_CONTENT: Record<string, string> = {
   "about.image": "/images/profile.svg",
   "cta.heading": "LET'S CREATE SOMETHING GREAT",
   "cta.subtext": "Have a project in mind? Tell me about it — I usually reply within 24 hours.",
-  "socials.email": "hello@muhanadmahdy.com",
+  "socials.email": "mohannadwael1000@gmail.com",
   "socials.whatsapp": "https://wa.me/971500000000",
   "socials.instagram": "https://instagram.com/muhanad.mahdy",
   "socials.youtube": "https://youtube.com/@muhanadmahdy",
