@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
-import { Menu, Moon, Sun, X } from "lucide-react";
+import { FileText, Menu, Moon, Sun, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const LINKS = [
@@ -100,6 +100,13 @@ export default function Navbar() {
             {mounted && isLight ? <Moon size={18} /> : <Sun size={18} />}
           </button>
           <Link
+            href="/cv"
+            className="hidden items-center gap-2 rounded-full border border-white/10 px-5 py-2.5 text-sm font-semibold text-zinc-300 transition hover:border-brand-500/60 hover:text-brand-400 md:inline-flex"
+          >
+            <FileText size={15} />
+            CV
+          </Link>
+          <Link
             href="/contact"
             className="hidden rounded-full bg-gradient-to-r from-brand-600 to-brand-500 px-6 py-2.5 text-sm font-semibold text-onbrand shadow-glow transition hover:shadow-glow-lg hover:brightness-110 sm:inline-flex"
           >
@@ -148,6 +155,21 @@ export default function Navbar() {
                   </Link>
                 </motion.li>
               ))}
+              <motion.li
+                initial={{ opacity: 0, x: -16 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.05 * LINKS.length }}
+              >
+                <Link
+                  href="/cv"
+                  className="flex items-center justify-between rounded-xl px-4 py-3 text-base font-medium text-zinc-400 hover:bg-white/5 hover:text-white"
+                >
+                  <span className="inline-flex items-center gap-2">
+                    <FileText size={16} /> My CV
+                  </span>
+                  <span className="text-xs text-brand-500">OPEN</span>
+                </Link>
+              </motion.li>
               <li className="pt-3">
                 <Link
                   href="/contact"

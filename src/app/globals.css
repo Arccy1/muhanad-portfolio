@@ -12,6 +12,9 @@
     --c-zinc-500: 113 113 122;
     --c-zinc-600: 82 82 91;
     --c-zinc-700: 63 63 70;
+    --c-zinc-800: 39 39 42;
+    --c-zinc-900: 24 24 27;
+    --c-zinc-950: 9 9 11;
     --c-ink: 5 5 5;
     --c-ink-700: 15 15 15;
     --c-ink-800: 11 11 11;
@@ -28,6 +31,9 @@
     --c-zinc-500: 113 113 122;
     --c-zinc-600: 161 161 170;
     --c-zinc-700: 161 161 170;
+    --c-zinc-800: 228 228 231;
+    --c-zinc-900: 244 244 245;
+    --c-zinc-950: 250 250 249;
     --c-ink: 250 250 249; /* page background */
     --c-ink-700: 255 255 255; /* raised surfaces */
     --c-ink-800: 255 255 255;
@@ -169,4 +175,24 @@ html.light ::-webkit-scrollbar-thumb:hover {
 /* The film-grain noise is dark; soften it on light surfaces */
 html.light .grain::after {
   opacity: 0.03;
+}
+
+/* ------------------------------------------------------------------ */
+/* Printing — the CV page prints as a clean paper document            */
+/* ------------------------------------------------------------------ */
+@media print {
+  header,
+  footer,
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #fff !important;
+  }
+  main {
+    padding: 0 !important;
+  }
+  @page {
+    margin: 12mm;
+  }
 }

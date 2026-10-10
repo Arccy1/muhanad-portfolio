@@ -39,6 +39,9 @@ const config: Config = {
           500: "rgb(var(--c-zinc-500) / <alpha-value>)",
           600: "rgb(var(--c-zinc-600) / <alpha-value>)",
           700: "rgb(var(--c-zinc-700) / <alpha-value>)",
+          800: "rgb(var(--c-zinc-800) / <alpha-value>)",
+          900: "rgb(var(--c-zinc-900) / <alpha-value>)",
+          950: "rgb(var(--c-zinc-950) / <alpha-value>)",
         },
       },
       fontFamily: {
