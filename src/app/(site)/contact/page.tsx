@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { Instagram, Linkedin, Mail, MessageCircle, Music2, Globe, Youtube } from "lucide-react";
+import { Instagram, Linkedin, Mail, MessageCircle } from "lucide-react";
 import Reveal from "@/components/ui/Reveal";
 import ContactForm from "@/components/contact/ContactForm";
 import { getSiteContent, getSocials } from "@/lib/content";
@@ -9,7 +9,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Get in touch with Muhanad Wael Mahdy for video editing and motion design projects — email, WhatsApp, Instagram, YouTube, TikTok, Behance and LinkedIn.",
+    "Get in touch with Muhanad Wael Mahdy for video editing and motion design projects — email, WhatsApp, Instagram and LinkedIn.",
 };
 
 export default async function ContactPage() {
@@ -20,9 +20,6 @@ export default async function ContactPage() {
     { label: "Email", value: socials.email, href: `mailto:${socials.email}`, icon: Mail },
     { label: "WhatsApp", value: "Chat instantly", href: socials.whatsapp, icon: MessageCircle },
     { label: "Instagram", value: "@muhanad.mahdy", href: socials.instagram, icon: Instagram },
-    { label: "YouTube", value: "@muhanadmahdy", href: socials.youtube, icon: Youtube },
-    { label: "TikTok", value: "@muhanad.mahdy", href: socials.tiktok, icon: Music2 },
-    { label: "Behance", value: "muhanadmahdy", href: socials.behance, icon: Globe },
     { label: "LinkedIn", value: "muhanad-mahdy", href: socials.linkedin, icon: Linkedin },
   ];
 

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Instagram, Youtube, Linkedin, Mail, MessageCircle, Music2, Globe } from "lucide-react";
+import { Instagram, Linkedin, Mail, MessageCircle } from "lucide-react";
 import { getSiteContent, getSocials, type SiteContent } from "@/lib/content";
 
 const NAV = [
@@ -79,9 +79,6 @@ export default async function Footer() {
           </a>
           <div className="mt-5 flex flex-wrap gap-2.5">
             <SocialIcon href={socials.instagram} label="Instagram"><Instagram size={17} /></SocialIcon>
-            <SocialIcon href={socials.youtube} label="YouTube"><Youtube size={17} /></SocialIcon>
-            <SocialIcon href={socials.tiktok} label="TikTok"><Music2 size={17} /></SocialIcon>
-            <SocialIcon href={socials.behance} label="Behance"><Globe size={17} /></SocialIcon>
             <SocialIcon href={socials.linkedin} label="LinkedIn"><Linkedin size={17} /></SocialIcon>
             <SocialIcon href={socials.whatsapp} label="WhatsApp"><MessageCircle size={17} /></SocialIcon>
             <SocialIcon href={`mailto:${socials.email}`} label="Email"><Mail size={17} /></SocialIcon>

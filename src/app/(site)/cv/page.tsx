@@ -59,9 +59,6 @@ export default async function CvPage() {
     { label: socials.email, href: `mailto:${socials.email}` },
     { label: "WhatsApp", href: socials.whatsapp },
     { label: "Instagram", href: socials.instagram },
-    { label: "YouTube", href: socials.youtube },
-    { label: "TikTok", href: socials.tiktok },
-    { label: "Behance", href: socials.behance },
     { label: "LinkedIn", href: socials.linkedin },
   ];
 
