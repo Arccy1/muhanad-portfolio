@@ -39,7 +39,7 @@ export default function ShowreelTeaser({ title, description, videoUrl, poster }:
                 <img src={asset(poster)} alt="" className="h-full w-full object-cover transition duration-700 group-hover:scale-105" loading="lazy" />
               ) : null}
               <span aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/80 to-black/20" />
-              <span className="relative flex items-center gap-3 rounded-full bg-brand-600 px-8 py-4 font-semibold uppercase tracking-widest text-white shadow-glow transition group-hover:shadow-glow-lg">
+              <span className="relative flex items-center gap-3 rounded-full bg-brand-600 px-8 py-4 font-semibold uppercase tracking-widest text-onbrand shadow-glow transition group-hover:shadow-glow-lg">
                 Watch Showreel <ArrowRight size={18} />
               </span>
             </Link>

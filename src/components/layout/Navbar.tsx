@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, Moon, Sun, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const LINKS = [
@@ -19,14 +19,29 @@ const LINKS = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const [isLight, setIsLight] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
+    setMounted(true);
+    setIsLight(document.documentElement.classList.contains("light"));
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  function toggleTheme() {
+    const next = !isLight;
+    document.documentElement.classList.toggle("light", next);
+    try {
+      localStorage.setItem("mwm-theme", next ? "light" : "dark");
+    } catch {
+      /* private mode — theme just won't persist */
+    }
+    setIsLight(next);
+  }
 
   // Close the mobile menu whenever the route changes.
   useEffect(() => setOpen(false), [pathname]);
@@ -75,9 +90,18 @@ export default function Navbar() {
         </ul>
 
         <div className="flex items-center gap-3">
+          <button
+            type="button"
+            onClick={toggleTheme}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 text-zinc-400 transition hover:border-brand-500/50 hover:text-brand-400"
+            aria-label={isLight ? "Switch to dark mode" : "Switch to light mode"}
+            title={isLight ? "Dark mode" : "Light mode"}
+          >
+            {mounted && isLight ? <Moon size={18} /> : <Sun size={18} />}
+          </button>
           <Link
             href="/contact"
-            className="hidden rounded-full bg-gradient-to-r from-brand-600 to-brand-500 px-6 py-2.5 text-sm font-semibold text-white shadow-glow transition hover:shadow-glow-lg hover:brightness-110 sm:inline-flex"
+            className="hidden rounded-full bg-gradient-to-r from-brand-600 to-brand-500 px-6 py-2.5 text-sm font-semibold text-onbrand shadow-glow transition hover:shadow-glow-lg hover:brightness-110 sm:inline-flex"
           >
             Hire Me
           </Link>
@@ -127,7 +151,7 @@ export default function Navbar() {
               <li className="pt-3">
                 <Link
                   href="/contact"
-                  className="flex items-center justify-center rounded-xl bg-gradient-to-r from-brand-600 to-brand-500 px-4 py-3 font-semibold text-white shadow-glow"
+                  className="flex items-center justify-center rounded-xl bg-gradient-to-r from-brand-600 to-brand-500 px-4 py-3 font-semibold text-onbrand shadow-glow"
                 >
                   Hire Me
                 </Link>

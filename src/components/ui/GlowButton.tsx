@@ -14,7 +14,7 @@ export default function GlowButton({ href, children, variant = "primary", classN
   const base = cn(
     "group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full px-8 py-3.5 text-sm font-semibold uppercase tracking-widest transition-all duration-300 focus-visible:ring-2",
     variant === "primary"
-      ? "bg-gradient-to-r from-brand-600 to-brand-500 text-white shadow-glow hover:shadow-glow-lg hover:brightness-110"
+      ? "bg-gradient-to-r from-brand-600 to-brand-500 text-onbrand shadow-glow hover:shadow-glow-lg hover:brightness-110"
       : "glass text-white hover:border-brand-500/60 hover:text-brand-400 hover:shadow-glow-sm",
     className
   );

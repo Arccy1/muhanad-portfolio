@@ -145,7 +145,7 @@ export function MultiImageUpload({
             <button
               type="button"
               onClick={() => onChange(values.filter((_, j) => j !== i))}
-              className="absolute right-1 top-1 flex h-6 w-6 items-center justify-center rounded-full bg-black/70 text-white opacity-0 transition group-hover:opacity-100"
+              className="absolute right-1 top-1 flex h-6 w-6 items-center justify-center rounded-full bg-black/70 text-onbrand opacity-0 transition group-hover:opacity-100"
               aria-label={`Remove image ${i + 1}`}
             >
               <X size={13} />

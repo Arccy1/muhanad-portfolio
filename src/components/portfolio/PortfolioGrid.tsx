@@ -89,7 +89,7 @@ function FilterPill({
       onClick={onClick}
       className={cn(
         "relative rounded-full px-5 py-2.5 text-sm font-medium transition-colors duration-300",
-        active ? "text-white" : "text-zinc-400 hover:text-white"
+        active ? "text-onbrand" : "text-zinc-400 hover:text-white"
       )}
     >
       {active && (
@@ -102,7 +102,7 @@ function FilterPill({
       {!active && <span className="absolute inset-0 rounded-full border border-white/10 bg-white/[0.03]" />}
       <span className="relative z-10">
         {label}
-        <span className={cn("ml-2 text-xs", active ? "text-white/80" : "text-zinc-600")}>{count}</span>
+        <span className={cn("ml-2 text-xs", active ? "text-onbrand/80" : "text-zinc-600")}>{count}</span>
       </span>
     </button>
   );

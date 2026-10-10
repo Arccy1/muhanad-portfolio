@@ -11,7 +11,9 @@ import {
   Mail,
   Menu,
   MessageSquareQuote,
+  Moon,
   Settings2,
+  Sun,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -28,8 +30,26 @@ export default function AdminPanelLayout({ children }: { children: React.ReactNo
   const [user, setUser] = useState<{ name: string; email: string } | null>(null);
   const [checked, setChecked] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const [isLight, setIsLight] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
+
+  useEffect(() => {
+    setMounted(true);
+    setIsLight(document.documentElement.classList.contains("light"));
+  }, []);
+
+  function toggleTheme() {
+    const next = !isLight;
+    document.documentElement.classList.toggle("light", next);
+    try {
+      localStorage.setItem("mwm-theme", next ? "light" : "dark");
+    } catch {
+      /* private mode */
+    }
+    setIsLight(next);
+  }
 
   useEffect(() => {
     let cancelled = false;
@@ -109,6 +129,14 @@ export default function AdminPanelLayout({ children }: { children: React.ReactNo
           </nav>
 
           <div className="border-t border-white/5 p-4">
+            <button
+              type="button"
+              onClick={toggleTheme}
+              className="mb-2 flex w-full items-center gap-3 rounded-xl px-4 py-2.5 text-xs font-medium text-zinc-500 transition hover:text-brand-400"
+            >
+              {mounted && isLight ? <Moon size={15} /> : <Sun size={15} />}
+              {mounted && isLight ? "Dark mode" : "Light mode"}
+            </button>
             <Link
               href="/"
               target="_blank"

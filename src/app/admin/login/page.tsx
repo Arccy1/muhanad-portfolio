@@ -91,7 +91,7 @@ export default function AdminLoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="flex w-full items-center justify-center gap-2.5 rounded-xl bg-gradient-to-r from-brand-600 to-brand-500 px-8 py-4 text-sm font-semibold uppercase tracking-widest text-white shadow-glow transition hover:shadow-glow-lg hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60"
+            className="flex w-full items-center justify-center gap-2.5 rounded-xl bg-gradient-to-r from-brand-600 to-brand-500 px-8 py-4 text-sm font-semibold uppercase tracking-widest text-onbrand shadow-glow transition hover:shadow-glow-lg hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60"
           >
             {loading ? <Loader2 size={18} className="animate-spin" /> : null}
             {loading ? "Signing in..." : "Sign In"}

@@ -51,7 +51,7 @@ function ServiceCard({ service, index }: { service: ServiceDTO; index: number })
           aria-hidden
           className="absolute -left-8 -top-8 h-28 w-28 rounded-full bg-brand-600/10 blur-2xl transition duration-500 group-hover:bg-brand-600/25"
         />
-        <span className="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-600/10 text-brand-400 transition duration-300 group-hover:bg-brand-600 group-hover:text-white group-hover:shadow-glow">
+        <span className="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-600/10 text-brand-400 transition duration-300 group-hover:bg-brand-600 group-hover:text-onbrand group-hover:shadow-glow">
           <Icon size={26} />
         </span>
         <h3 className="relative mt-6 font-display text-2xl tracking-wide text-white">{service.title}</h3>

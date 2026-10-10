@@ -69,7 +69,7 @@ export default function GalleryGrid({ images, title }: Props) {
             <button
               type="button"
               onClick={() => setOpenIndex(null)}
-              className="absolute right-6 top-6 flex h-11 w-11 items-center justify-center rounded-full border border-white/20 text-white transition hover:border-brand-500 hover:text-brand-400"
+              className="absolute right-6 top-6 flex h-11 w-11 items-center justify-center rounded-full border border-[#ffffff33] text-onbrand transition hover:border-brand-500 hover:text-brand-400"
               aria-label="Close image viewer"
             >
               <X size={20} />
@@ -80,7 +80,7 @@ export default function GalleryGrid({ images, title }: Props) {
                 e.stopPropagation();
                 setOpenIndex((openIndex - 1 + images.length) % images.length);
               }}
-              className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full border border-white/20 bg-black/40 px-4 py-2 text-sm text-white transition hover:border-brand-500 hover:text-brand-400"
+              className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full border border-[#ffffff33] bg-black/40 px-4 py-2 text-sm text-onbrand transition hover:border-brand-500 hover:text-brand-400"
               aria-label="Previous image"
             >
               ‹ Prev
@@ -91,7 +91,7 @@ export default function GalleryGrid({ images, title }: Props) {
                 e.stopPropagation();
                 setOpenIndex((openIndex + 1) % images.length);
               }}
-              className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full border border-white/20 bg-black/40 px-4 py-2 text-sm text-white transition hover:border-brand-500 hover:text-brand-400"
+              className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full border border-[#ffffff33] bg-black/40 px-4 py-2 text-sm text-onbrand transition hover:border-brand-500 hover:text-brand-400"
               aria-label="Next image"
             >
               Next ›

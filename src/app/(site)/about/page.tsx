@@ -141,7 +141,7 @@ export default async function AboutPage() {
             {SPECIALTIES.map((s, i) => (
               <Reveal key={s.label} delay={0.05 * i}>
                 <div className="glass group flex flex-col items-center gap-3.5 rounded-2xl px-4 py-8 text-center transition duration-300 hover:-translate-y-1 hover:border-brand-500/50 hover:shadow-glow-sm">
-                  <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-600/10 text-brand-400 transition group-hover:bg-brand-600 group-hover:text-white">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-600/10 text-brand-400 transition group-hover:bg-brand-600 group-hover:text-onbrand">
                     <s.icon size={22} />
                   </span>
                   <span className="text-sm font-medium text-zinc-200">{s.label}</span>

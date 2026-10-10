@@ -131,7 +131,7 @@ export default function AdminDashboardPage() {
         <div className="mt-5 flex flex-wrap gap-3">
           <Link
             href="/admin/projects"
-            className="rounded-full bg-gradient-to-r from-brand-600 to-brand-500 px-6 py-2.5 text-sm font-semibold text-white shadow-glow transition hover:shadow-glow-lg"
+            className="rounded-full bg-gradient-to-r from-brand-600 to-brand-500 px-6 py-2.5 text-sm font-semibold text-onbrand shadow-glow transition hover:shadow-glow-lg"
           >
             + Add a new project
           </Link>

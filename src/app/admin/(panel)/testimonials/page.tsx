@@ -86,7 +86,7 @@ export default function AdminTestimonialsPage() {
             onClick={() =>
               setForm({ name: "", role: "", avatarUrl: "", rating: 5, content: "", order: items.length + 1, published: true })
             }
-            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-600 to-brand-500 px-6 py-2.5 text-sm font-semibold text-white shadow-glow transition hover:shadow-glow-lg"
+            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-600 to-brand-500 px-6 py-2.5 text-sm font-semibold text-onbrand shadow-glow transition hover:shadow-glow-lg"
           >
             <Plus size={16} /> Add Testimonial
           </button>
@@ -149,7 +149,7 @@ export default function AdminTestimonialsPage() {
               type="button"
               onClick={save}
               disabled={saving}
-              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-600 to-brand-500 px-8 py-2.5 text-sm font-semibold uppercase tracking-widest text-white shadow-glow disabled:opacity-60"
+              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-600 to-brand-500 px-8 py-2.5 text-sm font-semibold uppercase tracking-widest text-onbrand shadow-glow disabled:opacity-60"
             >
               {saving && <Loader2 size={15} className="animate-spin" />} Save
             </button>

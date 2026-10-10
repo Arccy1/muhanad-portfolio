@@ -19,12 +19,26 @@ const config: Config = {
           900: "#4D0207",
           950: "#2E0104",
         },
+        // Literal white for text/icon on brand-red or dark-image surfaces
+        // (stays white in both themes).
+        onbrand: "rgb(255 255 255 / <alpha-value>)",
+        // Neutral palette is CSS-variable driven so the whole UI themes via
+        // globals.css (:root = dark, html.light = light).
+        white: "rgb(var(--c-white) / <alpha-value>)",
         ink: {
-          DEFAULT: "#050505",
-          700: "#0f0f0f",
-          800: "#0b0b0b",
-          900: "#080808",
-          950: "#050505",
+          DEFAULT: "rgb(var(--c-ink) / <alpha-value>)",
+          700: "rgb(var(--c-ink-700) / <alpha-value>)",
+          800: "rgb(var(--c-ink-800) / <alpha-value>)",
+          900: "rgb(var(--c-ink-900) / <alpha-value>)",
+          950: "rgb(var(--c-ink-950) / <alpha-value>)",
+        },
+        zinc: {
+          200: "rgb(var(--c-zinc-200) / <alpha-value>)",
+          300: "rgb(var(--c-zinc-300) / <alpha-value>)",
+          400: "rgb(var(--c-zinc-400) / <alpha-value>)",
+          500: "rgb(var(--c-zinc-500) / <alpha-value>)",
+          600: "rgb(var(--c-zinc-600) / <alpha-value>)",
+          700: "rgb(var(--c-zinc-700) / <alpha-value>)",
         },
       },
       fontFamily: {

@@ -263,7 +263,7 @@ export default function ProjectForm({ categories, initial, saving, error, onSave
         <button
           type="submit"
           disabled={saving}
-          className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-600 to-brand-500 px-8 py-2.5 text-sm font-semibold uppercase tracking-widest text-white shadow-glow transition hover:shadow-glow-lg disabled:opacity-60"
+          className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-600 to-brand-500 px-8 py-2.5 text-sm font-semibold uppercase tracking-widest text-onbrand shadow-glow transition hover:shadow-glow-lg disabled:opacity-60"
         >
           {saving && <Loader2 size={15} className="animate-spin" />}
           Save Project

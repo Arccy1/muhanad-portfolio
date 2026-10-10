@@ -143,7 +143,7 @@ export default function AdminMessagesPage() {
                     <div className="mt-5 flex flex-wrap gap-3">
                       <a
                         href={`mailto:${m.email}?subject=Re: your project inquiry`}
-                        className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-600 to-brand-500 px-5 py-2 text-xs font-semibold uppercase tracking-widest text-white shadow-glow"
+                        className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-600 to-brand-500 px-5 py-2 text-xs font-semibold uppercase tracking-widest text-onbrand shadow-glow"
                       >
                         Reply by email
                       </a>

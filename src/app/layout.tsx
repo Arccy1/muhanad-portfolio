@@ -58,8 +58,14 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body className={`${display.variable} ${sans.variable} font-sans bg-ink text-zinc-300 antialiased`}>
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{if(localStorage.getItem('mwm-theme')==='light')document.documentElement.classList.add('light')}catch(e){}",
+          }}
+        />
         {children}
       </body>
     </html>

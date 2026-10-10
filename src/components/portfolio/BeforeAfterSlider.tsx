@@ -71,10 +71,10 @@ export default function BeforeAfterSlider({ before, after }: Props) {
         </div>
       </div>
 
-      <span className="pointer-events-none absolute left-4 top-4 rounded-full bg-black/60 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.25em] text-zinc-300 backdrop-blur-sm">
+      <span className="pointer-events-none absolute left-4 top-4 rounded-full bg-black/60 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.25em] text-onbrand backdrop-blur-sm">
         Before
       </span>
-      <span className="pointer-events-none absolute right-4 top-4 rounded-full bg-brand-600/80 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.25em] text-white backdrop-blur-sm">
+      <span className="pointer-events-none absolute right-4 top-4 rounded-full bg-brand-600/80 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.25em] text-onbrand backdrop-blur-sm">
         After
       </span>
     </div>

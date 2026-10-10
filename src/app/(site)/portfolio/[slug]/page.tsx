@@ -178,7 +178,7 @@ export default async function ProjectPage({ params }: Props) {
                 </div>
                 <Link
                   href="/contact"
-                  className="mt-2 flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-brand-600 to-brand-500 px-6 py-3 text-sm font-semibold uppercase tracking-widest text-white shadow-glow transition hover:shadow-glow-lg"
+                  className="mt-2 flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-brand-600 to-brand-500 px-6 py-3 text-sm font-semibold uppercase tracking-widest text-onbrand shadow-glow transition hover:shadow-glow-lg"
                 >
                   Start a Similar Project <ArrowRight size={15} />
                 </Link>

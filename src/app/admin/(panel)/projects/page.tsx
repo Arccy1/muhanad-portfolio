@@ -192,7 +192,7 @@ export default function AdminProjectsPage() {
         <button
           type="button"
           onClick={() => setEditing("new")}
-          className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-600 to-brand-500 px-6 py-2.5 text-sm font-semibold text-white shadow-glow transition hover:shadow-glow-lg"
+          className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-600 to-brand-500 px-6 py-2.5 text-sm font-semibold text-onbrand shadow-glow transition hover:shadow-glow-lg"
         >
           <Plus size={16} /> Add Project
         </button>
@@ -250,7 +250,7 @@ export default function AdminProjectsPage() {
                 className={cn(
                   "rounded-lg px-3.5 py-1.5 text-xs font-semibold transition",
                   fStatus === value
-                    ? "bg-gradient-to-r from-brand-600 to-brand-500 text-white shadow-glow-sm"
+                    ? "bg-gradient-to-r from-brand-600 to-brand-500 text-onbrand shadow-glow-sm"
                     : "text-zinc-500 hover:text-white"
                 )}
               >
