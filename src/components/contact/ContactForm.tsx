@@ -17,7 +17,8 @@ const PROJECT_TYPES = [
 
 const BUDGETS = ["Under $250", "$250 – $500", "$500 – $1,000", "$1,000 – $5,000", "$5,000+", "Let's discuss"];
 
-// Maps a service title (from the Services page) to a contact form project type.
+// Maps a service title (from the Services page) or specialty (from the About
+// page) to a contact form project type.
 const SERVICE_TO_TYPE: Record<string, string> = {
   "Video Editing": "Long-Form / YouTube",
   "Short-Form Content": "Short-Form Content",
@@ -27,6 +28,13 @@ const SERVICE_TO_TYPE: Record<string, string> = {
   "Gaming Video Editing": "Gaming / Esports",
   "Color Grading": "Other",
   "Sound Design": "Other",
+  // About page specialties
+  "Narrative Editing": "Long-Form / YouTube",
+  "Retention-Driven Cuts": "Short-Form Content",
+  "Cinematic Color": "Other",
+  "Esports Montages": "Gaming / Esports",
+  "Brand Storytelling": "Commercial / Brand",
+  "Platform Optimization": "Social Media Campaign",
 };
 
 // Static builds (GitHub Pages) have no server inbox — submissions open the
