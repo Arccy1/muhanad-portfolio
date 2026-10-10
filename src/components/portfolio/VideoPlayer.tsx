@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Play } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { AlertTriangle, Play } from "lucide-react";
+import { asset, cn } from "@/lib/utils";
 
 type Props = {
   src: string;
@@ -27,20 +27,50 @@ function youtubeEmbed(src: string): string {
  */
 export default function VideoPlayer({ src, poster, title, className }: Props) {
   const [playing, setPlaying] = useState(false);
+  const [failed, setFailed] = useState(false);
+  const resolvedSrc = asset(src);
 
   return (
     <div className={cn("group relative aspect-video w-full overflow-hidden rounded-2xl border border-white/10 bg-black shadow-card", className)}>
       {playing ? (
-        isEmbed(src) ? (
+        failed ? (
+          <div className="flex h-full w-full flex-col items-center justify-center gap-4 p-8 text-center">
+            <AlertTriangle size={40} className="text-brand-400" />
+            <p className="font-display text-2xl tracking-wide text-white">VIDEO CAN&apos;T BE PLAYED</p>
+            <p className="max-w-md text-sm leading-relaxed text-zinc-400">
+              This video format isn&apos;t supported by your browser, or the file moved.
+              Try a different browser, or contact me and I&apos;ll send the file directly.
+            </p>
+            <button
+              type="button"
+              onClick={() => {
+                setFailed(false);
+                setPlaying(false);
+              }}
+              className="mt-2 rounded-full border border-white/20 px-6 py-2.5 text-sm text-zinc-200 transition hover:border-brand-500/60 hover:text-brand-400"
+            >
+              Go back
+            </button>
+          </div>
+        ) : isEmbed(resolvedSrc) ? (
           <iframe
-            src={youtubeEmbed(src)}
+            src={youtubeEmbed(resolvedSrc)}
             title={title || "Video player"}
             className="h-full w-full"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
           />
         ) : (
-          <video src={src} poster={poster} controls autoPlay playsInline className="h-full w-full" />
+          <video
+            src={resolvedSrc}
+            poster={poster}
+            controls
+            autoPlay
+            playsInline
+            preload="metadata"
+            onError={() => setFailed(true)}
+            className="h-full w-full"
+          />
         )
       ) : (
         <button
@@ -67,3 +97,4 @@ export default function VideoPlayer({ src, poster, title, className }: Props) {
     </div>
   );
 }
+
