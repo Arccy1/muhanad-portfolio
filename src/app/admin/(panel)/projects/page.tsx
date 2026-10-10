@@ -2,6 +2,8 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import {
+  ArrowDown,
+  ArrowUp,
   Calendar,
   ChevronDown,
   Filter,
@@ -54,6 +56,7 @@ export default function AdminProjectsPage() {
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState<ProjectDTO | "new" | null>(null);
   const [saving, setSaving] = useState(false);
+  const [moving, setMoving] = useState(false);
   const [error, setError] = useState("");
 
   // Filters
@@ -111,6 +114,56 @@ export default function AdminProjectsPage() {
     setFStatus("all");
     setSearch("");
   };
+
+  // Full update payload from a serialized project — the PUT route re-validates
+  // everything through normalizeProjectBody.
+  function toPayload(p: ProjectDTO, order: number) {
+    return {
+      title: p.title,
+      slug: p.slug,
+      shortDescription: p.shortDescription,
+      description: p.description,
+      categoryId: p.category?.id ?? null,
+      duration: p.duration,
+      software: p.software,
+      videoUrl: p.videoUrl,
+      thumbnailUrl: p.thumbnailUrl,
+      gallery: p.gallery,
+      beforeAfter: p.beforeAfter ?? {},
+      process: p.process,
+      tags: p.tags,
+      client: p.client,
+      year: p.year,
+      featured: p.featured,
+      published: p.published,
+      order,
+    };
+  }
+
+  // Swap a project with its neighbour and re-sequence every order value, so
+  // duplicates (all projects created via the form default to 0) still move.
+  async function move(index: number, dir: -1 | 1) {
+    if (activeFilterCount > 0) return; // arrows are disabled while filtered
+    const list = [...filtered];
+    const j = index + dir;
+    if (j < 0 || j >= list.length) return;
+    [list[index], list[j]] = [list[j], list[index]];
+    setMoving(true);
+    try {
+      await Promise.all(
+        list.map((p, i) =>
+          fetch(`/api/projects/${p.id}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(toPayload(p, i)),
+          })
+        )
+      );
+      await load();
+    } finally {
+      setMoving(false);
+    }
+  }
 
   async function save(values: ProjectFormValues) {
     setSaving(true);
@@ -287,7 +340,7 @@ export default function AdminProjectsPage() {
             </tr>
           </thead>
           <tbody className="divide-y divide-white/5">
-            {filtered.map((p) => (
+            {filtered.map((p, index) => (
               <tr key={p.id} className="transition hover:bg-white/[0.02]">
                 <td className="px-5 py-3.5">
                   <div className="flex items-center gap-3.5">
@@ -320,7 +373,29 @@ export default function AdminProjectsPage() {
                   </span>
                 </td>
                 <td className="px-5 py-3.5">
-                  <div className="flex justify-end gap-2">
+                  <div className="flex items-center justify-end gap-2">
+                    <span className="mr-1 flex flex-col gap-0.5">
+                      <button
+                        type="button"
+                        onClick={() => move(index, -1)}
+                        disabled={index === 0 || activeFilterCount > 0 || moving}
+                        className="rounded-md border border-white/10 p-1 text-zinc-500 transition hover:border-brand-500/50 hover:text-brand-400 disabled:opacity-25"
+                        aria-label={`Move ${p.title} up`}
+                        title={activeFilterCount > 0 ? "Clear filters to reorder" : "Move up"}
+                      >
+                        <ArrowUp size={13} />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => move(index, 1)}
+                        disabled={index === filtered.length - 1 || activeFilterCount > 0 || moving}
+                        className="rounded-md border border-white/10 p-1 text-zinc-500 transition hover:border-brand-500/50 hover:text-brand-400 disabled:opacity-25"
+                        aria-label={`Move ${p.title} down`}
+                        title={activeFilterCount > 0 ? "Clear filters to reorder" : "Move down"}
+                      >
+                        <ArrowDown size={13} />
+                      </button>
+                    </span>
                     <button
                       type="button"
                       onClick={() => {
