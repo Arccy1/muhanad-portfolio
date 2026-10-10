@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { asset } from "@/lib/utils";
 import Reveal from "@/components/ui/Reveal";
 import VideoPlayer from "@/components/portfolio/VideoPlayer";
 
@@ -35,7 +36,7 @@ export default function ShowreelTeaser({ title, description, videoUrl, poster }:
             >
               {poster ? (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img src={poster} alt="" className="h-full w-full object-cover transition duration-700 group-hover:scale-105" loading="lazy" />
+                <img src={asset(poster)} alt="" className="h-full w-full object-cover transition duration-700 group-hover:scale-105" loading="lazy" />
               ) : null}
               <span aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/80 to-black/20" />
               <span className="relative flex items-center gap-3 rounded-full bg-brand-600 px-8 py-4 font-semibold uppercase tracking-widest text-white shadow-glow transition group-hover:shadow-glow-lg">

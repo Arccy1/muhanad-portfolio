@@ -8,6 +8,7 @@ import TestimonialsCarousel from "@/components/home/TestimonialsCarousel";
 import CTABand from "@/components/home/CTABand";
 import { getProjects, getSkills, getTestimonials } from "@/lib/data";
 import { getSiteContent } from "@/lib/content";
+import { asset } from "@/lib/utils";
 
 export const dynamic = "force-dynamic";
 
@@ -43,7 +44,7 @@ export default async function HomePage() {
         title={content["showreel.title"]}
         description={content["showreel.description"]}
         videoUrl={content["showreel.videoUrl"] || undefined}
-        poster="/images/showreel-poster.svg"
+        poster={asset("/images/showreel-poster.svg")}
       />
       <TestimonialsCarousel testimonials={testimonials} />
       <CTABand heading={content["cta.heading"]} subtext={content["cta.subtext"]} />

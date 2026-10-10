@@ -4,6 +4,11 @@
 # next.js
 /.next/
 /out/
+/open-next/
+
+# static export deploy scratch
+/.static-build-tmp/
+/.gh-pages-deploy/
 
 # production
 /build

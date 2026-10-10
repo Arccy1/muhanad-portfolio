@@ -5,6 +5,7 @@ import ProjectCard from "@/components/portfolio/ProjectCard";
 import CTABand from "@/components/home/CTABand";
 import { getProjects } from "@/lib/data";
 import { getSiteContent } from "@/lib/content";
+import { asset } from "@/lib/utils";
 
 export const dynamic = "force-dynamic";
 
@@ -42,14 +43,14 @@ export default async function ShowreelPage() {
             {videoUrl ? (
               <VideoPlayer
                 src={videoUrl}
-                poster="/images/showreel-poster.svg"
+                poster={asset("/images/showreel-poster.svg")}
                 title="Showreel 2026"
                 className="shadow-glow-lg"
               />
             ) : (
               <div className="flex aspect-video items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-ink-800">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/images/showreel-poster.svg" alt="Showreel poster" className="h-full w-full object-cover" />
+                <img src={asset("/images/showreel-poster.svg")} alt="Showreel poster" className="h-full w-full object-cover" />
               </div>
             )}
           </Reveal>

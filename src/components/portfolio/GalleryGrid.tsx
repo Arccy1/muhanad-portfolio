@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
+import { asset } from "@/lib/utils";
 
 type Props = { images: string[]; title: string };
 
@@ -23,7 +24,7 @@ export default function GalleryGrid({ images, title }: Props) {
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={src}
+              src={asset(src)}
               alt={`${title} — still ${i + 1}`}
               loading="lazy"
               className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
@@ -60,7 +61,7 @@ export default function GalleryGrid({ images, title }: Props) {
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={images[openIndex]}
+                src={asset(images[openIndex])}
                 alt={`${title} — still ${openIndex + 1}`}
                 className="max-h-[85vh] w-auto rounded-xl border border-white/10 shadow-glow"
               />

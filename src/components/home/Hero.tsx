@@ -4,6 +4,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { ChevronDown, Play } from "lucide-react";
 import Particles from "./Particles";
 import GlowButton from "@/components/ui/GlowButton";
+import { asset } from "@/lib/utils";
 
 type Props = {
   badge: string;
@@ -29,7 +30,7 @@ export default function Hero({ badge, heading, subheading, description, videoUrl
       {videoUrl ? (
         <video
           className="absolute inset-0 h-full w-full object-cover opacity-35"
-          src={videoUrl}
+          src={asset(videoUrl)}
           autoPlay={!reduce}
           muted
           loop

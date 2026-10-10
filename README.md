@@ -87,6 +87,29 @@ adding real projects).
 
 ---
 
+## Hosting on GitHub Pages (the public website)
+
+The visitor-facing site is hosted **live on GitHub Pages**:
+**https://arccy1.github.io/muhanad-portfolio/**
+
+It works as a two-part system:
+
+| Part | Where | What visitors see |
+| --- | --- | --- |
+| Public website | GitHub Pages (auto-updated) | Home, portfolio + project pages, about, services, showreel, contact (contact form opens the visitor's email app) |
+| Admin panel + database + inbox | Your PC via `start.bat` | Not public — where you manage content |
+
+**Publishing workflow:** edit content in the admin panel (`start.bat` → /admin), then
+double-click **`deploy-pages.bat`** (or run `npm run deploy:pages`). It rebuilds the
+static site from your current database, pushes it to the `gh-pages` branch, and waits
+until the live URL responds. Takes a couple of minutes.
+
+Notes:
+- The static build snapshots your local database — run it from this PC (where `dev.db` lives).
+- Media uploaded through the admin panel stays local; for images on the live site put the
+  files into `public/images/` (they're part of the repo) or use external URLs (YouTube etc.).
+- `/admin` and the API are intentionally excluded from the static build.
+
 ## Database
 
 Ships configured for **SQLite** (`prisma/schema.prisma`, `provider = "sqlite"`) so it
@@ -206,12 +229,10 @@ git push -u origin main
 `.env`, the database file, `node_modules`, and uploaded media are gitignored — the
 repo contains everything else needed to run the site from scratch.
 
-## Deploying
+## Deploying (other options)
 
-See **ROADMAP.md → Phase 2** for the production checklist (credentials, PostgreSQL,
-media storage on serverless, domain). Short version:
-
+- **GitHub Pages:** already configured — see "Hosting on GitHub Pages" above
+  (source: `gh-pages` branch, redeployed by `deploy-pages.bat`).
 - **VPS:** `npm run build && npm start` behind a reverse proxy — uploads to
-  `public/uploads` persist on disk.
-- **Vercel/serverless:** works, but move uploads to S3/Cloudinary first and use a
-  hosted PostgreSQL (Neon/Supabase) — the upload route is one file to change.
+  `public/uploads` persist on disk, and the full admin + inbox run online.
+- **Vercel/serverless:** needs more work (hosted Postgres + external media storage).

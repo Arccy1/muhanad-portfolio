@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { getAllProjectSlugs, getProjectBySlug, getProjects } from "@/lib/data";
 import { getSiteContent } from "@/lib/content";
+import { asset } from "@/lib/utils";
 import VideoPlayer from "@/components/portfolio/VideoPlayer";
 import BeforeAfterSlider from "@/components/portfolio/BeforeAfterSlider";
 import GalleryGrid from "@/components/portfolio/GalleryGrid";
@@ -25,6 +26,13 @@ export const dynamic = "force-dynamic";
 
 type Props = { params: { slug: string } };
 
+// Pre-renders every published project page (required for static export builds;
+// ignored during dynamic server rendering).
+export async function generateStaticParams() {
+  const slugs = await getAllProjectSlugs();
+  return slugs.map((s) => ({ slug: s.slug }));
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const project = await getProjectBySlug(params.slug);
   if (!project) return { title: "Project not found" };
@@ -34,7 +42,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: project.title,
       description: project.shortDescription,
-      images: project.thumbnailUrl ? [{ url: project.thumbnailUrl }] : undefined,
+      images: project.thumbnailUrl ? [{ url: asset(project.thumbnailUrl) }] : undefined,
     },
   };
 }
@@ -97,12 +105,12 @@ export default async function ProjectPage({ params }: Props) {
           {/* Player */}
           <Reveal delay={0.12} className="mt-10">
             {project.videoUrl ? (
-              <VideoPlayer src={project.videoUrl} poster={project.thumbnailUrl} title={project.title} />
+              <VideoPlayer src={project.videoUrl} poster={asset(project.thumbnailUrl)} title={project.title} />
             ) : (
               <div className="relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-ink-800">
                 {project.thumbnailUrl ? (
                   // eslint-disable-next-line @next/next/no-img-element
-                  <img src={project.thumbnailUrl} alt="" className="h-full w-full object-cover opacity-40" loading="lazy" />
+                  <img src={asset(project.thumbnailUrl)} alt="" className="h-full w-full object-cover opacity-40" loading="lazy" />
                 ) : null}
                 <div className="relative z-10 text-center">
                   <Clapperboard size={40} className="mx-auto text-brand-500" />
@@ -191,7 +199,7 @@ export default async function ProjectPage({ params }: Props) {
                 description="Drag the handle to compare the raw footage against the final graded edit."
               />
               <Reveal delay={0.1} className="mt-9">
-                <BeforeAfterSlider before={project.beforeAfter.before} after={project.beforeAfter.after} />
+                <BeforeAfterSlider before={asset(project.beforeAfter.before)} after={asset(project.beforeAfter.after)} />
               </Reveal>
             </div>
           )}
@@ -208,7 +216,7 @@ export default async function ProjectPage({ params }: Props) {
                 }
               />
               <Reveal delay={0.1} className="mt-9">
-                <GalleryGrid images={project.gallery} title={project.title} />
+                <GalleryGrid images={project.gallery.map(asset)} title={project.title} />
               </Reveal>
             </div>
           )}

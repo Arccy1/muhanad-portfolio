@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Clock, Play } from "lucide-react";
 import type { ProjectDTO } from "@/lib/types";
-import { cn } from "@/lib/utils";
+import { asset, cn } from "@/lib/utils";
 
 type Props = {
   project: ProjectDTO;
@@ -22,7 +22,7 @@ export default function ProjectCard({ project, className }: Props) {
         {project.thumbnailUrl ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
-            src={project.thumbnailUrl}
+            src={asset(project.thumbnailUrl)}
             alt={project.title}
             loading="lazy"
             className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"

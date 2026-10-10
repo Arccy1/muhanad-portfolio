@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, Quote, Star } from "lucide-react";
+import { asset } from "@/lib/utils";
 import type { TestimonialDTO } from "@/lib/types";
 
 const AUTOPLAY_MS = 7000;
@@ -72,7 +73,7 @@ export default function TestimonialsCarousel({ testimonials }: { testimonials: T
                 {current.avatarUrl ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
-                    src={current.avatarUrl}
+                    src={asset(current.avatarUrl)}
                     alt=""
                     className="h-14 w-14 rounded-full border-2 border-brand-500/60 object-cover"
                     loading="lazy"

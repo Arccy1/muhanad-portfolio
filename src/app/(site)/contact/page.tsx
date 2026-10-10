@@ -75,7 +75,7 @@ export default async function ContactPage() {
 
           {/* Form */}
           <Reveal delay={0.1}>
-            <ContactForm />
+            <ContactForm contactEmail={socials.email} />
           </Reveal>
         </div>
       </div>

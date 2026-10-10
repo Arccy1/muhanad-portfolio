@@ -63,3 +63,15 @@ export function formatDate(date: Date | string): string {
     day: "numeric",
   });
 }
+
+/**
+ * Prefix internal media paths with the site's base path (GitHub Pages serves
+ * the site under /muhanad-portfolio). Remote and data URLs pass through.
+ * In normal (server) builds NEXT_PUBLIC_BASE_PATH is empty, so this is a no-op.
+ */
+export function asset(path?: string | null): string {
+  if (!path) return "";
+  if (/^(https?:|data:|mailto:|#)/i.test(path)) return path;
+  const base = process.env.NEXT_PUBLIC_BASE_PATH || "";
+  return `${base}${path.startsWith("/") ? path : `/${path}`}`;
+}

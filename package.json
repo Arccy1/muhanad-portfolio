@@ -10,6 +10,8 @@
     "postinstall": "prisma generate",
     "db:push": "prisma db push",
     "db:seed": "tsx prisma/seed.ts",
+    "build:static": "node scripts/build-static.mjs",
+    "deploy:pages": "node scripts/deploy-pages.mjs",
     "placeholders": "node scripts/generate-placeholders.mjs"
   },
   "prisma": {

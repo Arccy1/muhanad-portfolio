@@ -19,20 +19,19 @@ from a great demo into a live, revenue-generating portfolio.
 
 ## Phase 2 — Production Launch
 
+- [x] **Public website hosted on GitHub Pages**
+      (https://arccy1.github.io/muhanad-portfolio/ — redeploy after content edits
+      with `deploy-pages.bat`; admin panel + inbox keep running locally)
 - [ ] **Change credentials**: set real `ADMIN_EMAIL` / `ADMIN_PASSWORD` and a long
       random `AUTH_SECRET` in `.env`, then re-run `npm run db:seed`
 - [ ] **Switch to PostgreSQL** (see README → Database; `docker-compose.yml`
-      included). SQLite is fine for local dev, PostgreSQL for production.
-- [ ] **Media storage**: uploads currently go to `public/uploads` on disk — fine on
-      a VPS, **not persistent on serverless (Vercel/Netlify)**. Move to S3 /
-      Cloudinary / Bunny before deploying serverless (one file to change:
-      `src/app/api/upload/route.ts`, plus the URL fields stay the same).
-- [ ] Deploy:
-  - *VPS (recommended for uploads + PostgreSQL):* `npm run build && npm start`
-    behind nginx/Caddy, or a 5-line Dockerfile
-  - *Vercel:* works, but requires the media-storage change above + a hosted
-    Postgres (Neon/Supabase)
-- [ ] Custom domain + HTTPS, and set `NEXT_PUBLIC_SITE_URL` in `.env` to it
+      included) — only needed if you want the admin/inbox online 24/7 on a server;
+      the local-first workflow works fine without it
+- [ ] **Custom domain**: add it in repo Settings → Pages, then set
+      `NEXT_PUBLIC_SITE_URL` in `.env` and the `NEXT_PUBLIC_BASE_PATH`/sitemap
+      constants in `scripts/build-static.mjs` to "" (root domain hosting)
+- [ ] Optional: a VPS deployment if you want the contact inbox + admin online 24/7
+      (`npm run build && npm start` behind nginx/Caddy)
 - [ ] Add the site to Google Search Console and submit `/sitemap.xml`
 
 ## Phase 3 — Hardening & Operations

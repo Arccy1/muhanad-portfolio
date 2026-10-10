@@ -16,9 +16,15 @@ const PROJECT_TYPES = [
 
 const BUDGETS = ["Under $250", "$250 – $500", "$500 – $1,000", "$1,000 – $5,000", "$5,000+", "Let's discuss"];
 
+// Static builds (GitHub Pages) have no server inbox — submissions open the
+// visitor's email app instead. Dynamic builds POST to /api/messages.
+const STATIC_MODE = process.env.NEXT_PUBLIC_STATIC === "1";
+
 type Status = "idle" | "sending" | "success" | "error";
 
-export default function ContactForm() {
+type Props = { contactEmail?: string };
+
+export default function ContactForm({ contactEmail = "" }: Props) {
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState("");
 
@@ -36,6 +42,24 @@ export default function ContactForm() {
       budget: form.get("budget"),
       message: form.get("message"),
     };
+
+    if (STATIC_MODE) {
+      const subject = encodeURIComponent(`Project inquiry from ${payload.name}`);
+      const body = encodeURIComponent(
+        [
+          `Name: ${payload.name}`,
+          `Email: ${payload.email}`,
+          `Project type: ${payload.projectType || "-"}`,
+          `Budget: ${payload.budget || "-"}`,
+          "",
+          String(payload.message ?? ""),
+        ].join("\n")
+      );
+      const to = contactEmail || "hello@muhanadmahdy.com";
+      window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
+      setStatus("success");
+      return;
+    }
 
     try {
       const res = await fetch("/api/messages", {
@@ -77,9 +101,13 @@ export default function ContactForm() {
             >
               <CheckCircle2 size={64} className="text-brand-500" />
             </motion.div>
-            <h3 className="mt-6 font-display text-3xl tracking-wide text-white">MESSAGE SENT</h3>
+            <h3 className="mt-6 font-display text-3xl tracking-wide text-white">
+              {STATIC_MODE ? "OPENING YOUR EMAIL APP" : "MESSAGE SENT"}
+            </h3>
             <p className="mt-3 max-w-sm text-sm leading-relaxed text-zinc-400">
-              Thanks for reaching out — your message landed in my inbox. I usually reply within 24 hours.
+              {STATIC_MODE
+                ? `Your email app should open with the message pre-filled for ${contactEmail || "me"}. If nothing happens, write to ${contactEmail || "me"} directly.`
+                : "Thanks for reaching out — your message landed in my inbox. I usually reply within 24 hours."}
             </p>
             <button
               type="button"
