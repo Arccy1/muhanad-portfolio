@@ -28,8 +28,8 @@ function run(cmd, args, opts = {}) {
 
 // --- 1. Build the static site ---
 console.log("== Step 1/4: building static site ==");
-const npmCmd = process.platform === "win32" ? "npm.cmd" : "npm";
-if (!run(npmCmd, ["run", "build:static"])) {
+// Invoke Node directly (spawning npm.cmd fails silently on modern Node).
+if (!run(process.execPath, [join(ROOT, "scripts", "build-static.mjs")])) {
   console.error("[X] Static build failed — aborting deploy.");
   process.exit(1);
 }
@@ -46,7 +46,10 @@ if (!remote) {
 rmSync(DEPLOY, { recursive: true, force: true });
 mkdirSync(DEPLOY, { recursive: true });
 // Fresh orphan history each deploy — the branch is a build artifact snapshot.
-if (!run("git", ["init", "-q", "-b", "gh-pages", DEPLOY])) {
+if (
+  !run("git", ["init", "-q", "-b", "gh-pages", DEPLOY]) ||
+  !git(["-C", DEPLOY, "remote", "add", "origin", remote]).ok
+) {
   console.error("[X] Could not initialize deploy directory.");
   process.exit(1);
 }
@@ -127,7 +130,22 @@ if (!token) {
   if (pagesRes.status === 201 || pagesRes.status === 204) {
     console.log("> GitHub Pages enabled (source: gh-pages branch)");
   } else if (pagesRes.status === 409) {
-    console.log("> GitHub Pages already enabled");
+    // Already enabled — make sure it points at gh-pages (it may be on main,
+    // which GitHub renders via Jekyll instead of our static site).
+    const cur = await api(`/repos/${ghUser}/${PAGES_PATH.replace(/^\//, "")}/pages`, "GET");
+    if (cur.ok) {
+      const cfg = await cur.json();
+      if (cfg.source?.branch === "gh-pages") {
+        console.log("> GitHub Pages already enabled (source: gh-pages branch)");
+      } else {
+        console.log(`> Pages source was "${cfg.source?.branch}" — switching to gh-pages`);
+        await api(`/repos/${ghUser}/${PAGES_PATH.replace(/^\//, "")}/pages`, "PUT", {
+          source: { branch: "gh-pages", path: "/" },
+        });
+      }
+    }
+    await api(`/repos/${ghUser}/${PAGES_PATH.replace(/^\//, "")}/pages/builds`, "POST");
+    console.log("> Build requested");
   } else if (pagesRes.status === 403) {
     console.error("[!] Your GitHub token cannot manage Pages — enable it manually:");
     console.error(`    ${remote.replace(/\.git$/, "")}/settings/pages → Source: "Deploy from a branch" → Branch: gh-pages`);
