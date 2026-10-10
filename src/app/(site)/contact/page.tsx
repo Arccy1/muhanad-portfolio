@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { Metadata } from "next";
 import { Instagram, Linkedin, Mail, MessageCircle } from "lucide-react";
 import Reveal from "@/components/ui/Reveal";
@@ -72,7 +73,13 @@ export default async function ContactPage() {
 
           {/* Form */}
           <Reveal delay={0.1}>
-            <ContactForm contactEmail={socials.email} />
+            <Suspense
+              fallback={
+                <div className="glass h-[640px] animate-pulse rounded-3xl" aria-hidden />
+              }
+            >
+              <ContactForm contactEmail={socials.email} />
+            </Suspense>
           </Reveal>
         </div>
       </div>

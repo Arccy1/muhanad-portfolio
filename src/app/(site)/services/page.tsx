@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Link from "next/link";
 import {
   AudioLines,
   Film,
@@ -40,7 +41,11 @@ function ServiceCard({ service, index }: { service: ServiceDTO; index: number })
   const num = String(index + 1).padStart(2, "0");
   return (
     <Reveal delay={0.05 * index} className="h-full">
-      <div className="group relative h-full overflow-hidden rounded-2xl border border-white/8 bg-white/[0.02] p-7 transition-all duration-500 hover:-translate-y-1.5 hover:border-brand-500/50 hover:bg-white/[0.04] hover:shadow-glow">
+      <Link
+        href={`/contact?service=${encodeURIComponent(service.title)}`}
+        aria-label={`Contact about ${service.title}`}
+        className="group relative block h-full overflow-hidden rounded-2xl border border-white/8 bg-white/[0.02] p-7 transition-all duration-500 hover:-translate-y-1.5 hover:border-brand-500/50 hover:bg-white/[0.04] hover:shadow-glow"
+      >
         <span
           aria-hidden
           className="text-stroke absolute -right-2 -top-5 select-none font-display text-7xl opacity-60 transition group-hover:opacity-100"
@@ -56,11 +61,15 @@ function ServiceCard({ service, index }: { service: ServiceDTO; index: number })
         </span>
         <h3 className="relative mt-6 font-display text-2xl tracking-wide text-white">{service.title}</h3>
         <p className="relative mt-3 text-sm leading-relaxed text-zinc-500">{service.description}</p>
+        <span className="relative mt-5 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-brand-400">
+          Get a quote
+          <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+        </span>
         <span
           aria-hidden
           className="absolute bottom-0 left-0 h-[3px] w-0 bg-gradient-to-r from-brand-600 to-brand-300 transition-all duration-500 group-hover:w-full"
         />
-      </div>
+      </Link>
     </Reveal>
   );
 }

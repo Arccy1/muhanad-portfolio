@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { CheckCircle2, Loader2, Send } from "lucide-react";
 
@@ -16,6 +17,18 @@ const PROJECT_TYPES = [
 
 const BUDGETS = ["Under $250", "$250 – $500", "$500 – $1,000", "$1,000 – $5,000", "$5,000+", "Let's discuss"];
 
+// Maps a service title (from the Services page) to a contact form project type.
+const SERVICE_TO_TYPE: Record<string, string> = {
+  "Video Editing": "Long-Form / YouTube",
+  "Short-Form Content": "Short-Form Content",
+  "YouTube Editing": "Long-Form / YouTube",
+  "Motion Graphics": "Motion Graphics",
+  "Commercial Editing": "Commercial / Brand",
+  "Gaming Video Editing": "Gaming / Esports",
+  "Color Grading": "Other",
+  "Sound Design": "Other",
+};
+
 // Static builds (GitHub Pages) have no server inbox — submissions open the
 // visitor's email app instead. Dynamic builds POST to /api/messages.
 const STATIC_MODE = process.env.NEXT_PUBLIC_STATIC === "1";
@@ -25,6 +38,9 @@ type Status = "idle" | "sending" | "success" | "error";
 type Props = { contactEmail?: string };
 
 export default function ContactForm({ contactEmail = "" }: Props) {
+  const searchParams = useSearchParams();
+  const service = searchParams.get("service")?.trim() ?? "";
+  const matchedType = SERVICE_TO_TYPE[service] ?? (service ? "Other" : "");
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState("");
 
@@ -126,6 +142,14 @@ export default function ContactForm({ contactEmail = "" }: Props) {
             className="space-y-5"
             noValidate={false}
           >
+            {service && (
+              <div className="flex items-center justify-between gap-3 rounded-xl border border-brand-500/40 bg-brand-600/10 px-4 py-2.5 text-sm text-brand-300">
+                <span>
+                  Regarding: <span className="font-semibold">{service}</span>
+                </span>
+                <span className="text-xs uppercase tracking-widest text-brand-400/70">from Services</span>
+              </div>
+            )}
             <div className="grid gap-5 sm:grid-cols-2">
               <div>
                 <label htmlFor="name" className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">
@@ -151,7 +175,7 @@ export default function ContactForm({ contactEmail = "" }: Props) {
                 <label htmlFor="projectType" className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">
                   Project Type
                 </label>
-                <select id="projectType" name="projectType" className={inputCls} defaultValue="">
+                <select id="projectType" name="projectType" className={inputCls} defaultValue={matchedType}>
                   <option value="" disabled className="bg-ink-800">
                     Select a project type
                   </option>
@@ -188,6 +212,7 @@ export default function ContactForm({ contactEmail = "" }: Props) {
                 name="message"
                 required
                 rows={6}
+                defaultValue={service ? `Hi Muhanad, I'm interested in your "${service}" service.` : ""}
                 placeholder="Tell me about your project — footage, deadlines, references, anything helps."
                 className={`${inputCls} resize-none`}
                 maxLength={5000}
