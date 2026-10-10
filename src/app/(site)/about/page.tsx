@@ -26,7 +26,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Meet Muhanad Wael Mahdy — video editor and motion designer with 6+ years of experience across short-form, documentary, commercial and esports editing.",
+    "Meet Muhanad Wael Mahdy — video editor and motion designer with 2+ years of experience across short-form, documentary, commercial and esports editing.",
 };
 
 const SPECIALTIES = [
@@ -89,7 +89,9 @@ export default async function AboutPage() {
                 <div className="glass absolute -bottom-5 -right-4 flex items-center gap-3 rounded-2xl px-5 py-3.5">
                   <Award className="text-brand-500" size={22} />
                   <div>
-                    <p className="font-display text-lg leading-none text-white">6+ YEARS</p>
+                    <p className="font-display text-lg leading-none text-white">
+                      {content["stats.years"]} YEARS
+                    </p>
                     <p className="mt-1 text-[10px] uppercase tracking-[0.25em] text-zinc-500">In the timeline</p>
                   </div>
                 </div>

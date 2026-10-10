@@ -7,7 +7,7 @@ export const DEFAULT_CONTENT: Record<string, string> = {
   "hero.subheading": "VIDEO EDITOR & MOTION DESIGNER",
   "hero.description":
     "I transform raw footage into engaging visual stories through editing, motion graphics, sound design, and creative storytelling.",
-  "stats.years": "6+",
+  "stats.years": "2+",
   "stats.projects": "250+",
   "stats.clients": "80+",
   "stats.views": "50M+",
