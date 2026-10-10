@@ -5,8 +5,8 @@
       <stop offset="100%" stop-color="#220a0a"/>
     </linearGradient>
     <radialGradient id="pglow" cx="50%" cy="30%" r="60%">
-      <stop offset="0%" stop-color="#E50914" stop-opacity="0.35"/>
-      <stop offset="100%" stop-color="#E50914" stop-opacity="0"/>
+      <stop offset="0%" stop-color="#3B82F6" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#3B82F6" stop-opacity="0"/>
     </radialGradient>
   </defs>
   <rect width="800" height="800" fill="url(#pbg)"/>
@@ -14,9 +14,9 @@
   <g opacity="0.1"><rect x="0" y="0" width="1.5" height="800" fill="#fff"/><rect x="80" y="0" width="1.5" height="800" fill="#fff"/><rect x="160" y="0" width="1.5" height="800" fill="#fff"/><rect x="240" y="0" width="1.5" height="800" fill="#fff"/><rect x="320" y="0" width="1.5" height="800" fill="#fff"/><rect x="400" y="0" width="1.5" height="800" fill="#fff"/><rect x="480" y="0" width="1.5" height="800" fill="#fff"/><rect x="560" y="0" width="1.5" height="800" fill="#fff"/><rect x="640" y="0" width="1.5" height="800" fill="#fff"/><rect x="720" y="0" width="1.5" height="800" fill="#fff"/></g>
   <circle cx="400" cy="304" r="150" fill="#1d1d20"/>
   <path d="M 150 800 a 250 190 0 0 1 500 0 Z" fill="#1d1d20"/>
-  <circle cx="400" cy="304" r="150" fill="none" stroke="#E50914" stroke-opacity="0.75" stroke-width="4"/>
-  <path d="M 150 800 a 250 190 0 0 1 500 0" fill="none" stroke="#E50914" stroke-opacity="0.75" stroke-width="4"/>
+  <circle cx="400" cy="304" r="150" fill="none" stroke="#3B82F6" stroke-opacity="0.75" stroke-width="4"/>
+  <path d="M 150 800 a 250 190 0 0 1 500 0" fill="none" stroke="#3B82F6" stroke-opacity="0.75" stroke-width="4"/>
   <text x="400" y="288" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="120" fill="#ffffff" fill-opacity="0.9">MW</text>
   <text x="400" y="708" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="44" fill="#ffffff" letter-spacing="4">MUHANAD WAEL MAHDY</text>
-  <text x="400" y="752" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" fill="#FF4D48" letter-spacing="8">VIDEO EDITOR &amp; MOTION DESIGNER</text>
+  <text x="400" y="752" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" fill="#60A5FA" letter-spacing="8">VIDEO EDITOR &amp; MOTION DESIGNER</text>
 </svg>

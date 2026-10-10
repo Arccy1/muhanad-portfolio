@@ -2,32 +2,32 @@
   
   <defs>
     <linearGradient id="bg5" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0d0a08"/>
-      <stop offset="100%" stop-color="#22100a"/>
+      <stop offset="0%" stop-color="#060a12"/>
+      <stop offset="100%" stop-color="#0e1a30"/>
     </linearGradient>
     <radialGradient id="glow5" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#FF4D3D" stop-opacity="0.55"/>
-      <stop offset="100%" stop-color="#FF4D3D" stop-opacity="0"/>
+      <stop offset="0%" stop-color="#60A5FA" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#60A5FA" stop-opacity="0"/>
     </radialGradient>
     <linearGradient id="fade5" x1="0%" y1="0%" x2="0%" y2="100%">
       <stop offset="0%" stop-color="#000" stop-opacity="0"/>
       <stop offset="100%" stop-color="#000" stop-opacity="0.9"/>
     </linearGradient>
     <linearGradient id="redline5" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#E50914"/>
-      <stop offset="100%" stop-color="#FF6B4A"/>
+      <stop offset="0%" stop-color="#2563EB"/>
+      <stop offset="100%" stop-color="#60A5FA"/>
     </linearGradient>
   </defs>
   <rect width="1600" height="900" fill="url(#bg5)"/>
-  <rect x="-200" y="-100" width="60" height="1200" fill="#FF4D3D" opacity="0.05" transform="rotate(-6 800 450)"/>
-<rect x="60" y="-100" width="60" height="1200" fill="#FF4D3D" opacity="0.05" transform="rotate(-6 800 450)"/>
-<rect x="320" y="-100" width="60" height="1200" fill="#FF4D3D" opacity="0.05" transform="rotate(-6 800 450)"/>
-<circle cx="380" cy="288" r="218" fill="none" stroke="#FF4D3D" stroke-opacity="0.28" stroke-width="2"/>
+  <rect x="-200" y="-100" width="60" height="1200" fill="#60A5FA" opacity="0.05" transform="rotate(-6 800 450)"/>
+<rect x="60" y="-100" width="60" height="1200" fill="#60A5FA" opacity="0.05" transform="rotate(-6 800 450)"/>
+<rect x="320" y="-100" width="60" height="1200" fill="#60A5FA" opacity="0.05" transform="rotate(-6 800 450)"/>
+<circle cx="380" cy="288" r="218" fill="none" stroke="#60A5FA" stroke-opacity="0.28" stroke-width="2"/>
 <circle cx="380" cy="288" r="80" fill="none" stroke="#ffffff" stroke-opacity="0.1" stroke-width="1.5"/>
 <g opacity="0.16"><circle cx="70" cy="60" r="2" fill="#ffffff"/><circle cx="112" cy="60" r="2" fill="#ffffff"/><circle cx="154" cy="60" r="2" fill="#ffffff"/><circle cx="196" cy="60" r="2" fill="#ffffff"/><circle cx="238" cy="60" r="2" fill="#ffffff"/><circle cx="280" cy="60" r="2" fill="#ffffff"/><circle cx="322" cy="60" r="2" fill="#ffffff"/><circle cx="364" cy="60" r="2" fill="#ffffff"/><circle cx="406" cy="60" r="2" fill="#ffffff"/><circle cx="448" cy="60" r="2" fill="#ffffff"/><circle cx="490" cy="60" r="2" fill="#ffffff"/><circle cx="532" cy="60" r="2" fill="#ffffff"/><circle cx="574" cy="60" r="2" fill="#ffffff"/><circle cx="616" cy="60" r="2" fill="#ffffff"/><circle cx="70" cy="102" r="2" fill="#ffffff"/><circle cx="112" cy="102" r="2" fill="#ffffff"/><circle cx="154" cy="102" r="2" fill="#ffffff"/><circle cx="196" cy="102" r="2" fill="#ffffff"/><circle cx="238" cy="102" r="2" fill="#ffffff"/><circle cx="280" cy="102" r="2" fill="#ffffff"/><circle cx="322" cy="102" r="2" fill="#ffffff"/><circle cx="364" cy="102" r="2" fill="#ffffff"/><circle cx="406" cy="102" r="2" fill="#ffffff"/><circle cx="448" cy="102" r="2" fill="#ffffff"/><circle cx="490" cy="102" r="2" fill="#ffffff"/><circle cx="532" cy="102" r="2" fill="#ffffff"/><circle cx="574" cy="102" r="2" fill="#ffffff"/><circle cx="616" cy="102" r="2" fill="#ffffff"/><circle cx="70" cy="144" r="2" fill="#ffffff"/><circle cx="112" cy="144" r="2" fill="#ffffff"/><circle cx="154" cy="144" r="2" fill="#ffffff"/><circle cx="196" cy="144" r="2" fill="#ffffff"/><circle cx="238" cy="144" r="2" fill="#ffffff"/><circle cx="280" cy="144" r="2" fill="#ffffff"/><circle cx="322" cy="144" r="2" fill="#ffffff"/><circle cx="364" cy="144" r="2" fill="#ffffff"/><circle cx="406" cy="144" r="2" fill="#ffffff"/><circle cx="448" cy="144" r="2" fill="#ffffff"/><circle cx="490" cy="144" r="2" fill="#ffffff"/><circle cx="532" cy="144" r="2" fill="#ffffff"/><circle cx="574" cy="144" r="2" fill="#ffffff"/><circle cx="616" cy="144" r="2" fill="#ffffff"/><circle cx="70" cy="186" r="2" fill="#ffffff"/><circle cx="112" cy="186" r="2" fill="#ffffff"/><circle cx="154" cy="186" r="2" fill="#ffffff"/><circle cx="196" cy="186" r="2" fill="#ffffff"/><circle cx="238" cy="186" r="2" fill="#ffffff"/><circle cx="280" cy="186" r="2" fill="#ffffff"/><circle cx="322" cy="186" r="2" fill="#ffffff"/><circle cx="364" cy="186" r="2" fill="#ffffff"/><circle cx="406" cy="186" r="2" fill="#ffffff"/><circle cx="448" cy="186" r="2" fill="#ffffff"/><circle cx="490" cy="186" r="2" fill="#ffffff"/><circle cx="532" cy="186" r="2" fill="#ffffff"/><circle cx="574" cy="186" r="2" fill="#ffffff"/><circle cx="616" cy="186" r="2" fill="#ffffff"/><circle cx="70" cy="228" r="2" fill="#ffffff"/><circle cx="112" cy="228" r="2" fill="#ffffff"/><circle cx="154" cy="228" r="2" fill="#ffffff"/><circle cx="196" cy="228" r="2" fill="#ffffff"/><circle cx="238" cy="228" r="2" fill="#ffffff"/><circle cx="280" cy="228" r="2" fill="#ffffff"/><circle cx="322" cy="228" r="2" fill="#ffffff"/><circle cx="364" cy="228" r="2" fill="#ffffff"/><circle cx="406" cy="228" r="2" fill="#ffffff"/><circle cx="448" cy="228" r="2" fill="#ffffff"/><circle cx="490" cy="228" r="2" fill="#ffffff"/><circle cx="532" cy="228" r="2" fill="#ffffff"/><circle cx="574" cy="228" r="2" fill="#ffffff"/><circle cx="616" cy="228" r="2" fill="#ffffff"/><circle cx="70" cy="270" r="2" fill="#ffffff"/><circle cx="112" cy="270" r="2" fill="#ffffff"/><circle cx="154" cy="270" r="2" fill="#ffffff"/><circle cx="196" cy="270" r="2" fill="#ffffff"/><circle cx="238" cy="270" r="2" fill="#ffffff"/><circle cx="280" cy="270" r="2" fill="#ffffff"/><circle cx="322" cy="270" r="2" fill="#ffffff"/><circle cx="364" cy="270" r="2" fill="#ffffff"/><circle cx="406" cy="270" r="2" fill="#ffffff"/><circle cx="448" cy="270" r="2" fill="#ffffff"/><circle cx="490" cy="270" r="2" fill="#ffffff"/><circle cx="532" cy="270" r="2" fill="#ffffff"/><circle cx="574" cy="270" r="2" fill="#ffffff"/><circle cx="616" cy="270" r="2" fill="#ffffff"/><circle cx="70" cy="312" r="2" fill="#ffffff"/><circle cx="112" cy="312" r="2" fill="#ffffff"/><circle cx="154" cy="312" r="2" fill="#ffffff"/><circle cx="196" cy="312" r="2" fill="#ffffff"/><circle cx="238" cy="312" r="2" fill="#ffffff"/><circle cx="280" cy="312" r="2" fill="#ffffff"/><circle cx="322" cy="312" r="2" fill="#ffffff"/><circle cx="364" cy="312" r="2" fill="#ffffff"/><circle cx="406" cy="312" r="2" fill="#ffffff"/><circle cx="448" cy="312" r="2" fill="#ffffff"/><circle cx="490" cy="312" r="2" fill="#ffffff"/><circle cx="532" cy="312" r="2" fill="#ffffff"/><circle cx="574" cy="312" r="2" fill="#ffffff"/><circle cx="616" cy="312" r="2" fill="#ffffff"/><circle cx="70" cy="354" r="2" fill="#ffffff"/><circle cx="112" cy="354" r="2" fill="#ffffff"/><circle cx="154" cy="354" r="2" fill="#ffffff"/><circle cx="196" cy="354" r="2" fill="#ffffff"/><circle cx="238" cy="354" r="2" fill="#ffffff"/><circle cx="280" cy="354" r="2" fill="#ffffff"/><circle cx="322" cy="354" r="2" fill="#ffffff"/><circle cx="364" cy="354" r="2" fill="#ffffff"/><circle cx="406" cy="354" r="2" fill="#ffffff"/><circle cx="448" cy="354" r="2" fill="#ffffff"/><circle cx="490" cy="354" r="2" fill="#ffffff"/><circle cx="532" cy="354" r="2" fill="#ffffff"/><circle cx="574" cy="354" r="2" fill="#ffffff"/><circle cx="616" cy="354" r="2" fill="#ffffff"/></g>
-  <g stroke="#FF4D3D" stroke-opacity="0.5" stroke-width="3" fill="none">
+  <g stroke="#60A5FA" stroke-opacity="0.5" stroke-width="3" fill="none">
        <rect x="540" y="290" width="520" height="320" rx="24"/>
-       <rect x="600" y="350" width="400" height="200" rx="12" fill="#FF4D3D" fill-opacity="0.1"/>
+       <rect x="600" y="350" width="400" height="200" rx="12" fill="#60A5FA" fill-opacity="0.1"/>
      </g>
   <ellipse cx="800" cy="450" rx="500" ry="320" fill="url(#glow5)"/>
   <text x="80" y="810" font-family="Arial Black, Arial, sans-serif" font-size="120" fill="#ffffff" fill-opacity="0.14">03</text>

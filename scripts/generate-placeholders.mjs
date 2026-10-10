@@ -31,12 +31,12 @@ const PROJECTS = [
 
 // dark gradient bases (all warm / neutral — stays on brand)
 const BACKDROPS = [
-  ["#0b0b0d", "#1c0909"],
-  ["#0d0a08", "#22100a"],
-  ["#08080a", "#190606"],
-  ["#0c0b0a", "#1f0d08"],
+  ["#04070e", "#0b1524"],
+  ["#060a12", "#0e1a30"],
+  ["#05070f", "#0a1120"],
+  ["#05090f", "#0d1730"],
 ];
-const ACCENTS = ["#E50914", "#FF4D3D", "#C60712", "#FF6B4A"];
+const ACCENTS = ["#3B82F6", "#60A5FA", "#2563EB", "#7DB4FF"];
 
 function defs(seed) {
   const [a, b] = BACKDROPS[seed % BACKDROPS.length];
@@ -56,8 +56,8 @@ function defs(seed) {
       <stop offset="100%" stop-color="#000" stop-opacity="0.9"/>
     </linearGradient>
     <linearGradient id="redline${seed}" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#E50914"/>
-      <stop offset="100%" stop-color="#FF6B4A"/>
+      <stop offset="0%" stop-color="#2563EB"/>
+      <stop offset="100%" stop-color="#60A5FA"/>
     </linearGradient>
   </defs>`;
 }
@@ -93,8 +93,8 @@ function playButton(cx, cy, r = 64) {
   return `
   <g>
     <circle cx="${cx}" cy="${cy}" r="${r}" fill="#ffffff" fill-opacity="0.06" stroke="#ffffff" stroke-opacity="0.25" stroke-width="1.5"/>
-    <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#E50914" stroke-opacity="0.45" stroke-width="2" stroke-dasharray="8 6"/>
-    <path d="M ${cx - 18} ${cy - 26} L ${cx + 30} ${cy} L ${cx - 18} ${cy + 26} Z" fill="#E50914" fill-opacity="0.92"/>
+    <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#3B82F6" stroke-opacity="0.45" stroke-width="2" stroke-dasharray="8 6"/>
+    <path d="M ${cx - 18} ${cy - 26} L ${cx + 30} ${cy} L ${cx - 18} ${cy + 26} Z" fill="#3B82F6" fill-opacity="0.92"/>
   </g>`;
 }
 
@@ -116,9 +116,9 @@ function thumbSvg({ title, tag, seed, index }) {
   ${playButton(w / 2, h / 2 - 20)}
   ${filmStrip(h - 30, w)}
   <rect width="${w}" height="${h}" fill="url(#fade${seed})" opacity="0.75"/>
-  <text x="80" y="60" font-family="Arial Black, Arial, sans-serif" font-size="34" fill="#E50914" letter-spacing="6">MWM</text>
+  <text x="80" y="60" font-family="Arial Black, Arial, sans-serif" font-size="34" fill="#3B82F6" letter-spacing="6">MWM</text>
   <text x="${w - 80}" y="60" text-anchor="end" font-family="Arial, sans-serif" font-size="30" fill="#ffffff" fill-opacity="0.35" letter-spacing="4">${esc(index)}</text>
-  <text x="80" y="${h - 190}" font-family="Arial, sans-serif" font-weight="bold" font-size="28" fill="#FF4D48" letter-spacing="10">${esc(tag)}</text>
+  <text x="80" y="${h - 190}" font-family="Arial, sans-serif" font-weight="bold" font-size="28" fill="#60A5FA" letter-spacing="10">${esc(tag)}</text>
   <text x="78" y="${h - 110}" font-family="Arial Black, Arial, sans-serif" font-size="76" fill="#ffffff">${esc(title)}</text>
   <rect x="80" y="${h - 84}" width="140" height="6" rx="3" fill="url(#redline${seed})"/>
 </svg>`;
@@ -152,11 +152,11 @@ function beforeAfterSvg(mode, seed) {
   const w = 1600, h = 900;
   const before = mode === "before";
   const skyTop = before ? "#3c3c40" : "#160405";
-  const skyBot = before ? "#8f8f94" : "#E50914";
-  const m1 = before ? "#5a5a5e" : "#7A2210";
-  const m2 = before ? "#717175" : "#A63A12";
-  const m3 = before ? "#8b8b90" : "#D8541E";
-  const rim = before ? "#9c9ca0" : "#FFB37A";
+  const skyBot = before ? "#8f8f94" : "#2E7CD6";
+  const m1 = before ? "#5a5a5e" : "#12305e";
+  const m2 = before ? "#717175" : "#1c4a8f";
+  const m3 = before ? "#8b8b90" : "#2e6bc4";
+  const rim = before ? "#9c9ca0" : "#9CC3FF";
   const sun = before ? "#c9c9cd" : "#FFC873";
   const bars = before ? 0 : 56;
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">
@@ -173,7 +173,7 @@ function beforeAfterSvg(mode, seed) {
   <path d="M ${w * 0.3} ${h * 0.78} L ${w * 0.55} ${h * 0.42} L ${w * 0.82} ${h * 0.78} Z" fill="${m1}"/>
   <path d="M ${w * 0.3} ${h * 0.78} L ${w * 0.55} ${h * 0.42} L ${w * 0.82} ${h * 0.78}" fill="none" stroke="${rim}" stroke-opacity="${before ? 0.25 : 0.8}" stroke-width="4"/>
   <path d="M ${w * 0.6} ${h * 0.82} L ${w * 0.82} ${h * 0.58} L ${w} ${h * 0.82} Z" fill="${m2}"/>
-  <path d="M0 ${h} L ${w * 0.28} ${h * 0.74} L ${w} ${h} Z" fill="${before ? "#26262a" : "#120302"}"/>
+  <path d="M0 ${h} L ${w * 0.28} ${h * 0.74} L ${w} ${h} Z" fill="${before ? "#26262a" : "#060a14"}"/>
   <g opacity="${before ? 0.35 : 0.75}" stroke="${before ? "#5d5d61" : "#1a0505"}" stroke-width="4" fill="none">
     <path d="M ${w * 0.2} ${h * 0.3} q 14 -16 28 0 q 14 -16 28 0"/>
   </g>
@@ -210,8 +210,8 @@ function profileSvg() {
       <stop offset="100%" stop-color="#220a0a"/>
     </linearGradient>
     <radialGradient id="pglow" cx="50%" cy="30%" r="60%">
-      <stop offset="0%" stop-color="#E50914" stop-opacity="0.35"/>
-      <stop offset="100%" stop-color="#E50914" stop-opacity="0"/>
+      <stop offset="0%" stop-color="#3B82F6" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#3B82F6" stop-opacity="0"/>
     </radialGradient>
   </defs>
   <rect width="${s}" height="${s}" fill="url(#pbg)"/>
@@ -219,11 +219,11 @@ function profileSvg() {
   <g opacity="0.1">${Array.from({ length: 10 }, (_, i) => `<rect x="${i * 80}" y="0" width="1.5" height="${s}" fill="#fff"/>`).join("")}</g>
   <circle cx="${s / 2}" cy="${s * 0.38}" r="150" fill="#1d1d20"/>
   <path d="M ${s * 0.5 - 250} ${s} a 250 190 0 0 1 500 0 Z" fill="#1d1d20"/>
-  <circle cx="${s / 2}" cy="${s * 0.38}" r="150" fill="none" stroke="#E50914" stroke-opacity="0.75" stroke-width="4"/>
-  <path d="M ${s * 0.5 - 250} ${s} a 250 190 0 0 1 500 0" fill="none" stroke="#E50914" stroke-opacity="0.75" stroke-width="4"/>
+  <circle cx="${s / 2}" cy="${s * 0.38}" r="150" fill="none" stroke="#3B82F6" stroke-opacity="0.75" stroke-width="4"/>
+  <path d="M ${s * 0.5 - 250} ${s} a 250 190 0 0 1 500 0" fill="none" stroke="#3B82F6" stroke-opacity="0.75" stroke-width="4"/>
   <text x="${s / 2}" y="${s * 0.36}" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="120" fill="#ffffff" fill-opacity="0.9">MW</text>
   <text x="${s / 2}" y="${s - 92}" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="44" fill="#ffffff" letter-spacing="4">MUHANAD WAEL MAHDY</text>
-  <text x="${s / 2}" y="${s - 48}" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" fill="#FF4D48" letter-spacing="8">VIDEO EDITOR &amp; MOTION DESIGNER</text>
+  <text x="${s / 2}" y="${s - 48}" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" fill="#60A5FA" letter-spacing="8">VIDEO EDITOR &amp; MOTION DESIGNER</text>
 </svg>`;
 }
 
@@ -237,13 +237,13 @@ function showreelPosterSvg() {
   ${playButton(w / 2, h / 2, 96)}
   <rect x="0" y="0" width="${w}" height="90" fill="#000"/>
   <rect x="0" y="${h - 90}" width="${w}" height="90" fill="#000"/>
-  <text x="80" y="150" font-family="Arial, sans-serif" font-size="30" fill="#FF4D48" letter-spacing="12">REC</text>
-  <circle cx="52" cy="140" r="10" fill="#E50914">
+  <text x="80" y="150" font-family="Arial, sans-serif" font-size="30" fill="#60A5FA" letter-spacing="12">REC</text>
+  <circle cx="52" cy="140" r="10" fill="#3B82F6">
     <animate attributeName="opacity" values="1;0.2;1" dur="1.6s" repeatCount="indefinite"/>
   </circle>
   <text x="${w - 80}" y="150" text-anchor="end" font-family="Consolas, monospace" font-size="30" fill="#ffffff" fill-opacity="0.5">00:00:59:24</text>
   <text x="${w / 2}" y="${h / 2 + 210}" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="150" fill="none" stroke="#ffffff" stroke-opacity="0.85" stroke-width="2.5" letter-spacing="24">SHOWREEL</text>
-  <text x="${w / 2}" y="${h / 2 + 300}" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="64" fill="#E50914" letter-spacing="30">2026</text>
+  <text x="${w / 2}" y="${h / 2 + 300}" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="64" fill="#3B82F6" letter-spacing="30">2026</text>
   <text x="80" y="${h - 40}" font-family="Arial, sans-serif" font-size="26" fill="#ffffff" fill-opacity="0.4" letter-spacing="6">MUHANAD WAEL MAHDY — EDITOR &amp; MOTION DESIGNER</text>
 </svg>`;
 }
