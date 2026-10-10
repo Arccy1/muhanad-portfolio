@@ -6,6 +6,7 @@ import {
   ArrowUp,
   FileText,
   Languages,
+  ListChecks,
   Loader2,
   MonitorPlay,
   Plus,
@@ -42,6 +43,8 @@ export default function AdminCvPage() {
   const [drafts, setDrafts] = useState<Draft[]>([]);
   const [languages, setLanguages] = useState("");
   const [tools, setTools] = useState("");
+  const [projects, setProjects] = useState<{ id: string; title: string; meta: string }[]>([]);
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
   const [busyId, setBusyId] = useState<string | null>(null);
   const [error, setError] = useState("");
@@ -49,15 +52,33 @@ export default function AdminCvPage() {
 
   const load = useCallback(async () => {
     setLoading(true);
-    const [eRes, cRes] = await Promise.all([fetch("/api/cv-experience"), fetch("/api/content")]);
+    const [eRes, cRes, pRes] = await Promise.all([
+      fetch("/api/cv-experience"),
+      fetch("/api/content"),
+      fetch("/api/projects"),
+    ]);
     const eData = await eRes.json();
     const cData = await cRes.json();
+    const pData = await pRes.json();
     const list: CvExperienceDTO[] = eData.entries ?? [];
     setEntries(list);
     setDrafts(list.map(toDraft));
     const content: Record<string, string> = cData.content ?? {};
     setLanguages(content["cv.languages"] ?? "");
     setTools(content["cv.tools"] ?? "");
+    setProjects(
+      (pData.projects ?? []).map((p: { id: string; title: string; category?: { name: string }; year: string }) => ({
+        id: p.id,
+        title: p.title,
+        meta: [p.category?.name, p.year].filter(Boolean).join(" · "),
+      }))
+    );
+    try {
+      const ids = JSON.parse(content["cv.projectIds"] ?? "[]");
+      setSelectedIds(Array.isArray(ids) ? ids : []);
+    } catch {
+      setSelectedIds([]);
+    }
     setLoading(false);
   }, []);
 
@@ -151,6 +172,14 @@ export default function AdminCvPage() {
     setBusyId(null);
     if (res.ok) flash(`${label} saved.`);
     else setError("Save failed.");
+  }
+
+  function toggleProject(id: string) {
+    setSelectedIds((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
+  }
+
+  async function saveSelection() {
+    await saveListSetting("cv.projectIds", JSON.stringify(selectedIds), "Selected projects");
   }
 
   return (
@@ -311,6 +340,55 @@ export default function AdminCvPage() {
                 No experience entries yet — click “Add Experience”.
               </p>
             )}
+          </div>
+
+          <h2 className="mb-4 mt-10 flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-brand-400">
+            <ListChecks size={16} /> Selected Projects
+          </h2>
+          <div className="glass rounded-2xl p-5">
+            <p className="text-xs leading-relaxed text-zinc-500">
+              Pick which projects appear in “Selected Projects” on the CV. Leave everything
+              unchecked to show your first five automatically.
+            </p>
+            {projects.length === 0 ? (
+              <p className="py-6 text-center text-sm text-zinc-600">No published projects yet.</p>
+            ) : (
+              <div className="mt-4 grid gap-2 sm:grid-cols-2">
+                {projects.map((p) => (
+                  <label
+                    key={p.id}
+                    className="flex cursor-pointer items-center gap-3 rounded-xl border border-white/10 bg-white/[0.03] px-3.5 py-2.5 transition hover:border-brand-500/40"
+                  >
+                    <input
+                      type="checkbox"
+                      className="h-4 w-4 accent-[#E50914]"
+                      checked={selectedIds.includes(p.id)}
+                      onChange={() => toggleProject(p.id)}
+                    />
+                    <span className="min-w-0">
+                      <span className="block truncate text-sm text-white">{p.title}</span>
+                      <span className="block truncate text-xs text-zinc-600">{p.meta || "—"}</span>
+                    </span>
+                  </label>
+                ))}
+              </div>
+            )}
+            <div className="mt-4 flex items-center justify-between">
+              <span className="text-xs text-zinc-500">
+                {selectedIds.length > 0
+                  ? `${selectedIds.length} selected — these will appear on the CV`
+                  : "Nothing selected — the CV will show your first five projects automatically"}
+              </span>
+              <button
+                type="button"
+                onClick={saveSelection}
+                disabled={busyId === "cv.projectIds"}
+                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-600 to-brand-500 px-6 py-2 text-xs font-semibold uppercase tracking-widest text-onbrand shadow-glow disabled:opacity-60"
+              >
+                {busyId === "cv.projectIds" ? <Loader2 size={13} className="animate-spin" /> : <Save size={13} />} Save
+                selection
+              </button>
+            </div>
           </div>
 
           <h2 className="mb-4 mt-10 flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-brand-400">

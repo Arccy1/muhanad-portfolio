@@ -159,3 +159,17 @@ export async function getCvExperience(): Promise<CvExperienceDTO[]> {
     order: r.order,
   }));
 }
+
+/** Fetch published projects by ids, preserving the given id order. */
+export async function getProjectsByIds(ids: string[]): Promise<ProjectDTO[]> {
+  if (ids.length === 0) return [];
+  const rows = await prisma.project.findMany({
+    where: { id: { in: ids }, published: true },
+    include: { category: { select: { id: true, name: true, slug: true } } },
+  });
+  const byId = new Map(rows.map((r) => [r.id, r]));
+  return ids
+    .map((id) => byId.get(id))
+    .filter((r): r is NonNullable<typeof r> => Boolean(r))
+    .map(serializeProject);
+}

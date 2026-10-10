@@ -32,6 +32,9 @@ export const DEFAULT_CONTENT: Record<string, string> = {
   "cv.languages": "Arabic — Native, English — Fluent",
   "cv.tools":
     "Adobe Premiere Pro, Adobe After Effects, DaVinci Resolve, Adobe Photoshop, Adobe Audition",
+  // JSON array of project ids shown in "Selected Projects" on the CV.
+  // Empty = fall back to the first five published projects.
+  "cv.projectIds": "",
 };
 
 export type SiteContent = Record<string, string>;

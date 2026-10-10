@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import { getCvExperience, getProjects, getServices, getSkills } from "@/lib/data";
+import { getCvExperience, getProjects, getProjectsByIds, getServices, getSkills } from "@/lib/data";
 import { getSiteContent, getSocials } from "@/lib/content";
+import { parseJsonArray } from "@/lib/utils";
 import PrintButton from "@/components/cv/PrintButton";
 import Reveal from "@/components/ui/Reveal";
 
@@ -12,14 +13,21 @@ export const metadata: Metadata = {
 };
 
 export default async function CvPage() {
-  const [content, skills, services, projects, experience] = await Promise.all([
+  const [content, skills, services, allProjects, experience] = await Promise.all([
     getSiteContent(),
     getSkills(),
     getServices(),
-    getProjects({ take: 5 }),
+    getProjects(),
     getCvExperience(),
   ]);
   const socials = getSocials(content);
+
+  // "Selected Projects": admin-picked projects; falls back to the first
+  // five published projects when nothing is selected.
+  const pickedIds = parseJsonArray(content["cv.projectIds"]) as string[];
+  const projects =
+    pickedIds.length > 0 ? await getProjectsByIds(pickedIds) : allProjects.slice(0, 5);
+
   const tools = content["cv.tools"]
     .split(",")
     .map((s) => s.trim())
