@@ -74,3 +74,16 @@ export type CvExperienceDTO = {
   points: string[];
   order: number;
 };
+
+export type RatingDTO = {
+  id: string;
+  token: string;
+  projectId: string | null;
+  projectName: string | null;
+  rating: number; // 0 = awaiting the client's response
+  name: string;
+  email: string;
+  content: string;
+  approved: boolean;
+  createdAt: string;
+};

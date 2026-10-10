@@ -6,6 +6,7 @@ import type {
   CategoryDTO,
   CvExperienceDTO,
   ProjectDTO,
+  RatingDTO,
   ServiceDTO,
   SkillDTO,
   TestimonialDTO,
@@ -157,6 +158,67 @@ export async function getCvExperience(): Promise<CvExperienceDTO[]> {
     period: r.period,
     points: parseJsonArray(r.points) as string[],
     order: r.order,
+  }));
+}
+
+function serializeRating(r: {
+  id: string;
+  token: string;
+  projectId: string | null;
+  project?: { title: string } | null;
+  rating: number;
+  name: string;
+  email: string;
+  content: string;
+  approved: boolean;
+  createdAt: Date;
+}): RatingDTO {
+  return {
+    id: r.id,
+    token: r.token,
+    projectId: r.projectId,
+    projectName: r.project?.title ?? null,
+    rating: r.rating,
+    name: r.name,
+    email: r.email,
+    content: r.content,
+    approved: r.approved,
+    createdAt: r.createdAt.toISOString(),
+  };
+}
+
+/** All rating invites + submitted reviews (admin). */
+export async function getRatings(): Promise<RatingDTO[]> {
+  const rows = await prisma.rating.findMany({
+    orderBy: { createdAt: "desc" },
+    include: { project: { select: { title: true } } },
+  });
+  return rows.map(serializeRating);
+}
+
+export async function getRatingByToken(token: string): Promise<RatingDTO | null> {
+  const r = await prisma.rating.findUnique({
+    where: { token },
+    include: { project: { select: { title: true } } },
+  });
+  return r ? serializeRating(r) : null;
+}
+
+/** Approved client reviews, shaped to join the testimonials carousel. */
+export async function getApprovedClientReviews(): Promise<TestimonialDTO[]> {
+  const rows = await prisma.rating.findMany({
+    where: { approved: true, rating: { gt: 0 } },
+    orderBy: { createdAt: "desc" },
+    include: { project: { select: { title: true } } },
+  });
+  return rows.map((r, i) => ({
+    id: `rating-${r.id}`,
+    name: r.name || "Client",
+    role: r.project?.title ? `Verified client — ${r.project.title}` : "Verified client",
+    avatarUrl: "",
+    rating: r.rating,
+    content: r.content || "Great work!",
+    order: 1000 + i,
   }));
 }
 

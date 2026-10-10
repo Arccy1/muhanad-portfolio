@@ -21,6 +21,9 @@ const TMP = join(ROOT, ".static-build-tmp");
 const HIDE = [
   { from: join(ROOT, "src", "app", "api"), to: join(TMP, "api") },
   { from: join(ROOT, "src", "app", "admin"), to: join(TMP, "admin") },
+  // private client review pages need the live server — excluded from the
+  // static export
+  { from: join(ROOT, "src", "app", "rate"), to: join(TMP, "rate") },
 ];
 const SITE_DIR = join(ROOT, "src", "app", "(site)");
 const DYNAMIC = 'export const dynamic = "force-dynamic";';

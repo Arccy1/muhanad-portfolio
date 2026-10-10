@@ -62,6 +62,23 @@ model Project {
   order            Int      @default(0)
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
+  ratings          Rating[]
+}
+
+// Client review invites: admin generates a private link (/rate/<token>),
+// the client submits a 1-5 star rating + optional review, and approved
+// reviews appear in the homepage testimonials carousel.
+model Rating {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  projectId String?
+  project   Project? @relation(fields: [projectId], references: [id], onDelete: SetNull)
+  rating    Int      @default(0) // 0 = awaiting the client's response
+  name      String   @default("")
+  email     String   @default("")
+  content   String   @default("")
+  approved  Boolean  @default(false)
+  createdAt DateTime @default(now())
 }
 
 model Service {

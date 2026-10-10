@@ -6,7 +6,7 @@ import SkillsSection from "@/components/home/SkillsSection";
 import ShowreelTeaser from "@/components/home/ShowreelTeaser";
 import TestimonialsCarousel from "@/components/home/TestimonialsCarousel";
 import CTABand from "@/components/home/CTABand";
-import { getProjects, getSkills, getTestimonials } from "@/lib/data";
+import { getApprovedClientReviews, getProjects, getSkills, getTestimonials } from "@/lib/data";
 import { getSiteContent } from "@/lib/content";
 import { asset } from "@/lib/utils";
 
@@ -19,6 +19,9 @@ export default async function HomePage() {
     getSkills(),
     getTestimonials(),
   ]);
+  // Approved client reviews (from private review links) join the carousel.
+  const clientReviews = await getApprovedClientReviews();
+  const allTestimonials = [...testimonials, ...clientReviews];
 
   const stats = [
     { label: "Years Experience", value: content["stats.years"] },
@@ -46,7 +49,7 @@ export default async function HomePage() {
         videoUrl={content["showreel.videoUrl"] || undefined}
         poster={asset("/images/showreel-poster.svg")}
       />
-      <TestimonialsCarousel testimonials={testimonials} />
+      <TestimonialsCarousel testimonials={allTestimonials} />
       <CTABand heading={content["cta.heading"]} subtext={content["cta.subtext"]} />
     </>
   );
