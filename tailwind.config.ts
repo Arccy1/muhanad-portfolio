@@ -5,21 +5,23 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // Brand scale is CSS-variable driven: :root = dark-mode electric blue,
+        // html.light = light-mode deeper blue (see globals.css).
         brand: {
-          DEFAULT: "#E50914",
-          50: "#FFE9EA",
-          100: "#FFC9CD",
-          200: "#F99AA0",
-          300: "#F2676F",
-          400: "#F63E48",
-          500: "#E50914",
-          600: "#C60712",
-          700: "#9D050E",
-          800: "#74030A",
-          900: "#4D0207",
-          950: "#2E0104",
+          DEFAULT: "rgb(var(--c-brand-500) / <alpha-value>)",
+          50: "rgb(var(--c-brand-50) / <alpha-value>)",
+          100: "rgb(var(--c-brand-100) / <alpha-value>)",
+          200: "rgb(var(--c-brand-200) / <alpha-value>)",
+          300: "rgb(var(--c-brand-300) / <alpha-value>)",
+          400: "rgb(var(--c-brand-400) / <alpha-value>)",
+          500: "rgb(var(--c-brand-500) / <alpha-value>)",
+          600: "rgb(var(--c-brand-600) / <alpha-value>)",
+          700: "rgb(var(--c-brand-700) / <alpha-value>)",
+          800: "rgb(var(--c-brand-800) / <alpha-value>)",
+          900: "rgb(var(--c-brand-900) / <alpha-value>)",
+          950: "rgb(var(--c-brand-950) / <alpha-value>)",
         },
-        // Literal white for text/icon on brand-red or dark-image surfaces
+        // Literal white for text/icon on brand-colored or dark-image surfaces
         // (stays white in both themes).
         onbrand: "rgb(255 255 255 / <alpha-value>)",
         // Neutral palette is CSS-variable driven so the whole UI themes via
@@ -49,9 +51,9 @@ const config: Config = {
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
       },
       boxShadow: {
-        glow: "0 0 24px rgba(229,9,20,0.35)",
-        "glow-sm": "0 0 12px rgba(229,9,20,0.35)",
-        "glow-lg": "0 0 70px rgba(229,9,20,0.45)",
+        glow: "0 0 24px rgb(var(--c-brand-500) / 0.35)",
+        "glow-sm": "0 0 12px rgb(var(--c-brand-500) / 0.35)",
+        "glow-lg": "0 0 70px rgb(var(--c-brand-500) / 0.45)",
         card: "0 24px 60px rgba(0,0,0,0.55)",
       },
       animation: {

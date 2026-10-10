@@ -13,7 +13,7 @@ function SkillBar({ skill, index }: { skill: SkillDTO; index: number }) {
       </div>
       <div className="h-2 overflow-hidden rounded-full bg-white/[0.06]" role="progressbar" aria-valuenow={skill.level} aria-valuemin={0} aria-valuemax={100} aria-label={skill.name}>
         <motion.div
-          className="relative h-full rounded-full bg-gradient-to-r from-brand-700 via-brand-500 to-[#FF8A5C]"
+          className="relative h-full rounded-full bg-gradient-to-r from-brand-700 via-brand-500 to-brand-300"
           initial={reduce ? { width: `${skill.level}%` } : { width: 0 }}
           whileInView={{ width: `${skill.level}%` }}
           viewport={{ once: true, margin: "-40px" }}

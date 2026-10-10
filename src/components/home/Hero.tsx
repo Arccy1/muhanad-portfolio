@@ -81,7 +81,7 @@ export default function Hero({ badge, heading, subheading, description, videoUrl
           className="heading-display mt-7 text-[15vw] text-white sm:text-7xl lg:text-8xl xl:text-[7.5rem]"
         >
           {head}{" "}
-          <span className="text-gradient drop-shadow-[0_0_30px_rgba(229,9,20,0.35)]">{tail}</span>
+          <span className="text-gradient drop-shadow-[0_0_30px_rgb(var(--c-brand-500)/0.35)]">{tail}</span>
         </motion.h1>
 
         <motion.div

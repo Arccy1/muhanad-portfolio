@@ -4,41 +4,64 @@
 
 @layer base {
   :root {
-    /* Dark theme (default). Referenced from tailwind.config.ts. */
+    /* Dark theme (default) — deep navy with electric blue, like a cinematic
+       SaaS dark page. Referenced from tailwind.config.ts. */
     --c-white: 255 255 255;
-    --c-zinc-200: 228 228 231;
-    --c-zinc-300: 212 212 216;
-    --c-zinc-400: 161 161 170;
-    --c-zinc-500: 113 113 122;
-    --c-zinc-600: 82 82 91;
-    --c-zinc-700: 63 63 70;
-    --c-zinc-800: 39 39 42;
-    --c-zinc-900: 24 24 27;
-    --c-zinc-950: 9 9 11;
-    --c-ink: 5 5 5;
-    --c-ink-700: 15 15 15;
-    --c-ink-800: 11 11 11;
-    --c-ink-900: 8 8 8;
-    --c-ink-950: 5 5 5;
+    --c-zinc-200: 226 232 240;
+    --c-zinc-300: 203 213 225;
+    --c-zinc-400: 148 163 184;
+    --c-zinc-500: 100 116 139;
+    --c-zinc-600: 71 85 105;
+    --c-zinc-700: 51 65 85;
+    --c-zinc-800: 30 41 59;
+    --c-zinc-900: 15 23 42;
+    --c-zinc-950: 2 6 23;
+    --c-ink: 4 7 14;
+    --c-ink-700: 10 15 26;
+    --c-ink-800: 8 12 22;
+    --c-ink-900: 6 9 17;
+    --c-ink-950: 4 7 13;
+    --c-brand-50: 239 246 255;
+    --c-brand-100: 219 234 254;
+    --c-brand-200: 191 219 254;
+    --c-brand-300: 147 197 253;
+    --c-brand-400: 96 165 250;
+    --c-brand-500: 59 130 246;
+    --c-brand-600: 37 99 235;
+    --c-brand-700: 29 78 216;
+    --c-brand-800: 30 64 175;
+    --c-brand-900: 30 58 138;
+    --c-brand-950: 23 37 84;
   }
 
-  /* Light theme — neutral tokens invert; brand red stays. */
+  /* Light theme — soft steel blue-gray with clean blue accents. */
   html.light {
-    --c-white: 24 24 27; /* "white" text becomes near-black ink */
-    --c-zinc-200: 39 39 42;
-    --c-zinc-300: 63 63 70;
-    --c-zinc-400: 82 82 91;
-    --c-zinc-500: 113 113 122;
-    --c-zinc-600: 161 161 170;
-    --c-zinc-700: 161 161 170;
-    --c-zinc-800: 228 228 231;
-    --c-zinc-900: 244 244 245;
-    --c-zinc-950: 250 250 249;
-    --c-ink: 250 250 249; /* page background */
+    --c-white: 15 23 42; /* "white" text becomes deep slate ink */
+    --c-zinc-200: 30 41 59;
+    --c-zinc-300: 51 65 85;
+    --c-zinc-400: 71 85 105;
+    --c-zinc-500: 100 116 139;
+    --c-zinc-600: 148 163 184;
+    --c-zinc-700: 148 163 184;
+    --c-zinc-800: 226 232 240;
+    --c-zinc-900: 241 245 249;
+    --c-zinc-950: 248 250 252;
+    --c-ink: 228 236 243; /* page background — cool blue-gray */
     --c-ink-700: 255 255 255; /* raised surfaces */
     --c-ink-800: 255 255 255;
-    --c-ink-900: 247 247 246;
-    --c-ink-950: 245 245 244;
+    --c-ink-900: 244 248 252;
+    --c-ink-950: 238 244 250;
+    --c-brand-50: 219 234 254;
+    --c-brand-100: 191 219 254;
+    --c-brand-200: 147 197 253;
+    --c-brand-300: 96 165 250;
+    --c-brand-400: 59 130 246;
+    --c-brand-500: 37 99 235;
+    --c-brand-600: 29 78 216;
+    --c-brand-700: 26 64 175;
+    --c-brand-800: 30 58 138;
+    --c-brand-900: 23 37 84;
+    --c-brand-950: 23 37 84;
   }
 
   html {
@@ -51,7 +74,7 @@
   }
 
   ::selection {
-    background: rgba(229, 9, 20, 0.85);
+    background: rgb(var(--c-brand-500) / 0.85);
     color: #fff;
   }
 
@@ -60,15 +83,15 @@
     height: 10px;
   }
   ::-webkit-scrollbar-track {
-    background: #0a0a0a;
+    background: #060a12;
   }
   ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #3f0207, #74030a);
+    background: linear-gradient(180deg, #1e3a8a, #3b82f6);
     border-radius: 8px;
-    border: 2px solid #0a0a0a;
+    border: 2px solid #060a12;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, #74030a, #e50914);
+    background: linear-gradient(180deg, #3b82f6, #60a5fa);
   }
 
   :focus-visible {
@@ -84,7 +107,7 @@
 
   /* Dark red gradient headline text */
   .text-gradient {
-    @apply bg-gradient-to-r from-brand-500 via-brand-400 to-[#FF8A5C] bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-brand-500 via-brand-400 to-brand-300 bg-clip-text text-transparent;
   }
 
   .heading-display {
@@ -116,7 +139,7 @@
     color: transparent;
   }
   .text-stroke-red {
-    -webkit-text-stroke: 1.5px rgba(229, 9, 20, 0.55);
+    -webkit-text-stroke: 1.5px rgb(var(--c-brand-500) / 0.55);
     color: transparent;
   }
   .pause-on-hover:hover .animate-marquee {
@@ -141,35 +164,35 @@
 /* Light-theme refinements (unlayered so they win over utilities)      */
 /* ------------------------------------------------------------------ */
 
-/* Soft red glows read better on light backgrounds */
+/* Soft brand glows read better on light backgrounds */
 html.light .shadow-glow {
-  box-shadow: 0 0 18px rgba(229, 9, 20, 0.18);
+  box-shadow: 0 0 18px rgb(var(--c-brand-500) / 0.18);
 }
 html.light .shadow-glow-sm {
-  box-shadow: 0 0 10px rgba(229, 9, 20, 0.14);
+  box-shadow: 0 0 10px rgb(var(--c-brand-500) / 0.14);
 }
 html.light .shadow-glow-lg {
-  box-shadow: 0 0 46px rgba(229, 9, 20, 0.2);
+  box-shadow: 0 0 46px rgb(var(--c-brand-500) / 0.2);
 }
 html.light .shadow-card {
-  box-shadow: 0 16px 40px rgba(24, 24, 27, 0.1);
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.1);
 }
 
 /* Outlined watermark text follows the theme */
 html.light .text-stroke {
-  -webkit-text-stroke-color: rgba(24, 24, 27, 0.16);
+  -webkit-text-stroke-color: rgba(15, 23, 42, 0.16);
 }
 
 /* Scrollbar */
 html.light ::-webkit-scrollbar-track {
-  background: #f0efee;
+  background: #dbe5ee;
 }
 html.light ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #e5a3a3, #d47c7c);
-  border: 2px solid #f0efee;
+  background: linear-gradient(180deg, #93b8dd, #5b9bd5);
+  border: 2px solid #dbe5ee;
 }
 html.light ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #d47c7c, #c60712);
+  background: linear-gradient(180deg, #5b9bd5, #2563eb);
 }
 
 /* The film-grain noise is dark; soften it on light surfaces */

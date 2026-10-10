@@ -133,7 +133,7 @@ export default function AdminTestimonialsPage() {
             </div>
           </div>
           <label className="mt-5 flex cursor-pointer items-center gap-2.5 text-sm text-zinc-300">
-            <input type="checkbox" checked={form.published} onChange={(e) => setForm({ ...form, published: e.target.checked })} className="h-4 w-4 accent-[#E50914]" />
+            <input type="checkbox" checked={form.published} onChange={(e) => setForm({ ...form, published: e.target.checked })} className="h-4 w-4 accent-[#3B82F6]" />
             Published (visible on the website)
           </label>
           {error && (

@@ -236,11 +236,11 @@ export default function ProjectForm({ categories, initial, saving, error, onSave
 
         <div className="mt-6 flex flex-wrap gap-6">
           <label className="flex cursor-pointer items-center gap-2.5 text-sm text-zinc-300">
-            <input type="checkbox" checked={v.featured} onChange={(e) => set("featured", e.target.checked)} className="h-4 w-4 accent-[#E50914]" />
+            <input type="checkbox" checked={v.featured} onChange={(e) => set("featured", e.target.checked)} className="h-4 w-4 accent-[#3B82F6]" />
             Featured on homepage
           </label>
           <label className="flex cursor-pointer items-center gap-2.5 text-sm text-zinc-300">
-            <input type="checkbox" checked={v.published} onChange={(e) => set("published", e.target.checked)} className="h-4 w-4 accent-[#E50914]" />
+            <input type="checkbox" checked={v.published} onChange={(e) => set("published", e.target.checked)} className="h-4 w-4 accent-[#3B82F6]" />
             Published
           </label>
         </div>

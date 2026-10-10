@@ -119,7 +119,7 @@ export default function AdminPanelLayout({ children }: { children: React.ReactNo
                   className={cn(
                     "flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition",
                     active
-                      ? "bg-gradient-to-r from-brand-600/20 to-transparent text-white shadow-[inset_2px_0_0_0_#E50914]"
+                      ? "bg-gradient-to-r from-brand-600/20 to-transparent text-white shadow-[inset_2px_0_0_0_#3B82F6]"
                       : "text-zinc-500 hover:bg-white/[0.03] hover:text-white"
                   )}
                 >

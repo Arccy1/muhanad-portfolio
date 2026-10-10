@@ -361,7 +361,7 @@ export default function AdminCvPage() {
                   >
                     <input
                       type="checkbox"
-                      className="h-4 w-4 accent-[#E50914]"
+                      className="h-4 w-4 accent-[#3B82F6]"
                       checked={selectedIds.includes(p.id)}
                       onChange={() => toggleProject(p.id)}
                     />

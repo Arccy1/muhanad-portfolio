@@ -58,7 +58,7 @@ function ServiceCard({ service, index }: { service: ServiceDTO; index: number })
         <p className="relative mt-3 text-sm leading-relaxed text-zinc-500">{service.description}</p>
         <span
           aria-hidden
-          className="absolute bottom-0 left-0 h-[3px] w-0 bg-gradient-to-r from-brand-600 to-[#FF8A5C] transition-all duration-500 group-hover:w-full"
+          className="absolute bottom-0 left-0 h-[3px] w-0 bg-gradient-to-r from-brand-600 to-brand-300 transition-all duration-500 group-hover:w-full"
         />
       </div>
     </Reveal>

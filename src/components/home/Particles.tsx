@@ -66,9 +66,9 @@ export default function Particles({ className }: { className?: string }) {
     const tick = () => {
       // Re-read each frame so toggling the theme updates the canvas live.
       const light = document.documentElement.classList.contains("light");
-      const dot = light ? (a: number) => `rgba(180, 45, 45, ${a * 0.45})` : (a: number) => `rgba(255, 90, 80, ${a})`;
+      const dot = light ? (a: number) => `rgba(37, 99, 235, ${a * 0.45})` : (a: number) => `rgba(96, 165, 250, ${a})`;
       const line = (alpha: number) =>
-        light ? `rgba(180, 45, 45, ${alpha * 0.5})` : `rgba(229, 9, 20, ${alpha})`;
+        light ? `rgba(37, 99, 235, ${alpha * 0.5})` : `rgba(59, 130, 246, ${alpha})`;
 
       ctx.clearRect(0, 0, width, height);
 
@@ -115,7 +115,7 @@ export default function Particles({ className }: { className?: string }) {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
         ctx.fillStyle = dot(p.a);
-        ctx.shadowColor = "rgba(229, 9, 20, 0.8)";
+        ctx.shadowColor = "rgba(59, 130, 246, 0.8)";
         ctx.shadowBlur = light ? 0 : 6;
         ctx.fill();
         ctx.shadowBlur = 0;
