@@ -65,3 +65,12 @@ export type MessageDTO = {
   read: boolean;
   createdAt: string;
 };
+
+export type CvExperienceDTO = {
+  id: string;
+  role: string;
+  org: string;
+  period: string;
+  points: string[];
+  order: number;
+};

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import {
   Clapperboard,
+  FileText,
   FolderTree,
   LayoutDashboard,
   LogOut,
@@ -22,6 +23,7 @@ const NAV = [
   { href: "/admin/projects", label: "Projects", icon: Clapperboard },
   { href: "/admin/categories", label: "Categories", icon: FolderTree },
   { href: "/admin/testimonials", label: "Testimonials", icon: MessageSquareQuote },
+  { href: "/admin/cv", label: "CV", icon: FileText },
   { href: "/admin/messages", label: "Messages", icon: Mail },
   { href: "/admin/content", label: "Site Content", icon: Settings2 },
 ];

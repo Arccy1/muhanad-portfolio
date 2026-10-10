@@ -29,6 +29,9 @@ export const DEFAULT_CONTENT: Record<string, string> = {
   "socials.tiktok": "https://tiktok.com/@muhanad.mahdy",
   "socials.behance": "https://behance.net/muhanadmahdy",
   "socials.linkedin": "https://linkedin.com/in/muhanad-mahdy",
+  "cv.languages": "Arabic — Native, English — Fluent",
+  "cv.tools":
+    "Adobe Premiere Pro, Adobe After Effects, DaVinci Resolve, Adobe Photoshop, Adobe Audition",
 };
 
 export type SiteContent = Record<string, string>;

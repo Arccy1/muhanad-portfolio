@@ -72,6 +72,7 @@ async function main() {
   console.log("Seeding database...");
 
   await prisma.contactMessage.deleteMany();
+  await prisma.cvExperience.deleteMany();
   await prisma.project.deleteMany();
   await prisma.category.deleteMany();
   await prisma.service.deleteMany();
@@ -257,6 +258,32 @@ async function main() {
   for (const s of skills) await prisma.skill.create({ data: s });
   console.log(`  ${skills.length} skills seeded`);
 
+  // ----- CV experience + languages/tools -----
+  const cvExperience = [
+    {
+      role: "Video Editor",
+      org: "Reachhacks",
+      period: "2024 — Present",
+      points: JSON.stringify([
+        "Editing short-form and long-form video content for Reachhacks — hooks, pacing, kinetic captions, sound design and multi-platform delivery.",
+        "Building retention-driven edits that keep audiences watching from the first frame to the last.",
+      ]),
+      order: 1,
+    },
+    {
+      role: "Freelance Video Editor & Motion Designer",
+      org: "Self-employed · 2 years",
+      period: "2024 — Present",
+      points: JSON.stringify([
+        "Delivering edits for creators and brands across TikTok, Reels, Shorts, YouTube, commercials and esports.",
+        "Full post-production ownership: story assembly, pacing, color grading, sound design and platform-ready exports.",
+      ]),
+      order: 2,
+    },
+  ];
+  for (const e of cvExperience) await prisma.cvExperience.create({ data: e });
+  console.log(`  ${cvExperience.length} CV experience entries seeded`);
+
   // ----- Testimonials -----
   const avatars = manifest.avatars;
   const testimonials = [
@@ -297,6 +324,9 @@ async function main() {
     "socials.tiktok": "https://tiktok.com/@muhanad.mahdy",
     "socials.behance": "https://behance.net/muhanadmahdy",
     "socials.linkedin": "https://linkedin.com/in/muhanad-mahdy",
+    "cv.languages": "Arabic — Native, English — Fluent",
+    "cv.tools":
+      "Adobe Premiere Pro, Adobe After Effects, DaVinci Resolve, Adobe Photoshop, Adobe Audition",
   };
   for (const [key, value] of Object.entries(content)) {
     await prisma.siteContent.create({ data: { key, value } });

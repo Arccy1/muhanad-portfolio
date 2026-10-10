@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import { getProjects, getServices, getSkills } from "@/lib/data";
+import { getCvExperience, getProjects, getServices, getSkills } from "@/lib/data";
 import { getSiteContent, getSocials } from "@/lib/content";
 import PrintButton from "@/components/cv/PrintButton";
 import Reveal from "@/components/ui/Reveal";
@@ -11,50 +11,23 @@ export const metadata: Metadata = {
   description: "Curriculum vitae of Muhanad Wael Mahdy — video editor and motion designer.",
 };
 
-// --------------------------------------------------------------------
-// ✏️ Edit your real experience / languages here (everything else on this
-// CV is pulled from the admin panel: intro, stats, skills, services,
-// selected projects, contact links).
-// --------------------------------------------------------------------
-const EXPERIENCE = [
-  {
-    role: "Video Editor",
-    org: "Reachhacks",
-    period: "2024 — Present",
-    points: [
-      "Editing short-form and long-form video content for Reachhacks — hooks, pacing, kinetic captions, sound design and multi-platform delivery.",
-      "Building retention-driven edits that keep audiences watching from the first frame to the last.",
-    ],
-  },
-  {
-    role: "Freelance Video Editor & Motion Designer",
-    org: "Self-employed · 2 years",
-    period: "2024 — Present",
-    points: [
-      "Delivering edits for creators and brands across TikTok, Reels, Shorts, YouTube, commercials and esports.",
-      "Full post-production ownership: story assembly, pacing, color grading, sound design and platform-ready exports.",
-    ],
-  },
-];
-
-const TOOLS = [
-  "Adobe Premiere Pro",
-  "Adobe After Effects",
-  "DaVinci Resolve",
-  "Adobe Photoshop",
-  "Adobe Audition",
-];
-
-const LANGUAGES = ["Arabic — Native", "English — Fluent"];
-
 export default async function CvPage() {
-  const [content, skills, services, projects] = await Promise.all([
+  const [content, skills, services, projects, experience] = await Promise.all([
     getSiteContent(),
     getSkills(),
     getServices(),
     getProjects({ take: 5 }),
+    getCvExperience(),
   ]);
   const socials = getSocials(content);
+  const tools = content["cv.tools"]
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
+  const languages = content["cv.languages"]
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
 
   const stats = [
     { label: "Years", value: content["stats.years"] },
@@ -127,20 +100,23 @@ export default async function CvPage() {
 
             <Section title="Experience">
               <div className="space-y-5">
-                {EXPERIENCE.map((exp) => (
-                  <div key={exp.role}>
+                {experience.map((exp) => (
+                  <div key={exp.id}>
                     <div className="flex flex-wrap items-baseline justify-between gap-x-3">
                       <h3 className="text-sm font-semibold text-[#18181b]">{exp.role}</h3>
                       <span className="text-xs font-semibold text-brand-600">{exp.period}</span>
                     </div>
-                    <p className="text-xs text-[#71717a]">{exp.org}</p>
+                    {exp.org ? <p className="text-xs text-[#71717a]">{exp.org}</p> : null}
                     <ul className="mt-2 list-disc space-y-1 pl-4 text-sm leading-relaxed text-[#3f3f46]">
-                      {exp.points.map((point) => (
-                        <li key={point}>{point}</li>
+                      {exp.points.map((point, i) => (
+                        <li key={i}>{point}</li>
                       ))}
                     </ul>
                   </div>
                 ))}
+                {experience.length === 0 && (
+                  <p className="text-sm text-[#71717a]">Experience coming soon.</p>
+                )}
               </div>
             </Section>
 
@@ -180,7 +156,7 @@ export default async function CvPage() {
 
                 <Section title="Software">
                   <ul className="space-y-1.5 text-sm text-[#3f3f46]">
-                    {TOOLS.map((tool) => (
+                    {tools.map((tool) => (
                       <li key={tool} className="flex items-center gap-2">
                         <span className="h-1.5 w-1.5 rounded-full bg-brand-600" />
                         {tool}
@@ -204,7 +180,7 @@ export default async function CvPage() {
 
                 <Section title="Languages">
                   <ul className="space-y-1.5 text-sm text-[#3f3f46]">
-                    {LANGUAGES.map((lang) => (
+                    {languages.map((lang) => (
                       <li key={lang} className="flex items-center gap-2">
                         <span className="h-1.5 w-1.5 rounded-full bg-brand-600" />
                         {lang}

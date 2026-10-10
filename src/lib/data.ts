@@ -4,6 +4,7 @@ import { prisma } from "./prisma";
 import { parseJsonArray, parseJsonObject } from "./utils";
 import type {
   CategoryDTO,
+  CvExperienceDTO,
   ProjectDTO,
   ServiceDTO,
   SkillDTO,
@@ -142,5 +143,19 @@ export async function getTestimonials(): Promise<TestimonialDTO[]> {
     rating: t.rating,
     content: t.content,
     order: t.order,
+  }));
+}
+
+export async function getCvExperience(): Promise<CvExperienceDTO[]> {
+  const rows = await prisma.cvExperience.findMany({
+    orderBy: [{ order: "asc" }, { createdAt: "asc" }],
+  });
+  return rows.map((r) => ({
+    id: r.id,
+    role: r.role,
+    org: r.org,
+    period: r.period,
+    points: parseJsonArray(r.points) as string[],
+    order: r.order,
   }));
 }

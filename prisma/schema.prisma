@@ -93,6 +93,18 @@ model Testimonial {
   createdAt DateTime @default(now())
 }
 
+// CV résumé entries edited in Admin → CV
+model CvExperience {
+  id     String @id @default(cuid())
+  role   String
+  org    String @default("")
+  period String @default("")
+  // JSON string array of bullet points
+  points String @default("[]")
+  order  Int    @default(0)
+  createdAt DateTime @default(now())
+}
+
 model ContactMessage {
   id          String   @id @default(cuid())
   name        String
