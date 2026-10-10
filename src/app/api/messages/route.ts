@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { requireAdmin, unauthorized } from "@/lib/auth";
+import { clientIp, rateLimit, tooMany } from "@/lib/rateLimit";
 
 // Public contact submissions and the admin inbox share this route.
 export async function GET() {
@@ -12,11 +13,21 @@ export async function GET() {
 }
 
 export async function POST(req: NextRequest) {
+  // Spam protection: 5 messages per IP per hour + honeypot field below.
+  const rl = rateLimit(`contact:${clientIp(req)}`, 5, 60 * 60 * 1000);
+  if (!rl.ok) return tooMany(rl.retryAfterSeconds);
+
   try {
     const body = await req.json();
     const name = String(body.name ?? "").trim();
     const email = String(body.email ?? "").trim();
     const message = String(body.message ?? "").trim();
+
+    // Honeypot: hidden field that bots fill and humans never see.
+    // Pretend success so bots don't learn anything.
+    if (String(body.website ?? "").trim()) {
+      return NextResponse.json({ ok: true }, { status: 201 });
+    }
 
     if (!name || !email || !message) {
       return NextResponse.json({ error: "Name, email and message are required." }, { status: 400 });

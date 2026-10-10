@@ -36,7 +36,11 @@ from a great demo into a live, revenue-generating portfolio.
 
 ## Phase 3 — Hardening & Operations
 
-- [ ] Rate-limit `POST /api/messages` (e.g. 5/hour/IP) — spam protection
+- [x] **Rate limiting** — login (5/15 min per IP), contact form (5/hour per IP),
+      uploads (30/hour per IP); in-memory, resets on server restart
+- [x] **Contact-form honeypot** — bot submissions are silently discarded
+- [x] **Security headers** — CSP, X-Frame-Options, nosniff, Referrer-Policy,
+      Permissions-Policy on the full-stack server
 - [ ] Email notification when a contact message arrives (Resend / SendGrid /
       SMTP; hook into `src/app/api/messages/route.ts`)
 - [ ] Automated database backups (pg_dump cron on VPS, or managed backups)

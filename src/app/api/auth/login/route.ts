@@ -3,8 +3,13 @@ import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
 import { signToken, TOKEN_NAME } from "@/lib/jwt";
 import { TOKEN_COOKIE } from "@/lib/auth";
+import { clientIp, rateLimit, tooMany } from "@/lib/rateLimit";
 
 export async function POST(req: NextRequest) {
+  // Brute-force protection: 5 attempts per IP per 15 minutes.
+  const rl = rateLimit(`login:${clientIp(req)}`, 5, 15 * 60 * 1000);
+  if (!rl.ok) return tooMany(rl.retryAfterSeconds);
+
   try {
     const body = await req.json();
     const email = String(body.email ?? "").trim().toLowerCase();

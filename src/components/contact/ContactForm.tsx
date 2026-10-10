@@ -139,6 +139,11 @@ export default function ContactForm({ contactEmail = "" }: Props) {
                 </label>
                 <input id="email" name="email" type="email" required placeholder="you@email.com" className={inputCls} maxLength={200} />
               </div>
+              {/* Honeypot — hidden from humans, bots fill it and get silently dropped */}
+              <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+                <label htmlFor="website">Website</label>
+                <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" defaultValue="" />
+              </div>
             </div>
 
             <div className="grid gap-5 sm:grid-cols-2">

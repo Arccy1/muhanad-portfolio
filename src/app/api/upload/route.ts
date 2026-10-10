@@ -3,6 +3,7 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { randomUUID } from "node:crypto";
 import { requireAdmin, unauthorized } from "@/lib/auth";
+import { clientIp, rateLimit, tooMany } from "@/lib/rateLimit";
 
 export const runtime = "nodejs";
 
@@ -12,6 +13,8 @@ const MAX_SIZE = 200 * 1024 * 1024; // 200 MB
 
 export async function POST(req: NextRequest) {
   if (!(await requireAdmin())) return unauthorized();
+  const rl = rateLimit(`upload:${clientIp(req)}`, 30, 60 * 60 * 1000);
+  if (!rl.ok) return tooMany(rl.retryAfterSeconds);
   try {
     const form = await req.formData();
     const file = form.get("file");
