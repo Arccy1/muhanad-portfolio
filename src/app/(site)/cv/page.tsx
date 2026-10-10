@@ -18,13 +18,21 @@ export const metadata: Metadata = {
 // --------------------------------------------------------------------
 const EXPERIENCE = [
   {
-    role: "Freelance Video Editor & Motion Designer",
-    org: "Self-employed · Remote worldwide",
-    period: "2019 — Present",
+    role: "Video Editor",
+    org: "Reachhacks",
+    period: "2024 — Present",
     points: [
-      "Delivered 250+ edits across short-form (TikTok, Reels, Shorts), YouTube, commercials, documentaries, motion graphics and esports.",
-      "Retention-focused short-form editing that repeatedly multiplied watch time and views for creators and brands.",
-      "Full post-production ownership: story assembly, pacing, color grading, sound design and multi-platform delivery.",
+      "Editing short-form and long-form video content for Reachhacks — hooks, pacing, kinetic captions, sound design and multi-platform delivery.",
+      "Building retention-driven edits that keep audiences watching from the first frame to the last.",
+    ],
+  },
+  {
+    role: "Freelance Video Editor & Motion Designer",
+    org: "Self-employed · 2 years",
+    period: "2024 — Present",
+    points: [
+      "Delivering edits for creators and brands across TikTok, Reels, Shorts, YouTube, commercials and esports.",
+      "Full post-production ownership: story assembly, pacing, color grading, sound design and platform-ready exports.",
     ],
   },
 ];
