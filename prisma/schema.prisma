@@ -1,16 +1,14 @@
 // Data model for the Muhanad Wael Mahdy portfolio.
-// Default provider is SQLite so the project runs locally out of the box.
-// To switch to PostgreSQL: change provider below to "postgresql" and update
-// DATABASE_URL in .env (see README), then run: npm run db:push && npm run db:seed
-// NOTE: JSON-shaped fields (arrays/objects) are stored as JSON strings to stay
-// portable across SQLite and PostgreSQL.
+// Provider: PostgreSQL (local server at C:\Users\mohan\pgsql, auto-started
+// by start.bat). JSON-shaped fields (arrays/objects) are stored as JSON
+// strings so the schema also works on SQLite if ever needed.
 
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 

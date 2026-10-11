@@ -37,3 +37,6 @@ prisma/dev.db-journal
 # user uploads (managed content)
 /public/uploads/*
 !/public/uploads/.gitkeep
+ 
+# local data backup - contains private visitor messages, never commit 
+/prisma/data-backup.json

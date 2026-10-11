@@ -4,18 +4,28 @@ cd /d "%~dp0"
 
 rem ---------------------------------------------------------------
 rem  One-click launcher for the portfolio website.
-rem  - Uses the portable Node.js at C:\Users\mohan\nodejs if needed
+rem  - Starts PostgreSQL (the site database) if installed
 rem  - Installs dependencies / database on first run
 rem  - Starts the site on http://localhost:3000 and opens the browser
 rem ---------------------------------------------------------------
 
-rem Make sure node is available (fresh terminals have it on PATH already)
+rem Make sure node and git are available (fresh terminals have them already)
 where node >nul 2>nul || set "PATH=C:\Users\mohan\nodejs;%PATH%"
 where node >nul 2>nul
 if errorlevel 1 (
   echo [ERROR] Node.js not found. Expected in C:\Users\mohan\nodejs
   pause
   exit /b 1
+)
+
+rem Start PostgreSQL if installed (the site database runs on it)
+if exist "C:\Users\mohan\pgsql\data\PG_VERSION" (
+  "C:\Users\mohan\pgsql\bin\pg_ctl.exe" -D "C:\Users\mohan\pgsql\data" -l "C:\Users\mohan\pgsql\log.txt" status >nul 2>nul
+  if errorlevel 1 (
+    echo Starting PostgreSQL database...
+    "C:\Users\mohan\pgsql\bin\pg_ctl.exe" -D "C:\Users\mohan\pgsql\data" -l "C:\Users\mohan\pgsql\log.txt" start >nul 2>nul
+    timeout /t 3 /nobreak >nul
+  )
 )
 
 rem If the site is already running, just open it
@@ -34,14 +44,15 @@ if not exist "node_modules" (
   if errorlevel 1 goto fail
 )
 
-rem First run: create and seed the database
+rem First run: create the database schema
 if not exist "prisma\dev.db" (
-  echo First run detected - creating and seeding the database...
+  if exist "prisma\migrated-pg.flag" goto db-done
+  echo First run detected - pushing the schema to PostgreSQL...
   call npx prisma db push
   if errorlevel 1 goto fail
-  call npm run db:seed
-  if errorlevel 1 goto fail
+  echo migrated > "prisma\migrated-pg.flag"
 )
+:db-done
 
 echo.
 echo  ============================================================
@@ -49,7 +60,7 @@ echo   Portfolio website starting...
 echo.
 echo   Website     : http://localhost:3000
 echo   Admin panel : http://localhost:3000/admin
-echo                 login: admin@muhanad.dev  /  admin123
+echo                 (your credentials are in the .env file)
 echo.
 echo   Keep this window OPEN while using the site.
 echo   Close this window (or press Ctrl+C) to stop the website.
@@ -64,3 +75,4 @@ goto :eof
 echo.
 echo [ERROR] Setup failed - read the messages above for the cause.
 pause
+

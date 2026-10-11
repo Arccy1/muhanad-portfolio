@@ -64,26 +64,24 @@ Copy `.env.example` and adjust. Every variable is documented inside the template
 ## Admin Dashboard — Login
 
 - **URL:** http://localhost:3000/admin
-- **Email:** `admin@muhanad.dev`
-- **Password:** `admin123`
+- **Credentials:** stored in the project's **`.env`** file (never committed) —
+  look for `ADMIN_EMAIL` and `ADMIN_PASSWORD` there.
 
-Visiting `/admin` while logged out redirects to the login page automatically
-(credentials are also shown there as a reminder while in demo mode).
-
-**Change the credentials before going live:** edit `ADMIN_EMAIL` / `ADMIN_PASSWORD`
-in `.env`, then re-run `npm run db:seed` (this resets demo content, so do it before
-adding real projects).
+Visiting `/admin` while logged out redirects to the login page automatically.
+The session lasts 7 days.
 
 ### What the dashboard manages
 
 | Section | Capabilities |
 | --- | --- |
 | **Dashboard** | Live counts and recent activity |
-| **Projects** | Full CRUD with thumbnail/video/gallery/before-after uploads, category, software, process steps, client info, featured & published toggles — plus **search + category/year/status filters** |
+| **Projects** | Full CRUD with thumbnail/video/gallery/before-after uploads, category, software, process steps, client info, featured & published toggles — plus **search + category/year/status filters** and **drag-free reordering** |
 | **Categories** | Portfolio categories and subcategories |
 | **Testimonials** | Client quotes with avatars and ratings |
+| **Client Reviews** | Private per-project review links — clients rate 1-5 stars; you approve before they appear on the homepage |
+| **CV** | Experience entries, languages and software for the /cv page |
 | **Messages** | Contact-form inbox — unread states, mark read, reply by email, delete |
-| **Site Content** | Hero text, stats, showreel video, about text & photo, CTA, all social links |
+| **Site Content** | Hero text, stats, showreel video, about text & photo, CTA, social links |
 
 ---
 
@@ -112,33 +110,19 @@ Notes:
 
 ## Database
 
-Ships configured for **SQLite** (`prisma/schema.prisma`, `provider = "sqlite"`) so it
-runs anywhere with zero setup. Data lives in `prisma/dev.db` (gitignored).
+The site runs on **PostgreSQL 16**, installed locally at `C:\Users\mohan\pgsql` and
+**started automatically by `start.bat`** (data directory: `C:\Users\mohan\pgsql\data`).
+Connection details live in `.env` (`DATABASE_URL`).
 
-### Switching to PostgreSQL (recommended for production)
+All content was migrated from the original SQLite file (kept as a backup at
+`prisma/data-backup.json`).
 
-1. Start Postgres — a ready-made instance is included:
+### Notes
 
-   ```bash
-   docker compose up -d
-   ```
-
-2. In `prisma/schema.prisma` change the datasource provider to `"postgresql"`.
-3. In `.env` set:
-
-   ```
-   DATABASE_URL="postgresql://muhanad:muhanad_secret@localhost:5432/muhanad_portfolio?schema=public"
-   ```
-
-4. Recreate and seed:
-
-   ```bash
-   npm run db:push
-   npm run db:seed
-   ```
-
-The schema avoids provider-specific features (JSON columns are stored as JSON strings)
-so it works identically on both databases.
+- Schema changes: edit `prisma/schema.prisma`, then `npm run db:push`.
+- To start/stop PostgreSQL manually:
+  `"C:\Users\mohan\pgsql\bin\pg_ctl.exe" -D "C:\Users\mohan\pgsql\data" start|stop`
+- A `docker-compose.yml` is included for containerized PostgreSQL on a VPS.
 
 ---
 

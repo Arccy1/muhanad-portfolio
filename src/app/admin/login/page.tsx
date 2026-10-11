@@ -98,10 +98,8 @@ export default function AdminLoginPage() {
           </button>
         </form>
 
-        <p className="mt-6 rounded-xl border border-white/5 bg-white/[0.02] px-4 py-3 text-center text-xs leading-relaxed text-zinc-600">
-          Demo credentials: <span className="text-zinc-400">admin@muhanad.dev</span> /{" "}
-          <span className="text-zinc-400">admin123</span> — change them in{" "}
-          <span className="text-zinc-500">.env</span> and re-run the seed.
+        <p className="mt-6 text-center text-xs text-zinc-600">
+          Authorized use only. Credentials are stored in the project&apos;s .env file.
         </p>
         <p className="mt-4 text-center text-xs text-zinc-600">
           <Link href="/" className="transition hover:text-brand-400">← Back to website</Link>

@@ -22,17 +22,20 @@ from a great demo into a live, revenue-generating portfolio.
 - [x] **Public website hosted on GitHub Pages**
       (https://arccy1.github.io/muhanad-portfolio/ — redeploy after content edits
       with `deploy-pages.bat`; admin panel + inbox keep running locally)
-- [ ] **Change credentials**: set real `ADMIN_EMAIL` / `ADMIN_PASSWORD` and a long
-      random `AUTH_SECRET` in `.env`, then re-run `npm run db:seed`
-- [ ] **Switch to PostgreSQL** (see README → Database; `docker-compose.yml`
-      included) — only needed if you want the admin/inbox online 24/7 on a server;
-      the local-first workflow works fine without it
-- [ ] **Custom domain**: add it in repo Settings → Pages, then set
-      `NEXT_PUBLIC_SITE_URL` in `.env` and the `NEXT_PUBLIC_BASE_PATH`/sitemap
-      constants in `scripts/build-static.mjs` to "" (root domain hosting)
+- [x] **Credentials rotated** — real admin login (your Gmail) + a strong password +
+      a fresh `AUTH_SECRET`; stored in `.env` (never committed). Login page no
+      longer shows any hints.
+- [x] **PostgreSQL** — portable PostgreSQL 16 installed at `C:\Users\mohan\pgsql`,
+      all content migrated from SQLite, `start.bat` starts it automatically.
+      (Original SQLite kept as backup: `prisma/data-backup.json`.)
+- [ ] **Custom domain** (needs your purchase): add it in repo Settings → Pages,
+      then set `NEXT_PUBLIC_SITE_URL` in `.env` and the
+      `NEXT_PUBLIC_BASE_PATH`/sitemap constants in `scripts/build-static.mjs`
+      to "" (root domain hosting)
 - [ ] Optional: a VPS deployment if you want the contact inbox + admin online 24/7
       (`npm run build && npm start` behind nginx/Caddy)
 - [ ] Add the site to Google Search Console and submit `/sitemap.xml`
+      (needs your Google account — verify ownership, then submit the sitemap URL)
 
 ## Phase 3 — Hardening & Operations
 
