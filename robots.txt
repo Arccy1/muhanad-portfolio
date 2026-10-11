@@ -1,0 +1,6 @@
+User-Agent: *
+Allow: /
+Disallow: /admin
+Disallow: /api
+
+Sitemap: https://arccy1.github.io/muhanad-portfolio/sitemap.xml
