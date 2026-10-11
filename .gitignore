@@ -40,3 +40,11 @@ prisma/dev.db-journal
  
 # local data backup - contains private visitor messages, never commit 
 /prisma/data-backup.json
+ 
+# local backups and logs 
+/backups/ 
+/logs/
+ 
+# local curl cookie jars from admin tests (contain session tokens) 
+ck.txt 
+*.txt.cookies

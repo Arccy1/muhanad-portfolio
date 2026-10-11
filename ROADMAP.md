@@ -44,11 +44,24 @@ from a great demo into a live, revenue-generating portfolio.
 - [x] **Contact-form honeypot** — bot submissions are silently discarded
 - [x] **Security headers** — CSP, X-Frame-Options, nosniff, Referrer-Policy,
       Permissions-Policy on the full-stack server
-- [ ] Email notification when a contact message arrives (Resend / SendGrid /
-      SMTP; hook into `src/app/api/messages/route.ts`)
-- [ ] Automated database backups (pg_dump cron on VPS, or managed backups)
-- [ ] Optional: second admin account or password reset flow
-- [ ] Error tracking (Sentry) and basic analytics (Plausible/Umami — cookieless)
+- [x] **Email notifications** — implemented via SMTP (nodemailer). To activate:
+      create a Gmail App Password (myaccount.google.com/apppasswords) and fill
+      `SMTP_HOST`/`SMTP_USER`/`SMTP_PASS` + `NOTIFY_EMAIL` in `.env`. Without
+      credentials the contact form still works, just without emails.
+- [x] **Automated database backups** — daily Windows scheduled task at 21:00
+      ("MuhanadPortfolio DB Backup") runs `npm run db:backup` (pg_dump) into
+      `/backups`, keeping the last 30. Manual: `npm run db:backup`.
+      Restore with: `pg_restore -U postgres -d muhanad_portfolio <file>.dump`
+- [x] **Password self-service** — change password + profile email/name directly
+      in Admin → Dashboard. Additional admin accounts:
+      `npm run admin:add -- "email" "password" "Name"`
+- [x] **Error tracking + cookieless analytics (local)** — unexpected errors log
+      to `logs/error.log` (client errors included via the global error
+      boundary); page views are recorded in the database and shown in
+      Admin → Dashboard ("Site Traffic"). For analytics of the live
+      GitHub Pages site, add Plausible later (needs an account).
+- [ ] Optional: migrate these to hosted services (Sentry/Plausible) if the
+      backend moves online
 
 ## Phase 4 — Site Growth
 

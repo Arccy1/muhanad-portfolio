@@ -63,6 +63,16 @@ model Project {
   ratings          Rating[]
 }
 
+// Cookieless analytics: one row per page view (public site only).
+model PageView {
+  id        String   @id @default(cuid())
+  path      String
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([path])
+}
+
 // Client review invites: admin generates a private link (/rate/<token>),
 // the client submits a 1-5 star rating + optional review, and approved
 // reviews appear in the homepage testimonials carousel.

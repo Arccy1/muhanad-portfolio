@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { requireAdmin, unauthorized } from "@/lib/auth";
 import { clientIp, rateLimit, tooMany } from "@/lib/rateLimit";
+import { notifyNewMessage } from "@/lib/mailer";
+import { logError } from "@/lib/logger";
 
 // Public contact submissions and the admin inbox share this route.
 export async function GET() {
@@ -39,7 +41,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "One of the fields is too long." }, { status: 400 });
     }
 
-    await prisma.contactMessage.create({
+    const created = await prisma.contactMessage.create({
       data: {
         name,
         email,
@@ -48,8 +50,20 @@ export async function POST(req: NextRequest) {
         budget: String(body.budget ?? "").trim(),
       },
     });
+
+    // Email notification (only when SMTP is configured in .env) — never blocks
+    // the form and never fails the request.
+    notifyNewMessage({
+      name,
+      email,
+      projectType: created.projectType,
+      budget: created.budget,
+      message: created.message,
+    }).catch((e) => logError("notify", e));
+
     return NextResponse.json({ ok: true }, { status: 201 });
-  } catch {
+  } catch (e) {
+    logError("messages", e);
     return NextResponse.json({ error: "Could not send your message. Please try again." }, { status: 500 });
   }
 }

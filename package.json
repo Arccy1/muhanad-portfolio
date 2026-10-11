@@ -10,6 +10,8 @@
     "postinstall": "prisma generate",
     "db:push": "prisma db push",
     "db:seed": "tsx prisma/seed.ts",
+    "db:backup": "node scripts/backup-database.mjs",
+    "admin:add": "node --import tsx scripts/add-admin.mjs",
     "build:static": "node scripts/build-static.mjs",
     "deploy:pages": "node scripts/deploy-pages.mjs",
     "placeholders": "node scripts/generate-placeholders.mjs"
@@ -24,12 +26,14 @@
     "jose": "^5.9.6",
     "lucide-react": "^0.454.0",
     "next": "^14.2.5",
+    "nodemailer": "^10.1.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
     "@types/node": "^20.16.0",
+    "@types/nodemailer": "^8.0.2",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "autoprefixer": "^10.4.20",
