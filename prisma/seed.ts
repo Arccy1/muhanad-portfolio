@@ -87,7 +87,7 @@ async function main() {
   await prisma.adminUser.create({
     data: {
       email,
-      name: process.env.ADMIN_NAME || "Muhanad Wael Mahdy",
+      name: process.env.ADMIN_NAME || "Muhanad Wael El-Mahdy",
       passwordHash: bcrypt.hashSync(password, 10),
     },
   });
@@ -312,7 +312,7 @@ async function main() {
     "showreel.title": "MY SHOWREEL",
     "showreel.description": "Selected work showcasing my editing style, motion graphics, transitions, visual effects, and storytelling.",
     "showreel.videoUrl": SAMPLE_VIDEOS[4],
-    "about.intro": "I'm Muhanad Wael Mahdy, a video editor and motion designer with 2+ years of experience turning raw footage into stories people finish, share and remember. My work spans short-form virality, long-form documentaries, commercials and esports montages — always with the same obsession: rhythm, emotion and polish in every frame.",
+    "about.intro": "I'm Muhanad Wael El-Mahdy, a video editor and motion designer with 2+ years of experience turning raw footage into stories people finish, share and remember. My work spans short-form virality, long-form documentaries, commercials and esports montages — always with the same obsession: rhythm, emotion and polish in every frame.",
     "about.approach": "Great editing is invisible. I start every project by understanding the story and the audience, then let rhythm and pacing do the heavy lifting. Whether it's a 15-second Reel or a 12-minute documentary, the goal is the same: make people feel something before they realize they're watching an edit.",
     "about.image": "/images/profile.svg",
     "cta.heading": "LET'S CREATE SOMETHING GREAT",

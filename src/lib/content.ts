@@ -16,7 +16,7 @@ export const DEFAULT_CONTENT: Record<string, string> = {
     "Selected work showcasing my editing style, motion graphics, transitions, visual effects, and storytelling.",
   "showreel.videoUrl": "",
   "about.intro":
-    "I'm Muhanad Wael Mahdy, a video editor and motion designer turning raw footage into stories people finish, share and remember.",
+    "I'm Muhanad Wael El-Mahdy, a video editor and motion designer turning raw footage into stories people finish, share and remember.",
   "about.approach":
     "Great editing is invisible. I start every project by understanding the story and the audience, then let rhythm and pacing do the heavy lifting.",
   "about.image": "/images/profile.svg",

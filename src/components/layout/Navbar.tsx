@@ -56,12 +56,12 @@ export default function Navbar() {
       )}
     >
       <nav className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-5 sm:px-8" aria-label="Main navigation">
-        <Link href="/" className="group flex items-center gap-3" aria-label="Muhanad Wael Mahdy — home">
+        <Link href="/" className="group flex items-center gap-3" aria-label="Muhanad Wael El-Mahdy — home">
           <span className="flex h-10 w-10 items-center justify-center rounded-lg border border-brand-500/50 bg-brand-600/10 font-display text-xl text-brand-500 shadow-glow-sm transition group-hover:bg-brand-600 group-hover:text-white">
             M
           </span>
           <span className="leading-tight">
-            <span className="block font-display text-lg tracking-wider text-white">MUHANAD MAHDY</span>
+            <span className="block font-display text-lg tracking-wider text-white">MUHANAD EL-MAHDY</span>
             <span className="block text-[10px] uppercase tracking-[0.3em] text-brand-400">Video Editor</span>
           </span>
         </Link>

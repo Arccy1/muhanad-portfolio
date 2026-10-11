@@ -27,7 +27,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Meet Muhanad Wael Mahdy — video editor and motion designer with 2+ years of experience across short-form, documentary, commercial and esports editing.",
+    "Meet Muhanad Wael El-Mahdy — video editor and motion designer with 2+ years of experience across short-form, documentary, commercial and esports editing.",
 };
 
 const SPECIALTIES = [
@@ -84,7 +84,7 @@ export default async function AboutPage() {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={asset(content["about.image"])}
-                  alt="Portrait of Muhanad Wael Mahdy"
+                  alt="Portrait of Muhanad Wael El-Mahdy"
                   className="relative aspect-square w-full rounded-3xl border border-white/10 object-cover shadow-card"
                 />
                 <div className="glass absolute -bottom-5 -right-4 flex items-center gap-3 rounded-2xl px-5 py-3.5">

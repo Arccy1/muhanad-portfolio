@@ -44,7 +44,7 @@ export default async function Footer() {
               M
             </span>
             <span className="leading-tight">
-              <span className="block font-display text-xl tracking-wider text-white">MUHANAD MAHDY</span>
+              <span className="block font-display text-xl tracking-wider text-white">MUHANAD EL-MAHDY</span>
               <span className="block text-[10px] uppercase tracking-[0.3em] text-brand-400">
                 Video Editor & Motion Designer
               </span>
@@ -88,7 +88,7 @@ export default async function Footer() {
 
       <div className="border-t border-white/5">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-5 py-6 text-xs text-zinc-600 sm:flex-row sm:px-8">
-          <p>© {new Date().getFullYear()} Muhanad Wael Mahdy. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Muhanad Wael El-Mahdy. All rights reserved.</p>
           <p>
             Edited, graded &amp; delivered with <span className="text-brand-500">●</span> by Muhanad
           </p>

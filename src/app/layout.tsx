@@ -20,11 +20,11 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Muhanad Wael Mahdy — Video Editor & Motion Designer",
-    template: "%s — Muhanad Wael Mahdy",
+    default: "Muhanad Wael El-Mahdy — Video Editor & Motion Designer",
+    template: "%s — Muhanad Wael El-Mahdy",
   },
   description:
-    "Portfolio of Muhanad Wael Mahdy, video editor and motion designer. Short-form, long-form, commercials, motion graphics, gaming edits and social media content.",
+    "Portfolio of Muhanad Wael El-Mahdy, video editor and motion designer. Short-form, long-form, commercials, motion graphics, gaming edits and social media content.",
   keywords: [
     "video editor",
     "motion designer",
@@ -33,20 +33,20 @@ export const metadata: Metadata = {
     "motion graphics",
     "color grading",
     "sound design",
-    "Muhanad Wael Mahdy",
+    "Muhanad Wael El-Mahdy",
   ],
-  authors: [{ name: "Muhanad Wael Mahdy" }],
+  authors: [{ name: "Muhanad Wael El-Mahdy" }],
   openGraph: {
-    title: "Muhanad Wael Mahdy — Video Editor & Motion Designer",
+    title: "Muhanad Wael El-Mahdy — Video Editor & Motion Designer",
     description:
       "I transform raw footage into engaging visual stories through editing, motion graphics, sound design, and creative storytelling.",
     url: SITE_URL,
-    siteName: "Muhanad Wael Mahdy",
+    siteName: "Muhanad Wael El-Mahdy",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Muhanad Wael Mahdy — Video Editor & Motion Designer",
+    title: "Muhanad Wael El-Mahdy — Video Editor & Motion Designer",
   },
 };
 

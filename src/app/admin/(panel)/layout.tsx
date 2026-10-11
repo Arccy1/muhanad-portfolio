@@ -106,7 +106,7 @@ export default function AdminPanelLayout({ children }: { children: React.ReactNo
             </span>
             <span className="leading-tight">
               <span className="block font-display text-lg tracking-wider text-white">ADMIN PANEL</span>
-              <span className="block text-[9px] uppercase tracking-[0.3em] text-brand-400">Muhanad Mahdy</span>
+              <span className="block text-[9px] uppercase tracking-[0.3em] text-brand-400">Muhanad El-Mahdy</span>
             </span>
           </Link>
 

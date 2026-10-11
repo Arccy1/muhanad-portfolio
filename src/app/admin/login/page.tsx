@@ -58,7 +58,7 @@ export default function AdminLoginPage() {
           </span>
           <div>
             <h1 className="font-display text-2xl tracking-wide text-white">ADMIN PANEL</h1>
-            <p className="text-[10px] uppercase tracking-[0.3em] text-brand-400">Muhanad Wael Mahdy</p>
+            <p className="text-[10px] uppercase tracking-[0.3em] text-brand-400">Muhanad Wael El-Mahdy</p>
           </div>
         </div>
 

@@ -9,7 +9,7 @@ import Reveal from "@/components/ui/Reveal";
 
 export const metadata: Metadata = {
   title: "CV",
-  description: "Curriculum vitae of Muhanad Wael Mahdy — video editor and motion designer.",
+  description: "Curriculum vitae of Muhanad Wael El-Mahdy — video editor and motion designer.",
 };
 
 export default async function CvPage() {
@@ -77,7 +77,7 @@ export default async function CvPage() {
             {/* Header */}
             <header>
               <h1 className="font-display text-4xl uppercase tracking-wide sm:text-5xl">
-                Muhanad Wael Mahdy
+                Muhanad Wael El-Mahdy
               </h1>
               <p className="mt-1 font-display text-lg uppercase tracking-[0.3em] text-brand-600">
                 Video Editor &amp; Motion Designer

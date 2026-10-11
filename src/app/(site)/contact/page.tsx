@@ -10,7 +10,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Get in touch with Muhanad Wael Mahdy for video editing and motion design projects — email, WhatsApp, Instagram and LinkedIn.",
+    "Get in touch with Muhanad Wael El-Mahdy for video editing and motion design projects — email, WhatsApp, Instagram and LinkedIn.",
 };
 
 export default async function ContactPage() {
