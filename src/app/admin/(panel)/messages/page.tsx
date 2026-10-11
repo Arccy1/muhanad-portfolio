@@ -140,6 +140,26 @@ export default function AdminMessagesPage() {
                       </span>
                     </div>
                     <p className="mt-4 whitespace-pre-line text-sm leading-relaxed text-zinc-300">{m.message}</p>
+                    {(m.files || []).length > 0 && (
+                      <div className="mt-4">
+                        <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">
+                          Attachments
+                        </p>
+                        <div className="flex flex-wrap gap-2">
+                          {m.files.map((f) => (
+                            <a
+                              key={f}
+                              href={f}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="rounded-lg border border-white/10 bg-white/[0.02] px-3 py-1.5 text-xs text-zinc-300 transition hover:border-brand-500/60 hover:text-brand-400"
+                            >
+                              📎 {f.split("/").pop()}
+                            </a>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                     <div className="mt-5 flex flex-wrap gap-3">
                       <a
                         href={`mailto:${m.email}?subject=Re: your project inquiry`}

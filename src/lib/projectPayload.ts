@@ -14,6 +14,8 @@ export type ProjectInput = {
   gallery: string;
   beforeAfter: string;
   process: string;
+  clientQuote: string;
+  results: string;
   tags: string;
   client: string;
   year: string;
@@ -66,6 +68,15 @@ export function normalizeProjectBody(body: Record<string, unknown>): ProjectInpu
     gallery: toJsonArray(body.gallery),
     beforeAfter,
     process,
+    clientQuote: String(body.clientQuote ?? "").trim().slice(0, 500),
+    results: JSON.stringify(
+      (Array.isArray(body.results) ? body.results : [])
+        .map((r) => ({
+          label: String((r as { label?: unknown })?.label ?? "").trim().slice(0, 80),
+          value: String((r as { value?: unknown })?.value ?? "").trim().slice(0, 40),
+        }))
+        .filter((r) => r.label || r.value)
+    ),
     tags: toJsonArray(body.tags),
     client: String(body.client ?? "").trim(),
     year: String(body.year ?? "").trim(),

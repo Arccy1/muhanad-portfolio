@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import { getAllProjectSlugs, getProjectBySlug, getProjects } from "@/lib/data";
 import { getSiteContent } from "@/lib/content";
-import { asset } from "@/lib/utils";
+import { asset, cn } from "@/lib/utils";
 import VideoPlayer from "@/components/portfolio/VideoPlayer";
 import BeforeAfterSlider from "@/components/portfolio/BeforeAfterSlider";
 import GalleryGrid from "@/components/portfolio/GalleryGrid";
@@ -148,6 +148,37 @@ export default async function ProjectPage({ params }: Props) {
                 </div>
               )}
             </Reveal>
+
+            {/* Case study: results + client quote */}
+            {(project.results.length > 0 || project.clientQuote) && (
+              <Reveal delay={0.05} className="mt-12">
+                <div className="grid gap-6 lg:grid-cols-[1fr_340px]">
+                  {project.results.length > 0 && (
+                    <div className="grid gap-4 sm:grid-cols-3">
+                      {project.results.map((r, i) => (
+                        <div key={i} className="glass rounded-2xl p-5 text-center">
+                          <p className="font-display text-3xl text-brand-400">{r.value}</p>
+                          <p className="mt-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">{r.label}</p>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  {project.clientQuote && (
+                    <blockquote
+                      className={cn(
+                        "glass relative rounded-2xl p-6",
+                        project.results.length === 0 && "sm:col-span-2"
+                      )}
+                    >
+                      <p className="text-sm leading-relaxed text-zinc-200">&ldquo;{project.clientQuote}&rdquo;</p>
+                      <footer className="mt-3 text-xs font-semibold uppercase tracking-[0.2em] text-brand-400">
+                        {project.client || "Client"} — verified feedback
+                      </footer>
+                    </blockquote>
+                  )}
+                </div>
+              </Reveal>
+            )}
 
             {/* Sidebar */}
             <Reveal delay={0.1}>

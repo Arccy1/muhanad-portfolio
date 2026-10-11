@@ -4,6 +4,7 @@ import { requireAdmin, unauthorized } from "@/lib/auth";
 import { clientIp, rateLimit, tooMany } from "@/lib/rateLimit";
 import { notifyNewMessage } from "@/lib/mailer";
 import { logError } from "@/lib/logger";
+import { toJsonArray } from "@/lib/utils";
 
 // Public contact submissions and the admin inbox share this route.
 export async function GET() {
@@ -11,7 +12,19 @@ export async function GET() {
   const messages = await prisma.contactMessage.findMany({
     orderBy: { createdAt: "desc" },
   });
-  return NextResponse.json({ messages });
+  return NextResponse.json({
+    messages: messages.map((m) => ({
+      id: m.id,
+      name: m.name,
+      email: m.email,
+      projectType: m.projectType,
+      budget: m.budget,
+      message: m.message,
+      files: toJsonArray(m.files),
+      read: m.read,
+      createdAt: m.createdAt.toISOString(),
+    })),
+  });
 }
 
 export async function POST(req: NextRequest) {
@@ -48,6 +61,7 @@ export async function POST(req: NextRequest) {
         message,
         projectType: String(body.projectType ?? "").trim(),
         budget: String(body.budget ?? "").trim(),
+        files: toJsonArray(body.files),
       },
     });
 

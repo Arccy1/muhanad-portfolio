@@ -65,12 +65,25 @@ from a great demo into a live, revenue-generating portfolio.
 
 ## Phase 4 — Site Growth
 
-- [ ] Public portfolio search + pagination once projects pass ~30
-- [ ] Project case-study blocks (client quotes per project, results/metrics)
-- [ ] Services pricing tiers / "start a project" wizard with file uploads
-- [ ] Blog or editing-breakdown series (great for SEO: "how I edited X")
-- [ ] Arabic / English bilingual support (next-intl)
-- [ ] Dark/red is the identity — optional subtle theme variations seasonally
+- [x] **Portfolio search + pagination** — live search over titles/clients/tags/software
+      plus 9-per-page pagination with page controls on the public portfolio page
+- [x] **Project case-study blocks** — per-project client quote and results/metrics
+      (editable in Admin → Projects → Case Study; rendered as metric cards + a
+      verified-feedback quote on the project page)
+- [x] **Start-a-project wizard** — /start: 3-step guided brief (service + budget →
+      details → attachments) with file uploads (10 MB, PDF/Word/images/ZIP,
+      rate-limited) that arrive as links in the contact inbox; on the live
+      GitHub Pages site it hands off to a pre-filled email instead
+- [x] **Blog** — Admin → Blog (write/edit/publish posts, cover images, read time)
+      + public /blog list and /blog/<slug> post pages with headings/paragraphs
+      rendering, wired into the nav, footer and sitemap
+- [x] **Arabic / English bilingual UI** — globe toggle in the navbar (EN / عربي):
+      full interface translation + RTL layout, persisted per visitor. DB content
+      (projects, services, posts) displays in the language you author it in —
+      type Arabic versions in the admin and they show as-is
+- [x] **Seasonal accent variations** — Admin → Site Content → "Seasonal accent":
+      switch the whole brand hue (Blue / Teal / Purple / Gold / Rose) in both
+      themes; subtle by design — layout stays identical
 
 ## Phase 5 — Admin Quality-of-Life
 

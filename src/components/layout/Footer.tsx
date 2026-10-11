@@ -1,16 +1,22 @@
+"use client";
+
 import Link from "next/link";
 import { Instagram, Linkedin, Mail, MessageCircle } from "lucide-react";
-import { getSiteContent, getSocials, type SiteContent } from "@/lib/content";
+import { useLang } from "@/components/site/LanguageProvider";
+import type { SiteContent } from "@/lib/content";
 
-const NAV = [
-  { href: "/", label: "Home" },
-  { href: "/portfolio", label: "Portfolio" },
-  { href: "/about", label: "About" },
-  { href: "/services", label: "Services" },
-  { href: "/showreel", label: "Showreel" },
-  { href: "/cv", label: "CV" },
-  { href: "/contact", label: "Contact" },
-];
+type Props = {
+  content: SiteContent;
+  socials: {
+    email: string;
+    whatsapp: string;
+    instagram: string;
+    youtube: string;
+    tiktok: string;
+    behance: string;
+    linkedin: string;
+  };
+};
 
 function SocialIcon({ href, label, children }: { href: string; label: string; children: React.ReactNode }) {
   return (
@@ -27,9 +33,19 @@ function SocialIcon({ href, label, children }: { href: string; label: string; ch
   );
 }
 
-export default async function Footer() {
-  const content: SiteContent = await getSiteContent();
-  const socials = getSocials(content);
+export default function Footer({ content, socials }: Props) {
+  const { t, lang } = useLang();
+
+  const NAV = [
+    { href: "/", label: t("nav.home") },
+    { href: "/portfolio", label: t("nav.portfolio") },
+    { href: "/about", label: t("nav.about") },
+    { href: "/services", label: t("nav.services") },
+    { href: "/showreel", label: t("nav.showreel") },
+    { href: "/blog", label: t("nav.blog") },
+    { href: "/cv", label: t("nav.cv") },
+    { href: "/contact", label: t("nav.contact") },
+  ];
 
   return (
     <footer className="relative border-t border-white/5 bg-ink-800">
@@ -46,18 +62,15 @@ export default async function Footer() {
             <span className="leading-tight">
               <span className="block font-display text-xl tracking-wider text-white">MUHANAD EL-MAHDY</span>
               <span className="block text-[10px] uppercase tracking-[0.3em] text-brand-400">
-                Video Editor & Motion Designer
+                {lang === "ar" ? "مونتير فيديو ومصمم موشن" : "Video Editor & Motion Designer"}
               </span>
             </span>
           </Link>
-          <p className="mt-5 max-w-sm text-sm leading-relaxed text-zinc-500">
-            Transforming raw footage into engaging visual stories through editing, motion graphics,
-            sound design and creative storytelling.
-          </p>
+          <p className="mt-5 max-w-sm text-sm leading-relaxed text-zinc-500">{content["hero.description"]}</p>
         </div>
 
         <div>
-          <h3 className="text-xs font-semibold uppercase tracking-[0.3em] text-zinc-500">Navigate</h3>
+          <h3 className="text-xs font-semibold uppercase tracking-[0.3em] text-zinc-500">{t("footer.navigate")}</h3>
           <ul className="mt-5 grid grid-cols-2 gap-2.5 text-sm">
             {NAV.map((item) => (
               <li key={item.href}>
@@ -70,7 +83,7 @@ export default async function Footer() {
         </div>
 
         <div>
-          <h3 className="text-xs font-semibold uppercase tracking-[0.3em] text-zinc-500">Connect</h3>
+          <h3 className="text-xs font-semibold uppercase tracking-[0.3em] text-zinc-500">{t("footer.connect")}</h3>
           <a
             href={`mailto:${socials.email}`}
             className="mt-5 block text-sm text-zinc-300 transition hover:text-brand-400"
@@ -88,9 +101,11 @@ export default async function Footer() {
 
       <div className="border-t border-white/5">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-5 py-6 text-xs text-zinc-600 sm:flex-row sm:px-8">
-          <p>© {new Date().getFullYear()} Muhanad Wael El-Mahdy. All rights reserved.</p>
           <p>
-            Edited, graded &amp; delivered with <span className="text-brand-500">●</span> by Muhanad
+            © {new Date().getFullYear()} Muhanad Wael El-Mahdy. {t("footer.rights")}
+          </p>
+          <p>
+            {t("footer.edited")} <span className="text-brand-500">●</span> {t("footer.by")}
           </p>
         </div>
       </div>

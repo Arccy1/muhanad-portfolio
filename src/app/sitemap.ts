@@ -1,10 +1,20 @@
 import type { MetadataRoute } from "next";
-import { getAllProjectSlugs } from "@/lib/data";
+import { getAllProjectSlugs, getPublishedPosts } from "@/lib/data";
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const staticRoutes = ["", "/portfolio", "/about", "/services", "/showreel", "/cv", "/contact"].map((path) => ({
+  const staticRoutes = [
+    "",
+    "/portfolio",
+    "/about",
+    "/services",
+    "/showreel",
+    "/cv",
+    "/blog",
+    "/start",
+    "/contact",
+  ].map((path) => ({
     url: `${BASE}${path}`,
     lastModified: new Date(),
     changeFrequency: "weekly" as const,
@@ -24,5 +34,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // database unavailable — ship static routes only
   }
 
-  return [...staticRoutes, ...projectRoutes];
+  let postRoutes: MetadataRoute.Sitemap = [];
+  try {
+    const posts = await getPublishedPosts();
+    postRoutes = posts.map((p) => ({
+      url: `${BASE}/blog/${p.slug}`,
+      lastModified: new Date(p.publishedAt),
+      changeFrequency: "monthly" as const,
+      priority: 0.5,
+    }));
+  } catch {
+    // database unavailable
+  }
+
+  return [...staticRoutes, ...projectRoutes, ...postRoutes];
 }

@@ -4,16 +4,19 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
-import { FileText, Menu, Moon, Sun, X } from "lucide-react";
+import { FileText, Globe, Menu, Moon, Sun, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useLang } from "@/components/site/LanguageProvider";
+import { LANGS } from "@/lib/i18n";
 
 const LINKS = [
-  { href: "/", label: "Home" },
-  { href: "/portfolio", label: "Portfolio" },
-  { href: "/about", label: "About" },
-  { href: "/services", label: "Services" },
-  { href: "/showreel", label: "Showreel" },
-  { href: "/contact", label: "Contact" },
+  { href: "/", key: "nav.home" },
+  { href: "/portfolio", key: "nav.portfolio" },
+  { href: "/about", key: "nav.about" },
+  { href: "/services", key: "nav.services" },
+  { href: "/showreel", key: "nav.showreel" },
+  { href: "/blog", key: "nav.blog" },
+  { href: "/contact", key: "nav.contact" },
 ];
 
 export default function Navbar() {
@@ -22,6 +25,7 @@ export default function Navbar() {
   const [mounted, setMounted] = useState(false);
   const [isLight, setIsLight] = useState(false);
   const pathname = usePathname();
+  const { t, lang, setLang } = useLang();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -62,7 +66,7 @@ export default function Navbar() {
           </span>
           <span className="leading-tight">
             <span className="block font-display text-lg tracking-wider text-white">MUHANAD EL-MAHDY</span>
-            <span className="block text-[10px] uppercase tracking-[0.3em] text-brand-400">Video Editor</span>
+            <span className="block text-[10px] uppercase tracking-[0.3em] text-brand-400">{t("nav.subtitle")}</span>
           </span>
         </Link>
 
@@ -83,7 +87,7 @@ export default function Navbar() {
                     transition={{ type: "spring", stiffness: 350, damping: 30 }}
                   />
                 )}
-                <span className="relative z-10">{link.label}</span>
+                <span className="relative z-10">{t(link.key)}</span>
               </Link>
             </li>
           ))}
@@ -99,6 +103,16 @@ export default function Navbar() {
           >
             {mounted && isLight ? <Moon size={18} /> : <Sun size={18} />}
           </button>
+          <button
+            type="button"
+            onClick={() => setLang(lang === "ar" ? "en" : "ar")}
+            className="inline-flex h-10 items-center justify-center gap-1.5 rounded-lg border border-white/10 px-2.5 text-xs font-semibold text-zinc-400 transition hover:border-brand-500/50 hover:text-brand-400"
+            aria-label={lang === "ar" ? "Switch to English" : "التبديل إلى العربية"}
+            title={lang === "ar" ? "English" : "العربية"}
+          >
+            <Globe size={15} />
+            {mounted && lang === "ar" ? "EN" : "عربي"}
+          </button>
           <Link
             href="/cv"
             className="hidden items-center gap-2 rounded-full border border-white/10 px-5 py-2.5 text-sm font-semibold text-zinc-300 transition hover:border-brand-500/60 hover:text-brand-400 md:inline-flex"
@@ -110,7 +124,7 @@ export default function Navbar() {
             href="/contact"
             className="hidden rounded-full bg-gradient-to-r from-brand-600 to-brand-500 px-6 py-2.5 text-sm font-semibold text-onbrand shadow-glow transition hover:shadow-glow-lg hover:brightness-110 sm:inline-flex"
           >
-            Hire Me
+            {t("nav.hire")}
           </Link>
           <button
             type="button"
@@ -150,7 +164,7 @@ export default function Navbar() {
                         : "text-zinc-400 hover:bg-white/5 hover:text-white"
                     )}
                   >
-                    {link.label}
+                    {t(link.key)}
                     <span className="text-xs text-brand-500">0{i + 1}</span>
                   </Link>
                 </motion.li>
@@ -165,7 +179,7 @@ export default function Navbar() {
                   className="flex items-center justify-between rounded-xl px-4 py-3 text-base font-medium text-zinc-400 hover:bg-white/5 hover:text-white"
                 >
                   <span className="inline-flex items-center gap-2">
-                    <FileText size={16} /> My CV
+                    <FileText size={16} /> {t("nav.cv")}
                   </span>
                   <span className="text-xs text-brand-500">OPEN</span>
                 </Link>
@@ -175,7 +189,7 @@ export default function Navbar() {
                   href="/contact"
                   className="flex items-center justify-center rounded-xl bg-gradient-to-r from-brand-600 to-brand-500 px-4 py-3 font-semibold text-onbrand shadow-glow"
                 >
-                  Hire Me
+                  {t("nav.hire")}
                 </Link>
               </li>
             </ul>

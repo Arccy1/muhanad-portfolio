@@ -20,6 +20,7 @@ export const DEFAULT_CONTENT: Record<string, string> = {
   "about.approach":
     "Great editing is invisible. I start every project by understanding the story and the audience, then let rhythm and pacing do the heavy lifting.",
   "about.image": "/images/profile.svg",
+  "theme.accent": "blue",
   "cta.heading": "LET'S CREATE SOMETHING GREAT",
   "cta.subtext": "Have a project in mind? Tell me about it — I usually reply within 24 hours.",
   "socials.email": "mohannadwael1000@gmail.com",

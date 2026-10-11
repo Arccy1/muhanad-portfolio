@@ -14,6 +14,7 @@ import {
   MessageSquareQuote,
   Moon,
   Settings2,
+  Newspaper,
   Star,
   Sun,
 } from "lucide-react";
@@ -25,6 +26,7 @@ const NAV = [
   { href: "/admin/categories", label: "Categories", icon: FolderTree },
   { href: "/admin/testimonials", label: "Testimonials", icon: MessageSquareQuote },
   { href: "/admin/reviews", label: "Client Reviews", icon: Star },
+  { href: "/admin/blog", label: "Blog", icon: Newspaper },
   { href: "/admin/cv", label: "CV", icon: FileText },
   { href: "/admin/messages", label: "Messages", icon: Mail },
   { href: "/admin/content", label: "Site Content", icon: Settings2 },

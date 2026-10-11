@@ -4,7 +4,15 @@ import { useCallback, useEffect, useState } from "react";
 import { Loader2, Save } from "lucide-react";
 import ImageUpload from "@/components/admin/ImageUpload";
 
-const GROUPS: { title: string; fields: { key: string; label: string; type?: "text" | "textarea" | "image" }[] }[] = [
+const ACCENTS = [
+  { value: "blue", label: "Electric Blue (default)" },
+  { value: "teal", label: "Teal" },
+  { value: "purple", label: "Purple" },
+  { value: "gold", label: "Gold" },
+  { value: "rose", label: "Rose" },
+];
+
+const GROUPS: { title: string; fields: { key: string; label: string; type?: "text" | "textarea" | "image" | "select"; options?: { value: string; label: string }[] }[] }[] = [
   {
     title: "Hero (homepage)",
     fields: [
@@ -45,6 +53,17 @@ const GROUPS: { title: string; fields: { key: string; label: string; type?: "tex
     fields: [
       { key: "cta.heading", label: "Heading" },
       { key: "cta.subtext", label: "Subtext", type: "textarea" },
+    ],
+  },
+  {
+    title: "Seasonal accent",
+    fields: [
+      {
+        key: "theme.accent",
+        label: "Accent color",
+        type: "select",
+        options: ACCENTS,
+      },
     ],
   },
   {
@@ -140,7 +159,20 @@ export default function AdminContentPage() {
                       <label className={labelCls} htmlFor={`f-${field.key}`}>
                         {field.label}
                       </label>
-                      {field.type === "textarea" ? (
+                      {field.type === "select" ? (
+                        <select
+                          id={`f-${field.key}`}
+                          className={inputCls}
+                          value={values[field.key] ?? ""}
+                          onChange={(e) => setValues((prev) => ({ ...prev, [field.key]: e.target.value }))}
+                        >
+                          {(field.options ?? []).map((o) => (
+                            <option key={o.value} value={o.value} className="bg-ink-800">
+                              {o.label}
+                            </option>
+                          ))}
+                        </select>
+                      ) : field.type === "textarea" ? (
                         <textarea
                           id={`f-${field.key}`}
                           rows={3}

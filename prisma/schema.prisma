@@ -55,12 +55,31 @@ model Project {
   tags             String   @default("[]")
   client           String   @default("")
   year             String   @default("")
+  // Case study: client quote shown on the project page
+  clientQuote      String   @default("")
+  // Case study: results/metrics — JSON string array of { label, value }
+  results          String   @default("[]")
   featured         Boolean  @default(false)
   published        Boolean  @default(true)
   order            Int      @default(0)
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
   ratings          Rating[]
+}
+
+// Blog posts / editing breakdowns
+model Post {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  excerpt     String   @default("")
+  content     String   @default("") // paragraphs; lines starting with ## render as headings
+  coverImage  String   @default("")
+  readMinutes Int      @default(3)
+  published   Boolean  @default(true)
+  publishedAt DateTime @default(now())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 // Cookieless analytics: one row per page view (public site only).
@@ -137,6 +156,8 @@ model ContactMessage {
   projectType String   @default("")
   budget      String   @default("")
   message     String   @default("")
+  // JSON string array of uploaded file URLs (start-a-project wizard)
+  files       String   @default("[]")
   read        Boolean  @default(false)
   createdAt   DateTime @default(now())
 }

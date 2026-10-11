@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Bebas_Neue, Inter } from "next/font/google";
+import { getSiteContent } from "@/lib/content";
 import "./globals.css";
 
 const display = Bebas_Neue({
@@ -56,14 +57,21 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+// Seasonal accent: the admin picks a hue (blue/teal/purple/gold/rose) and the
+// whole site's brand color shifts subtly — both themes.
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const content = await getSiteContent();
+  const accent = ["blue", "teal", "purple", "gold", "rose"].includes(content["theme.accent"])
+    ? content["theme.accent"]
+    : "blue";
+
   return (
-    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
+    <html lang="en" dir="ltr" className="scroll-smooth" data-accent={accent} suppressHydrationWarning>
       <body className={`${display.variable} ${sans.variable} font-sans bg-ink text-zinc-300 antialiased`}>
         <script
           dangerouslySetInnerHTML={{
             __html:
-              "try{if(localStorage.getItem('mwm-theme')==='light')document.documentElement.classList.add('light')}catch(e){}",
+              "try{if(localStorage.getItem('mwm-theme')==='light')document.documentElement.classList.add('light');var L=localStorage.getItem('mwm-lang');if(L==='ar'){document.documentElement.lang='ar';document.documentElement.dir='rtl'}}catch(e){}",
           }}
         />
         {children}

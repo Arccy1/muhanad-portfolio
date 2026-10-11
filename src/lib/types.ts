@@ -26,6 +26,8 @@ export type ProjectDTO = {
   gallery: string[];
   beforeAfter: { before: string; after: string } | null;
   process: ProcessStep[];
+  clientQuote: string;
+  results: ResultMetric[];
   tags: string[];
   client: string;
   year: string;
@@ -55,17 +57,6 @@ export type TestimonialDTO = {
   order: number;
 };
 
-export type MessageDTO = {
-  id: string;
-  name: string;
-  email: string;
-  projectType: string;
-  budget: string;
-  message: string;
-  read: boolean;
-  createdAt: string;
-};
-
 export type CvExperienceDTO = {
   id: string;
   role: string;
@@ -73,6 +64,32 @@ export type CvExperienceDTO = {
   period: string;
   points: string[];
   order: number;
+};
+
+export type ResultMetric = { label: string; value: string };
+
+export type PostDTO = {
+  id: string;
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: string;
+  coverImage: string;
+  readMinutes: number;
+  published: boolean;
+  publishedAt: string;
+};
+
+export type MessageDTO = {
+  id: string;
+  name: string;
+  email: string;
+  projectType: string;
+  budget: string;
+  message: string;
+  files: string[];
+  read: boolean;
+  createdAt: string;
 };
 
 export type RatingDTO = {

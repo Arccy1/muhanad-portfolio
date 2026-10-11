@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import Link from "next/link";
 import { Metadata } from "next";
 import { Instagram, Linkedin, Mail, MessageCircle } from "lucide-react";
 import Reveal from "@/components/ui/Reveal";
@@ -80,6 +81,12 @@ export default async function ContactPage() {
             >
               <ContactForm contactEmail={socials.email} />
             </Suspense>
+            <p className="mt-5 text-center text-sm text-zinc-500">
+              Want a more guided experience?{" "}
+              <Link href="/start" className="font-medium text-brand-400 hover:underline">
+                Start a project →
+              </Link>
+            </p>
           </Reveal>
         </div>
       </div>

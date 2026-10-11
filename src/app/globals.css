@@ -160,6 +160,46 @@
   }
 }
 
+/* Seasonal accent: teal */
+html[data-accent="teal"] {
+  --c-brand-300: 94 234 212;
+  --c-brand-400: 45 212 191;
+  --c-brand-500: 20 184 166;
+  --c-brand-600: 13 148 136;
+  --c-brand-700: 15 118 110;
+  --c-brand-950: 4 47 46;
+}
+
+/* Seasonal accent: purple */
+html[data-accent="purple"] {
+  --c-brand-300: 196 181 253;
+  --c-brand-400: 167 139 250;
+  --c-brand-500: 139 92 246;
+  --c-brand-600: 124 58 237;
+  --c-brand-700: 109 40 217;
+  --c-brand-950: 46 16 101;
+}
+
+/* Seasonal accent: gold */
+html[data-accent="gold"] {
+  --c-brand-300: 252 211 77;
+  --c-brand-400: 251 191 36;
+  --c-brand-500: 245 158 11;
+  --c-brand-600: 217 119 6;
+  --c-brand-700: 180 83 9;
+  --c-brand-950: 69 26 3;
+}
+
+/* Seasonal accent: rose */
+html[data-accent="rose"] {
+  --c-brand-300: 253 164 175;
+  --c-brand-400: 251 113 133;
+  --c-brand-500: 244 63 94;
+  --c-brand-600: 225 29 72;
+  --c-brand-700: 190 18 60;
+  --c-brand-950: 76 5 25;
+}
+
 /* ------------------------------------------------------------------ */
 /* Light-theme refinements (unlayered so they win over utilities)      */
 /* ------------------------------------------------------------------ */

@@ -5,6 +5,7 @@ import { parseJsonArray, parseJsonObject } from "./utils";
 import type {
   CategoryDTO,
   CvExperienceDTO,
+  PostDTO,
   ProjectDTO,
   RatingDTO,
   ServiceDTO,
@@ -30,10 +31,24 @@ type DbProject = {
   tags: string;
   client: string;
   year: string;
+  clientQuote: string;
+  results: string;
   featured: boolean;
   published: boolean;
   order: number;
   createdAt: Date;
+};
+
+type DbPost = {
+  id: string;
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: string;
+  coverImage: string;
+  readMinutes: number;
+  published: boolean;
+  publishedAt: Date;
 };
 
 export function serializeProject(p: DbProject): ProjectDTO {
@@ -59,6 +74,8 @@ export function serializeProject(p: DbProject): ProjectDTO {
       .filter((s) => s && typeof s === "object")
       .map((s) => ({ title: String(s.title ?? ""), description: String(s.description ?? "") })),
     tags: parseJsonArray(p.tags) as string[],
+  clientQuote: p.clientQuote,
+  results: (parseJsonArray(p.results) as { label: string; value: string }[]).map((r) => ({ label: String(r.label ?? ""), value: String(r.value ?? "") })),
     client: p.client,
     year: p.year,
     featured: p.featured,
@@ -205,6 +222,37 @@ export async function getRatingByToken(token: string): Promise<RatingDTO | null>
 }
 
 /** Approved client reviews, shaped to join the testimonials carousel. */
+
+export function serializePost(p: DbPost): PostDTO {
+  return {
+    id: p.id,
+    title: p.title,
+    slug: p.slug,
+    excerpt: p.excerpt,
+    content: p.content,
+    coverImage: p.coverImage,
+    readMinutes: p.readMinutes,
+    published: p.published,
+    publishedAt: p.publishedAt.toISOString(),
+  };
+}
+
+export async function getPublishedPosts(): Promise<PostDTO[]> {
+  const posts = await prisma.post.findMany({ where: { published: true }, orderBy: { publishedAt: "desc" } });
+  return posts.map(serializePost);
+}
+
+export async function getAllPosts(): Promise<PostDTO[]> {
+  const posts = await prisma.post.findMany({ orderBy: { publishedAt: "desc" } });
+  return posts.map(serializePost);
+}
+
+export async function getPostBySlug(slug: string): Promise<PostDTO | null> {
+  const post = await prisma.post.findUnique({ where: { slug } });
+  return post && post.published ? serializePost(post) : null;
+}
+
+
 export async function getApprovedClientReviews(): Promise<TestimonialDTO[]> {
   const rows = await prisma.rating.findMany({
     where: { approved: true, rating: { gt: 0 } },

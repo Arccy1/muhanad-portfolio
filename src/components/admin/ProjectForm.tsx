@@ -19,6 +19,8 @@ export type ProjectFormValues = {
   gallery: string[];
   beforeAfter: { before: string; after: string };
   process: ProcessStep[];
+  clientQuote: string;
+  results: { label: string; value: string }[];
   tags: string;
   client: string;
   year: string;
@@ -41,6 +43,8 @@ export function emptyProject(): ProjectFormValues {
     gallery: [],
     beforeAfter: { before: "", after: "" },
     process: [{ title: "", description: "" }],
+    clientQuote: "",
+    results: [],
     tags: "",
     client: "",
     year: String(new Date().getFullYear()),
@@ -64,6 +68,8 @@ export function projectToForm(p: ProjectDTO): ProjectFormValues {
     gallery: p.gallery,
     beforeAfter: { before: p.beforeAfter?.before ?? "", after: p.beforeAfter?.after ?? "" },
     process: p.process.length ? p.process : [{ title: "", description: "" }],
+    clientQuote: p.clientQuote,
+    results: p.results,
     tags: p.tags.join(", "),
     client: p.client,
     year: p.year,
@@ -243,6 +249,75 @@ export default function ProjectForm({ categories, initial, saving, error, onSave
             <input type="checkbox" checked={v.published} onChange={(e) => set("published", e.target.checked)} className="h-4 w-4 accent-[#3B82F6]" />
             Published
           </label>
+        </div>
+      </section>
+
+      {/* Case study */}
+      <section className="glass rounded-2xl p-6">
+        <h3 className="mb-5 text-sm font-semibold uppercase tracking-[0.2em] text-brand-400">Case Study</h3>
+        <div className="space-y-5">
+          <div>
+            <label className={labelCls} htmlFor="p-quote">Client quote</label>
+            <textarea
+              id="p-quote"
+              rows={3}
+              className={`${inputCls} resize-none`}
+              value={v.clientQuote}
+              onChange={(e) => set("clientQuote", e.target.value)}
+              placeholder={'e.g. "The edit tripled our watch time" — Founder, Company'}
+            />
+          </div>
+          <div>
+            <div className="mb-2 flex items-center justify-between">
+              <span className={labelCls}>Results &amp; metrics</span>
+              <button
+                type="button"
+                onClick={() => set("results", [...v.results, { label: "", value: "" }])}
+                className="inline-flex items-center gap-1.5 rounded-lg border border-white/10 px-3 py-1.5 text-xs text-zinc-400 transition hover:border-brand-500/50 hover:text-brand-400"
+              >
+                <Plus size={13} /> Add metric
+              </button>
+            </div>
+            <div className="grid gap-3 sm:grid-cols-2">
+              {v.results.map((r, i) => (
+                <div key={i} className="flex items-center gap-2 rounded-xl border border-white/8 bg-white/[0.02] p-3">
+                  <input
+                    className={inputCls}
+                    value={r.label}
+                    placeholder="e.g. Watch time"
+                    aria-label={`Metric ${i + 1} label`}
+                    onChange={(e) => {
+                      const next = [...v.results];
+                      next[i] = { ...next[i], label: e.target.value };
+                      set("results", next);
+                    }}
+                  />
+                  <input
+                    className={`${inputCls} max-w-[110px] text-center font-display`}
+                    value={r.value}
+                    placeholder="+42%"
+                    aria-label={`Metric ${i + 1} value`}
+                    onChange={(e) => {
+                      const next = [...v.results];
+                      next[i] = { ...next[i], value: e.target.value };
+                      set("results", next);
+                    }}
+                  />
+                  <button
+                    type="button"
+                    aria-label={`Remove metric ${i + 1}`}
+                    onClick={() => set("results", v.results.filter((_, j) => j !== i))}
+                    className="rounded-lg p-2 text-zinc-600 transition hover:text-brand-400"
+                  >
+                    <Trash2 size={14} />
+                  </button>
+                </div>
+              ))}
+              {v.results.length === 0 && (
+                <p className="text-xs text-zinc-600 sm:col-span-2">Optional — add numbers that show the impact of this edit.</p>
+              )}
+            </div>
+          </div>
         </div>
       </section>
 
