@@ -1,12 +1,13 @@
 /**
  * Deploys the static site to GitHub Pages:
+ *  0. Ensures PostgreSQL is running (the build queries it for content)
  *  1. Runs scripts/build-static.mjs (full static export into out/)
  *  2. Publishes out/ to the `gh-pages` branch (force-pushed snapshot branch)
  *  3. Enables GitHub Pages from that branch via the GitHub API
  *     (uses your saved GitHub credential; no interaction needed)
  *  4. Polls the live URL until it responds
  */
-import { spawnSync } from "node:child_process";
+import { spawnSync, execFileSync } from "node:child_process";
 import { existsSync, mkdirSync, readdirSync, rmSync, statSync, writeFileSync, copyFileSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -15,6 +16,27 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const DEPLOY = join(ROOT, ".gh-pages-deploy");
 const PAGES_PATH = "/muhanad-portfolio";
 const LIVE_URL = "https://arccy1.github.io/muhanad-portfolio/";
+const PG_BIN = "C:/Users/mohan/pgsql/bin";
+const PG_DATA = "C:/Users/mohan/pgsql/data";
+
+// --- 0. Ensure PostgreSQL is running ---
+console.log("== Step 0/4: ensuring PostgreSQL is running ==");
+const pgCtl = join(PG_BIN, "pg_ctl.exe");
+if (existsSync(pgCtl)) {
+  const st = spawnSync(pgCtl, ["-D", PG_DATA, "status"], { encoding: "utf8", shell: false });
+  if (st.status !== 0 || !st.stdout.includes("running")) {
+    console.log("> Starting PostgreSQL…");
+    spawnSync(pgCtl, ["-D", PG_DATA, "-l", join(PG_BIN, "..", "log.txt"), "start"], { encoding: "utf8", shell: false });
+    // wait for it to accept connections
+    for (let i = 0; i < 10; i++) {
+      const check = spawnSync(pgCtl, ["-D", PG_DATA, "status"], { encoding: "utf8", shell: false });
+      if (check.stdout.includes("running")) { console.log("> PostgreSQL is running"); break; }
+      spawnSync(process.execPath, ["-e", "require('net').createConnection(5432,'localhost')"], { timeout: 1000 });
+    }
+  } else {
+    console.log("> PostgreSQL already running");
+  }
+}
 
 function git(args, opts = {}) {
   const res = spawnSync("git", args, { cwd: ROOT, encoding: "utf8", shell: false, ...opts });
