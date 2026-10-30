@@ -48,3 +48,7 @@ prisma/dev.db-journal
 # local curl cookie jars from admin tests (contain session tokens) 
 ck.txt 
 *.txt.cookies
+ 
+# deploy artifacts 
+.deploy-status.json 
+deploy.log
