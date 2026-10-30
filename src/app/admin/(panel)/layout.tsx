@@ -5,16 +5,18 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import {
   Clapperboard,
+  CloudUpload,
   FileText,
   FolderTree,
   LayoutDashboard,
+  Loader2,
   LogOut,
   Mail,
   Menu,
   MessageSquareQuote,
   Moon,
-  Settings2,
   Newspaper,
+  Settings2,
   Star,
   Sun,
 } from "lucide-react";
@@ -36,6 +38,8 @@ export default function AdminPanelLayout({ children }: { children: React.ReactNo
   const [user, setUser] = useState<{ name: string; email: string } | null>(null);
   const [checked, setChecked] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [publishing, setPublishing] = useState(false);
+  const [publishMsg, setPublishMsg] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
   const [isLight, setIsLight] = useState(false);
   const pathname = usePathname();
@@ -133,6 +137,50 @@ export default function AdminPanelLayout({ children }: { children: React.ReactNo
               );
             })}
           </nav>
+
+          {/* Publish to live site */}
+          <div className="px-4 pb-2">
+            <button
+              type="button"
+              onClick={async () => {
+                setPublishing(true);
+                setPublishMsg(null);
+                try {
+                  const res = await fetch("/api/publish", { method: "POST" });
+                  const data = await res.json();
+                  if (!res.ok) { setPublishMsg(data.error || "Publish failed."); return; }
+                  setPublishMsg("Publishing… live site updates in ~2 min");
+                  const poll = setInterval(async () => {
+                    const s = await fetch("/api/publish").then(r => r.json()).catch(() => null);
+                    if (s && !s.running) {
+                      clearInterval(poll);
+                      setPublishing(false);
+                      setPublishMsg(s.lastError ? s.lastError : "Published! ✓");
+                      if (!s.lastError) setTimeout(() => setPublishMsg(null), 5000);
+                    }
+                  }, 5000);
+                } catch {
+                  setPublishing(false);
+                  setPublishMsg("Network error.");
+                }
+              }}
+              disabled={publishing}
+              className={cn(
+                "flex w-full items-center justify-center gap-2.5 rounded-xl px-4 py-3 text-sm font-semibold transition-all",
+                publishing
+                  ? "bg-brand-600/30 text-brand-300 cursor-wait"
+                  : "bg-emerald-600 text-white shadow-lg shadow-emerald-600/25 hover:bg-emerald-500 hover:shadow-emerald-500/30"
+              )}
+            >
+              {publishing ? <Loader2 size={16} className="animate-spin" /> : <CloudUpload size={16} />}
+              {publishing ? "Publishing…" : "Publish to live site"}
+            </button>
+            {publishMsg && (
+              <p className={cn("mt-2 text-center text-xs", publishMsg.includes("Published") || publishMsg.includes("✓") ? "text-emerald-400" : "text-brand-300")}>
+                {publishMsg}
+              </p>
+            )}
+          </div>
 
           <div className="border-t border-white/5 p-4">
             <button
