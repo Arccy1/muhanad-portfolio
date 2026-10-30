@@ -12,6 +12,13 @@ export const dynamic = "force-dynamic";
 
 type Props = { params: { slug: string } };
 
+// Pre-renders every published blog post (required for static export builds;
+// ignored during dynamic server rendering).
+export async function generateStaticParams() {
+  const posts = await getPublishedPosts();
+  return posts.map((p) => ({ slug: p.slug }));
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = await getPostBySlug(params.slug);
   if (!post) return { title: "Post not found" };

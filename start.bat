@@ -25,6 +25,11 @@ if exist "C:\Users\mohan\pgsql\data\PG_VERSION" (
     echo Starting PostgreSQL database...
     "C:\Users\mohan\pgsql\bin\pg_ctl.exe" -D "C:\Users\mohan\pgsql\data" -l "C:\Users\mohan\pgsql\log.txt" start >nul 2>nul
     timeout /t 3 /nobreak >nul
+    "C:\Users\mohan\pgsql\bin\pg_ctl.exe" -D "C:\Users\mohan\pgsql\data" -l "C:\Users\mohan\pgsql\log.txt" status >nul 2>nul
+    if errorlevel 1 (
+      "C:\Users\mohan\pgsql\bin\pg_ctl.exe" -D "C:\Users\mohan\pgsql\data" -l "C:\Users\mohan\pgsql\log.txt" start >nul 2>nul
+      timeout /t 4 /nobreak >nul
+    )
   )
 )
 
