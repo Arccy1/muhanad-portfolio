@@ -28,11 +28,6 @@ export default function AdminDashboardPage() {
   const [recentMessages, setRecentMessages] = useState<MessageDTO[]>([]);
   const [recentProjects, setRecentProjects] = useState<(ProjectDTO & { category?: { name: string } })[]>([]);
 
-  // publish state
-  const [publishing, setPublishing] = useState(false);
-  const [publishMsg, setPublishMsg] = useState<string | null>(null);
-  const [lastPublished, setLastPublished] = useState<string | null>(null);
-
   // account form
   const [acctName, setAcctName] = useState("");
   const [acctEmail, setAcctEmail] = useState("");
@@ -62,43 +57,7 @@ export default function AdminDashboardPage() {
         setAcctEmail(d.user?.email ?? "");
       })
       .catch(() => {});
-    // check publish status
-    fetch("/api/publish")
-      .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
-      .then((d) => {
-        setPublishing(Boolean(d.running));
-        setLastPublished(d.lastFinished);
-      })
-      .catch(() => {});
   }, []);
-
-  async function publishToLive() {
-    setPublishing(true);
-    setPublishMsg("Building and deploying to GitHub Pages… (~2 min)");
-    try {
-      const res = await fetch("/api/publish", { method: "POST" });
-      const data = await res.json();
-      if (!res.ok) {
-        setPublishMsg(data.error || "Publish failed.");
-        setPublishing(false);
-        return;
-      }
-      // Poll until the deploy finishes
-      const poll = setInterval(async () => {
-        const s = await fetch("/api/publish").then((r) => r.json()).catch(() => null);
-        if (s && !s.running) {
-          clearInterval(poll);
-          setPublishing(false);
-          setLastPublished(s.lastFinished);
-          if (s.lastError) setPublishMsg(s.lastError);
-          else setPublishMsg("Published! The live site will update in ~1 minute.");
-        }
-      }, 5000);
-    } catch {
-      setPublishMsg("Network error.");
-      setPublishing(false);
-    }
-  }
 
   async function saveAccount(kind: "profile" | "password") {
     setAcctBusy(kind);
@@ -329,46 +288,25 @@ export default function AdminDashboardPage() {
         )}
       </section>
 
-      {/* Publish to live site */}
-      <section className="mt-8 rounded-2xl border border-brand-500/30 bg-brand-950/20 p-6">
-        <h2 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-brand-400">
-          <CloudUpload size={16} /> Publish to Live Website
+      {/* Live site info */}
+      <section className="mt-8 rounded-2xl border border-emerald-500/25 bg-emerald-950/15 p-6">
+        <h2 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-emerald-400">
+          <CloudUpload size={16} /> Live Website
         </h2>
         <p className="mt-2 text-sm text-zinc-500">
-          Rebuilds the public site with your latest content and pushes it to GitHub Pages.
+          The site is hosted on Vercel and connected to the cloud database — every change you save here appears on the
+          live website <span className="text-emerald-300">instantly</span>. No publishing step needed.
         </p>
-        <div className="mt-5 flex flex-wrap items-center gap-4">
-          <button
-            type="button"
-            onClick={publishToLive}
-            disabled={publishing}
-            className="inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-brand-600 to-brand-500 px-8 py-3 text-sm font-semibold uppercase tracking-widest text-onbrand shadow-glow transition hover:shadow-glow-lg hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60"
+        <p className="mt-3 text-sm text-zinc-400">
+          <a
+            href={LIVE_SITE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline decoration-emerald-500/40 underline-offset-4 transition hover:text-emerald-300"
           >
-            {publishing ? <Loader2 size={16} className="animate-spin" /> : <CloudUpload size={16} />}
-            {publishing ? "Publishing…" : "Publish Now"}
-          </button>
-          {lastPublished && !publishing && (
-            <span className="text-xs text-zinc-500">Last published: {new Date(lastPublished).toLocaleString()}</span>
-          )}
-        </div>
-        {publishMsg && (
-          <p
-            role="status"
-            className={cn(
-              "mt-4 rounded-xl px-4 py-2.5 text-sm",
-              publishing
-                ? "bg-brand-600/10 text-brand-300"
-                : "bg-emerald-500/10 text-emerald-300"
-            )}
-          >
-            {publishMsg}
-          </p>
-        )}
-        {publishing && (
-          <div className="mt-4 h-1 overflow-hidden rounded-full bg-white/10">
-            <div className="h-full w-1/3 animate-pulse rounded-full bg-gradient-to-r from-brand-600 to-brand-400" />
-          </div>
-        )}
+            {LIVE_SITE_URL.replace(/^https?:\/\//, "")} ↗
+          </a>
+        </p>
       </section>
 
       {/* Quick actions */}
