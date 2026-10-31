@@ -3,6 +3,10 @@ import { prisma } from "@/lib/prisma";
 import { requireAdmin, unauthorized } from "@/lib/auth";
 import { toJsonArray } from "@/lib/utils";
 
+export async function generateStaticParams() { return []; }
+
+export const dynamicParams = false;
+
 type Ctx = { params: { id: string } };
 
 export async function PUT(req: NextRequest, ctx: Ctx) {

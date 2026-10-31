@@ -4,6 +4,10 @@ import { requireAdmin, unauthorized } from "@/lib/auth";
 import { normalizeProjectBody, uniqueSlug } from "@/lib/projectPayload";
 import { serializeProject } from "@/lib/data";
 
+export async function generateStaticParams() { return []; }
+
+export const dynamicParams = false;
+
 type Ctx = { params: { id: string } };
 
 export async function GET(_req: NextRequest, ctx: Ctx) {

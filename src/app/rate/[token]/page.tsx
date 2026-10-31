@@ -6,6 +6,11 @@ import RateForm from "@/components/rate/RateForm";
 
 export const dynamic = "force-dynamic";
 
+// Skip during static export — this page queries the DB per token
+export async function generateStaticParams() {
+  return [];
+}
+
 export const metadata: Metadata = {
   title: "Rate your project",
   robots: { index: false },
