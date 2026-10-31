@@ -16,7 +16,7 @@ import {
   MessageSquareQuote,
   Save,
 } from "lucide-react";
-import { cn, formatDate } from "@/lib/utils";
+import { LIVE_SITE_URL, cn, formatDate } from "@/lib/utils";
 import type { MessageDTO, ProjectDTO } from "@/lib/types";
 
 type Stats = { projects: number; categories: number; testimonials: number; messages: number; unread: number };
@@ -388,7 +388,7 @@ export default function AdminDashboardPage() {
             Edit homepage content
           </Link>
           <Link
-            href="https://arccy1.github.io/muhanad-portfolio"
+            href={LIVE_SITE_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="rounded-full border border-white/15 px-6 py-2.5 text-sm text-zinc-300 transition hover:border-brand-500/60 hover:text-brand-400"

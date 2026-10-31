@@ -20,7 +20,7 @@ import {
   Star,
   Sun,
 } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { LIVE_SITE_URL, cn } from "@/lib/utils";
 
 const NAV = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard, exact: true },
@@ -192,7 +192,7 @@ export default function AdminPanelLayout({ children }: { children: React.ReactNo
               {mounted && isLight ? "Dark mode" : "Light mode"}
             </button>
             <Link
-              href="https://arccy1.github.io/muhanad-portfolio"
+              href={LIVE_SITE_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="mb-2 block rounded-xl px-4 py-2.5 text-xs font-medium text-zinc-500 transition hover:text-brand-400"

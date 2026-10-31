@@ -1,5 +1,13 @@
 // Shared utilities usable on server and client.
 
+/**
+ * Production website URL. Set NEXT_PUBLIC_SITE_URL in Vercel (e.g.
+ * https://muhanad-portfolio.vercel.app) after the first deploy.
+ * The GitHub Pages fallback keeps current links working until then.
+ */
+export const LIVE_SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://arccy1.github.io/muhanad-portfolio";
+
 export function cn(...classes: Array<string | false | null | undefined>): string {
   return classes.filter(Boolean).join(" ");
 }
