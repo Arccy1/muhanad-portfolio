@@ -102,7 +102,7 @@ export default function AdminLoginPage() {
           Authorized use only. Credentials are stored in the project&apos;s .env file.
         </p>
         <p className="mt-4 text-center text-xs text-zinc-600">
-          <Link href="/" className="transition hover:text-brand-400">← Back to website</Link>
+          <Link href="https://arccy1.github.io/muhanad-portfolio" className="transition hover:text-brand-400">← Back to website</Link>
         </p>
       </motion.div>
     </main>

@@ -388,8 +388,9 @@ export default function AdminDashboardPage() {
             Edit homepage content
           </Link>
           <Link
-            href="/"
+            href="https://arccy1.github.io/muhanad-portfolio"
             target="_blank"
+            rel="noopener noreferrer"
             className="rounded-full border border-white/15 px-6 py-2.5 text-sm text-zinc-300 transition hover:border-brand-500/60 hover:text-brand-400"
           >
             View live site ↗

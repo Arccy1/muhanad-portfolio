@@ -1,5 +1,8 @@
 import { prisma } from "./prisma";
 
+/** Production website URL (GitHub Pages). Used by admin links. */
+export const LIVE_SITE_URL = "https://arccy1.github.io/muhanad-portfolio";
+
 /** Fallback values used when a key has not been customized in the admin. */
 export const DEFAULT_CONTENT: Record<string, string> = {
   "hero.badge": "SHOWREEL 2026 — AVAILABLE FOR FREELANCE",
