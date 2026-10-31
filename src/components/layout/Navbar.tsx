@@ -56,7 +56,7 @@ export default function Navbar() {
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all duration-500",
-        scrolled ? "border-b border-white/5 bg-ink/80 backdrop-blur-xl" : "bg-transparent"
+        scrolled ? "border-b border-white/5 bg-ink/80 backdrop-blur-md" : "bg-transparent"
       )}
     >
       <nav className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-5 sm:px-8" aria-label="Main navigation">
@@ -145,7 +145,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="overflow-hidden border-b border-white/5 bg-ink/95 backdrop-blur-xl lg:hidden"
+            className="overflow-hidden border-b border-white/5 bg-ink/95 backdrop-blur-md lg:hidden"
           >
             <ul className="space-y-1 px-5 pb-6 pt-2">
               {LINKS.map((link, i) => (

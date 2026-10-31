@@ -44,7 +44,7 @@ export default function PortfolioGrid({ projects, categories }: Props) {
   return (
     <div>
       {/* Search + filter bar */}
-      <div className="sticky top-[72px] z-30 -mx-5 mb-12 bg-ink/85 px-5 py-4 backdrop-blur-xl sm:-mx-8 sm:px-8" role="tablist" aria-label="Filter projects by category">
+      <div className="sticky top-[72px] z-30 -mx-5 mb-12 bg-ink/85 px-5 py-4 backdrop-blur-md sm:-mx-8 sm:px-8" role="tablist" aria-label="Filter projects by category">
         <div className="mb-3 flex items-center gap-3">
           <div className="relative min-w-[200px] flex-1 sm:max-w-xs">
             <Search size={15} className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-600" />

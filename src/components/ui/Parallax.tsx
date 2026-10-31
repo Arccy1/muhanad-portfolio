@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 type Props = {
   children: React.ReactNode;
@@ -12,14 +12,20 @@ type Props = {
 
 /**
  * Subtle scroll parallax: children drift `distance` px (±) as the element
- * travels through the viewport. Structure is identical on server and client;
- * the drift is zeroed for reduced-motion visitors at runtime.
+ * travels through the viewport. Disabled on touch devices (coarse pointers)
+ * where compositing headroom is lower and every frame counts for scroll.
  */
 export default function Parallax({ children, className, distance = 18 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
-  const reduce = useReducedMotion();
+  // null while SSR/hydrating so the DOM structure never differs; resolved
+  // after mount. Touch devices keep the full image (no drift).
+  const [drift, setDrift] = useState(distance);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const y = useTransform(scrollYProgress, [0, 1], reduce ? [0, 0] : [distance, -distance]);
+  const y = useTransform(scrollYProgress, [0, 1], [drift, -drift]);
+
+  useEffect(() => {
+    if (window.matchMedia("(pointer: coarse)").matches) setDrift(0);
+  }, []);
 
   return (
     <div ref={ref} className={className}>

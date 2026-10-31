@@ -273,11 +273,12 @@ html.light .grain::after {
   z-index: -1;
   overflow: hidden;
   pointer-events: none;
+  contain: strict;
+  transform: translateZ(0);
 }
 .cine-bg__layer {
   position: absolute;
   border-radius: 9999px;
-  filter: blur(90px);
   will-change: transform;
 }
 .cine-bg__orb-a {
@@ -340,8 +341,7 @@ html.light .grain::after {
   left: -30%;
   width: 30%;
   height: 3px;
-  background: linear-gradient(90deg, transparent, rgb(var(--c-brand-400) / 0.35), transparent);
-  filter: blur(1px);
+  background: linear-gradient(90deg, transparent, rgb(var(--c-brand-400) / 0.35) 50%, transparent);
   animation-duration: inherit;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
@@ -396,7 +396,6 @@ html.light .cine-bg__vignette { background: radial-gradient(ellipse at 50% 42%, 
 }
 .kinetic-letter {
   display: inline-block;
-  will-change: transform, opacity, filter;
 }
 .kinetic-tail {
   position: relative;
@@ -407,7 +406,6 @@ html.light .cine-bg__vignette { background: radial-gradient(ellipse at 50% 42%, 
   position: absolute;
   inset: -18% -12%;
   background: radial-gradient(ellipse at 50% 55%, rgb(var(--c-brand-500) / 0.28), transparent 70%);
-  filter: blur(28px);
   z-index: -1;
   animation: cine-glow-pulse 5.5s ease-in-out infinite;
 }
@@ -416,16 +414,29 @@ html.light .cine-bg__vignette { background: radial-gradient(ellipse at 50% 42%, 
   50%      { opacity: 1; transform: scale(1.06); }
 }
 
-/* Mouse-following spotlight (desktop pointers only). */
+/* Mouse-following spotlight (desktop pointers only). A fixed-size
+   gradient circle is moved with transform — no per-frame repaints. */
 .spotlight {
   position: absolute;
   inset: 0;
+  overflow: hidden;
   pointer-events: none;
-  background: radial-gradient(600px circle at var(--spot-x, 50%) var(--spot-y, 40%), rgb(var(--c-brand-500) / 0.08), transparent 55%);
   opacity: 0;
   transition: opacity 0.6s ease;
 }
 .spotlight--on { opacity: 1; }
+.spotlight__disc {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1200px;
+  height: 1200px;
+  margin: -600px 0 0 -600px;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgb(var(--c-brand-500) / 0.09), transparent 55%);
+  transform: translate(50vw, 40vh);
+  will-change: transform;
+}
 
 /* Card lighting sweep on hover — a soft sheen crossing the thumbnail. */
 .sheen {
@@ -442,13 +453,14 @@ html.light .cine-bg__vignette { background: radial-gradient(ellipse at 50% 42%, 
   left: -80%;
   width: 55%;
   background: linear-gradient(100deg, transparent, rgb(255 255 255 / 0.09), transparent);
-  transform: skewX(-18deg);
+  transform: translateX(0) skewX(-18deg);
+  will-change: transform;
 }
 .group:hover .sheen::before {
   animation: cine-sheen 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 @keyframes cine-sheen {
-  to { left: 130%; }
+  to { transform: translateX(420%) skewX(-18deg); }
 }
 
 /* Viewfinder corner brackets for the showreel frame. */
@@ -474,6 +486,14 @@ html.light .cine-bg__vignette { background: radial-gradient(ellipse at 50% 42%, 
   border-left: none;
   border-top: none;
   border-bottom-right-radius: 4px;
+}
+
+/* Mobile: lighter ambience — same style, fewer layers moving. */
+@media (max-width: 768px) {
+  .cine-bg__sweep { animation: none; opacity: 0.6; }
+  .cine-bg__orb-a { width: 90vw; height: 90vw; }
+  .cine-bg__orb-b { width: 85vw; height: 85vw; }
+  .cine-bg__orb-c { display: none; }
 }
 
 /* ------------------------------------------------------------------ */
