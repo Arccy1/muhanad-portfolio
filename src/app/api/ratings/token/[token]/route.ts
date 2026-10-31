@@ -2,6 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { clientIp, rateLimit, tooMany } from "@/lib/rateLimit";
 
+
+// Required for output:export — prevents build error
+export async function generateStaticParams() { return []; }
+
 type Ctx = { params: { token: string } };
 
 /** Public: fetch the review invite state for the /rate/<token> page. */

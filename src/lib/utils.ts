@@ -65,13 +65,12 @@ export function formatDate(date: Date | string): string {
 }
 
 /**
- * Prefix internal media paths with the site's base path (GitHub Pages serves
- * the site under /muhanad-portfolio). Remote and data URLs pass through.
- * In normal (server) builds NEXT_PUBLIC_BASE_PATH is empty, so this is a no-op.
+ * Normalizes a media path for display.
+ * Full URLs (Supabase Storage, YouTube, etc.) pass through unchanged.
+ * Relative paths (e.g. /images/showreel-poster.svg) are returned as-is —
+ * they are served from the public/ directory at the site root.
  */
 export function asset(path?: string | null): string {
   if (!path) return "";
-  if (/^(https?:|data:|mailto:|#)/i.test(path)) return path;
-  const base = process.env.NEXT_PUBLIC_BASE_PATH || "";
-  return `${base}${path.startsWith("/") ? path : `/${path}`}`;
+  return path;
 }

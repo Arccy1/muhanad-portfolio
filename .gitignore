@@ -54,3 +54,6 @@ ck.txt
 deploy.log
 /backup/
 /backup/
+backup-supabase-migration/ 
+*.dump 
+*.bundle

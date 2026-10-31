@@ -2,6 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { requireAdmin, unauthorized } from "@/lib/auth";
 
+
+// Required for output:export — prevents build error
+export async function generateStaticParams() { return []; }
+
 type Ctx = { params: { id: string } };
 
 /** Approve / unapprove a submitted review (admin). */
