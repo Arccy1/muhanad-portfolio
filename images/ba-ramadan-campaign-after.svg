@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <linearGradient id="skyafter" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#160405"/>
+      <stop offset="100%" stop-color="#2E7CD6"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#skyafter)"/>
+  <circle cx="992" cy="396" r="110" fill="#FFC873" opacity="0.95"/>
+  <circle cx="992" cy="396" r="190" fill="#FFC873" opacity="0.2"/>
+  <path d="M0 648 L 352 450 L 640 648 Z" fill="#2e6bc4"/>
+  <path d="M 480 702 L 880.0000000000001 378 L 1312 702 Z" fill="#12305e"/>
+  <path d="M 480 702 L 880.0000000000001 378 L 1312 702" fill="none" stroke="#9CC3FF" stroke-opacity="0.8" stroke-width="4"/>
+  <path d="M 960 738 L 1312 522 L 1600 738 Z" fill="#1c4a8f"/>
+  <path d="M0 900 L 448.00000000000006 666 L 1600 900 Z" fill="#060a14"/>
+  <g opacity="0.75" stroke="#1a0505" stroke-width="4" fill="none">
+    <path d="M 320 270 q 14 -16 28 0 q 14 -16 28 0"/>
+  </g>
+  <rect x="0" y="0" width="1600" height="56" fill="#000"/>
+  <rect x="0" y="844" width="1600" height="56" fill="#000"/>
+</svg>

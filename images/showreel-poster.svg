@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  
+  <defs>
+    <linearGradient id="bg3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#05090f"/>
+      <stop offset="100%" stop-color="#0d1730"/>
+    </linearGradient>
+    <radialGradient id="glow3" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#7DB4FF" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#7DB4FF" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="fade3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="redline3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2563EB"/>
+      <stop offset="100%" stop-color="#60A5FA"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#bg3)"/>
+  <rect x="-200" y="-100" width="60" height="1380" fill="#7DB4FF" opacity="0.05" transform="rotate(-18 960 540)"/>
+<rect x="60" y="-100" width="60" height="1380" fill="#7DB4FF" opacity="0.05" transform="rotate(-18 960 540)"/>
+<rect x="320" y="-100" width="60" height="1380" fill="#7DB4FF" opacity="0.05" transform="rotate(-18 960 540)"/>
+<circle cx="380" cy="346" r="170" fill="none" stroke="#7DB4FF" stroke-opacity="0.28" stroke-width="2"/>
+<circle cx="380" cy="346" r="100" fill="none" stroke="#ffffff" stroke-opacity="0.1" stroke-width="1.5"/>
+<g opacity="0.16"><circle cx="70" cy="60" r="2" fill="#ffffff"/><circle cx="112" cy="60" r="2" fill="#ffffff"/><circle cx="154" cy="60" r="2" fill="#ffffff"/><circle cx="196" cy="60" r="2" fill="#ffffff"/><circle cx="238" cy="60" r="2" fill="#ffffff"/><circle cx="280" cy="60" r="2" fill="#ffffff"/><circle cx="322" cy="60" r="2" fill="#ffffff"/><circle cx="364" cy="60" r="2" fill="#ffffff"/><circle cx="406" cy="60" r="2" fill="#ffffff"/><circle cx="448" cy="60" r="2" fill="#ffffff"/><circle cx="490" cy="60" r="2" fill="#ffffff"/><circle cx="532" cy="60" r="2" fill="#ffffff"/><circle cx="574" cy="60" r="2" fill="#ffffff"/><circle cx="616" cy="60" r="2" fill="#ffffff"/><circle cx="70" cy="102" r="2" fill="#ffffff"/><circle cx="112" cy="102" r="2" fill="#ffffff"/><circle cx="154" cy="102" r="2" fill="#ffffff"/><circle cx="196" cy="102" r="2" fill="#ffffff"/><circle cx="238" cy="102" r="2" fill="#ffffff"/><circle cx="280" cy="102" r="2" fill="#ffffff"/><circle cx="322" cy="102" r="2" fill="#ffffff"/><circle cx="364" cy="102" r="2" fill="#ffffff"/><circle cx="406" cy="102" r="2" fill="#ffffff"/><circle cx="448" cy="102" r="2" fill="#ffffff"/><circle cx="490" cy="102" r="2" fill="#ffffff"/><circle cx="532" cy="102" r="2" fill="#ffffff"/><circle cx="574" cy="102" r="2" fill="#ffffff"/><circle cx="616" cy="102" r="2" fill="#ffffff"/><circle cx="70" cy="144" r="2" fill="#ffffff"/><circle cx="112" cy="144" r="2" fill="#ffffff"/><circle cx="154" cy="144" r="2" fill="#ffffff"/><circle cx="196" cy="144" r="2" fill="#ffffff"/><circle cx="238" cy="144" r="2" fill="#ffffff"/><circle cx="280" cy="144" r="2" fill="#ffffff"/><circle cx="322" cy="144" r="2" fill="#ffffff"/><circle cx="364" cy="144" r="2" fill="#ffffff"/><circle cx="406" cy="144" r="2" fill="#ffffff"/><circle cx="448" cy="144" r="2" fill="#ffffff"/><circle cx="490" cy="144" r="2" fill="#ffffff"/><circle cx="532" cy="144" r="2" fill="#ffffff"/><circle cx="574" cy="144" r="2" fill="#ffffff"/><circle cx="616" cy="144" r="2" fill="#ffffff"/><circle cx="70" cy="186" r="2" fill="#ffffff"/><circle cx="112" cy="186" r="2" fill="#ffffff"/><circle cx="154" cy="186" r="2" fill="#ffffff"/><circle cx="196" cy="186" r="2" fill="#ffffff"/><circle cx="238" cy="186" r="2" fill="#ffffff"/><circle cx="280" cy="186" r="2" fill="#ffffff"/><circle cx="322" cy="186" r="2" fill="#ffffff"/><circle cx="364" cy="186" r="2" fill="#ffffff"/><circle cx="406" cy="186" r="2" fill="#ffffff"/><circle cx="448" cy="186" r="2" fill="#ffffff"/><circle cx="490" cy="186" r="2" fill="#ffffff"/><circle cx="532" cy="186" r="2" fill="#ffffff"/><circle cx="574" cy="186" r="2" fill="#ffffff"/><circle cx="616" cy="186" r="2" fill="#ffffff"/><circle cx="70" cy="228" r="2" fill="#ffffff"/><circle cx="112" cy="228" r="2" fill="#ffffff"/><circle cx="154" cy="228" r="2" fill="#ffffff"/><circle cx="196" cy="228" r="2" fill="#ffffff"/><circle cx="238" cy="228" r="2" fill="#ffffff"/><circle cx="280" cy="228" r="2" fill="#ffffff"/><circle cx="322" cy="228" r="2" fill="#ffffff"/><circle cx="364" cy="228" r="2" fill="#ffffff"/><circle cx="406" cy="228" r="2" fill="#ffffff"/><circle cx="448" cy="228" r="2" fill="#ffffff"/><circle cx="490" cy="228" r="2" fill="#ffffff"/><circle cx="532" cy="228" r="2" fill="#ffffff"/><circle cx="574" cy="228" r="2" fill="#ffffff"/><circle cx="616" cy="228" r="2" fill="#ffffff"/><circle cx="70" cy="270" r="2" fill="#ffffff"/><circle cx="112" cy="270" r="2" fill="#ffffff"/><circle cx="154" cy="270" r="2" fill="#ffffff"/><circle cx="196" cy="270" r="2" fill="#ffffff"/><circle cx="238" cy="270" r="2" fill="#ffffff"/><circle cx="280" cy="270" r="2" fill="#ffffff"/><circle cx="322" cy="270" r="2" fill="#ffffff"/><circle cx="364" cy="270" r="2" fill="#ffffff"/><circle cx="406" cy="270" r="2" fill="#ffffff"/><circle cx="448" cy="270" r="2" fill="#ffffff"/><circle cx="490" cy="270" r="2" fill="#ffffff"/><circle cx="532" cy="270" r="2" fill="#ffffff"/><circle cx="574" cy="270" r="2" fill="#ffffff"/><circle cx="616" cy="270" r="2" fill="#ffffff"/><circle cx="70" cy="312" r="2" fill="#ffffff"/><circle cx="112" cy="312" r="2" fill="#ffffff"/><circle cx="154" cy="312" r="2" fill="#ffffff"/><circle cx="196" cy="312" r="2" fill="#ffffff"/><circle cx="238" cy="312" r="2" fill="#ffffff"/><circle cx="280" cy="312" r="2" fill="#ffffff"/><circle cx="322" cy="312" r="2" fill="#ffffff"/><circle cx="364" cy="312" r="2" fill="#ffffff"/><circle cx="406" cy="312" r="2" fill="#ffffff"/><circle cx="448" cy="312" r="2" fill="#ffffff"/><circle cx="490" cy="312" r="2" fill="#ffffff"/><circle cx="532" cy="312" r="2" fill="#ffffff"/><circle cx="574" cy="312" r="2" fill="#ffffff"/><circle cx="616" cy="312" r="2" fill="#ffffff"/><circle cx="70" cy="354" r="2" fill="#ffffff"/><circle cx="112" cy="354" r="2" fill="#ffffff"/><circle cx="154" cy="354" r="2" fill="#ffffff"/><circle cx="196" cy="354" r="2" fill="#ffffff"/><circle cx="238" cy="354" r="2" fill="#ffffff"/><circle cx="280" cy="354" r="2" fill="#ffffff"/><circle cx="322" cy="354" r="2" fill="#ffffff"/><circle cx="364" cy="354" r="2" fill="#ffffff"/><circle cx="406" cy="354" r="2" fill="#ffffff"/><circle cx="448" cy="354" r="2" fill="#ffffff"/><circle cx="490" cy="354" r="2" fill="#ffffff"/><circle cx="532" cy="354" r="2" fill="#ffffff"/><circle cx="574" cy="354" r="2" fill="#ffffff"/><circle cx="616" cy="354" r="2" fill="#ffffff"/></g>
+  <ellipse cx="960" cy="540" rx="720" ry="420" fill="url(#glow3)"/>
+  
+  <g>
+    <circle cx="960" cy="540" r="96" fill="#ffffff" fill-opacity="0.06" stroke="#ffffff" stroke-opacity="0.25" stroke-width="1.5"/>
+    <circle cx="960" cy="540" r="96" fill="none" stroke="#3B82F6" stroke-opacity="0.45" stroke-width="2" stroke-dasharray="8 6"/>
+    <path d="M 942 514 L 990 540 L 942 566 Z" fill="#3B82F6" fill-opacity="0.92"/>
+  </g>
+  <rect x="0" y="0" width="1920" height="90" fill="#000"/>
+  <rect x="0" y="990" width="1920" height="90" fill="#000"/>
+  <text x="80" y="150" font-family="Arial, sans-serif" font-size="30" fill="#60A5FA" letter-spacing="12">REC</text>
+  <circle cx="52" cy="140" r="10" fill="#3B82F6">
+    <animate attributeName="opacity" values="1;0.2;1" dur="1.6s" repeatCount="indefinite"/>
+  </circle>
+  <text x="1840" y="150" text-anchor="end" font-family="Consolas, monospace" font-size="30" fill="#ffffff" fill-opacity="0.5">00:00:59:24</text>
+  <text x="960" y="750" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="150" fill="none" stroke="#ffffff" stroke-opacity="0.85" stroke-width="2.5" letter-spacing="24">SHOWREEL</text>
+  <text x="960" y="840" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="64" fill="#3B82F6" letter-spacing="30">2026</text>
+  <text x="80" y="1040" font-family="Arial, sans-serif" font-size="26" fill="#ffffff" fill-opacity="0.4" letter-spacing="6">MUHANAD WAEL MAHDY — EDITOR &amp; MOTION DESIGNER</text>
+</svg>
