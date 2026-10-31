@@ -53,14 +53,16 @@ function run(args) {
   execFileSync(FFMPEG, ["-y", "-v", "error", ...args], { stdio: "inherit" });
 }
 
-function compress(src, dst, targetHeight, crf) {
-  const { h } = probe(src);
-  const scale = h > targetHeight ? `scale=-2:${targetHeight}` : "scale=trunc(iw/2)*2:trunc(ih/2)*2";
+function compress(src, dst, targetSize, crf) {
+  const { w, h } = probe(src);
+  // Vertical (portrait) videos: cap the WIDTH at targetSize so the long side
+  // keeps its quality (e.g. 1080x1920 -> 720x1280). Landscape: cap the height.
+  const scale = w > h ? `scale=-2:${targetSize}` : `scale=${targetSize}:-2`;
   run([
     "-i", src,
     "-vf", scale,
     "-c:v", "libx264", "-preset", "medium", "-crf", String(crf), "-pix_fmt", "yuv420p",
-    "-c:a", "aac", "-b:a", "96k",
+    "-c:a", "aac", "-b:a", "128k",
     "-movflags", "+faststart",
     dst,
   ]);
@@ -76,10 +78,10 @@ for (const { file, size } of videos) {
 
   console.log(`→ ${file} (${before} MB)`);
   let ok = false;
-  // Pass 1: 720p CRF 27. Pass 2 (if still too big): 480p CRF 31.
-  for (const [h, crf] of [[720, 27], [480, 31]]) {
+  // Pass 1: 720-class CRF 22. Pass 2 (if still too big): 480-class CRF 31.
+  for (const [s, crf] of [[720, 22], [480, 31]]) {
     try {
-      compress(src, dst, h, crf);
+      compress(src, dst, s, crf);
       const outSize = fs.statSync(dst).size;
       if (outSize <= MAX_MB * 1024 * 1024) {
         console.log(`  [OK] ${(outSize / 1048576).toFixed(1)} MB (${h}p CRF${crf}) → ${outName}`);
