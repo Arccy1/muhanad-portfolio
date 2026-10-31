@@ -1,11 +1,10 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import type { SkillDTO } from "@/lib/types";
 
 function SkillBar({ skill, index }: { skill: SkillDTO; index: number }) {
-  const reduce = useReducedMotion();
-  return (
+    return (
     <div>
       <div className="mb-2.5 flex items-center justify-between">
         <span className="text-sm font-medium text-zinc-200">{skill.name}</span>
@@ -14,7 +13,7 @@ function SkillBar({ skill, index }: { skill: SkillDTO; index: number }) {
       <div className="h-2 overflow-hidden rounded-full bg-white/[0.06]" role="progressbar" aria-valuenow={skill.level} aria-valuemin={0} aria-valuemax={100} aria-label={skill.name}>
         <motion.div
           className="relative h-full rounded-full bg-gradient-to-r from-brand-700 via-brand-500 to-brand-300"
-          initial={reduce ? { width: `${skill.level}%` } : { width: 0 }}
+          initial={{ width: 0 }}
           whileInView={{ width: `${skill.level}%` }}
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 1.2, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}

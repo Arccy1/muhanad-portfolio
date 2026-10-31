@@ -2,6 +2,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import ScrollProgress from "@/components/layout/ScrollProgress";
 import PageTracker from "@/components/site/PageTracker";
+import CinematicBackground from "@/components/site/CinematicBackground";
 import { LanguageProvider } from "@/components/site/LanguageProvider";
 import { getSiteContent, getSocials } from "@/lib/content";
 
@@ -11,6 +12,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
   const socials = getSocials(content);
   return (
     <LanguageProvider>
+      <CinematicBackground />
       <ScrollProgress />
       <Navbar />
       <main className="min-h-screen">{children}</main>

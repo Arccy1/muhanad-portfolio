@@ -39,16 +39,18 @@ export default async function ShowreelPage() {
             <p className="mt-6 text-lg leading-relaxed text-zinc-400">{content["showreel.description"]}</p>
           </Reveal>
 
-          <Reveal delay={0.15} className="mt-14">
+          <Reveal delay={0.15} variant="cinematic" className="mt-14">
             {videoUrl ? (
-              <VideoPlayer
-                src={videoUrl}
-                poster={asset("/images/showreel-poster.svg")}
-                title="Showreel 2026"
-                className="shadow-glow-lg"
-              />
+              <div className="viewfinder relative">
+                <VideoPlayer
+                  src={videoUrl}
+                  poster={asset("/images/showreel-poster.svg")}
+                  title="Showreel 2026"
+                  className="shadow-glow-lg"
+                />
+              </div>
             ) : (
-              <div className="flex aspect-video items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-ink-800">
+              <div className="viewfinder relative flex aspect-video items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-ink-800">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={asset("/images/showreel-poster.svg")} alt="Showreel poster" className="h-full w-full object-cover" />
               </div>
@@ -76,7 +78,7 @@ export default async function ShowreelPage() {
           </Reveal>
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {featured.map((project, i) => (
-              <Reveal key={project.id} delay={0.06 * i}>
+              <Reveal key={project.id} delay={0.06 * i} variant="cinematic">
                 <ProjectCard project={project} className="h-full" />
               </Reveal>
             ))}

@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useCallback, useContext, useEffect, useState } from "react";
+import { MotionConfig } from "framer-motion";
 import { Lang, translate } from "@/lib/i18n";
 
 type Ctx = { lang: Lang; dir: "ltr" | "rtl"; t: (key: string) => string; setLang: (lang: Lang) => void };
@@ -43,7 +44,12 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <LanguageContext.Provider value={{ lang, dir: lang === "ar" ? "rtl" : "ltr", t, setLang }}>
-      {children}
+      {/* reducedMotion="user": framer-motion automatically strips transform/
+          layout animations for visitors with reduced motion enabled — keeps
+          SSR/client DOM identical (no hydration mismatches). */}
+      <MotionConfig reducedMotion="user">
+        {children}
+      </MotionConfig>
     </LanguageContext.Provider>
   );
 }

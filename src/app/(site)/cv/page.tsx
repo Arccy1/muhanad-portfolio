@@ -7,6 +7,9 @@ import { parseJsonArray } from "@/lib/utils";
 import PrintButton from "@/components/cv/PrintButton";
 import Reveal from "@/components/ui/Reveal";
 
+// The CV reads live database content — never prerender it at build time.
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "CV",
   description: "Curriculum vitae of Muhanad Wael El-Mahdy — video editor and motion designer.",

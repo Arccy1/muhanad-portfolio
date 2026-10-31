@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Clock, Play } from "lucide-react";
+import Parallax from "@/components/ui/Parallax";
 import type { ProjectDTO } from "@/lib/types";
 import { asset, cn } from "@/lib/utils";
 
@@ -19,20 +20,23 @@ export default function ProjectCard({ project, className }: Props) {
       aria-label={`Open project: ${project.title}`}
     >
       <div className="relative aspect-video overflow-hidden">
-        {project.thumbnailUrl ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={asset(project.thumbnailUrl)}
-            alt={project.title}
-            loading="lazy"
-            className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
-          />
-        ) : (
-          <div className="h-full w-full bg-gradient-to-br from-ink-900 to-brand-950" />
-        )}
+        <Parallax distance={10} className="absolute inset-0">
+          {project.thumbnailUrl ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={asset(project.thumbnailUrl)}
+              alt={project.title}
+              loading="lazy"
+              className="h-full w-full scale-[1.12] object-cover transition-transform duration-700 ease-out group-hover:scale-[1.18]"
+            />
+          ) : (
+            <div className="h-full w-full bg-gradient-to-br from-ink-900 to-brand-950" />
+          )}
+        </Parallax>
 
-        {/* hover overlay */}
+        {/* lighting: bottom gradient + soft sheen sweep on hover */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-95" />
+        <span className="sheen" aria-hidden />
 
         {/* play button */}
         <div className="absolute inset-0 flex items-center justify-center">

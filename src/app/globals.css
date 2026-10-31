@@ -259,3 +259,234 @@ html.light .grain::after {
     margin: 12mm;
   }
 }
+
+
+/* ------------------------------------------------------------------ */
+/* Cinematic ambient background — brand-colored light orbs that drift  */
+/* extremely slowly, plus timeline-inspired playhead lines. All layers */
+/* are transform/opacity only (GPU-friendly) and freeze under the     */
+/* reduced-motion preference.                                         */
+/* ------------------------------------------------------------------ */
+.cine-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+.cine-bg__layer {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  will-change: transform;
+}
+.cine-bg__orb-a {
+  top: -18%;
+  left: -12%;
+  width: 62vw;
+  height: 62vw;
+  background: radial-gradient(circle at 40% 40%, rgb(var(--c-brand-600) / 0.16), transparent 65%);
+  animation: cine-drift-a 46s ease-in-out infinite alternate;
+}
+.cine-bg__orb-b {
+  bottom: -22%;
+  right: -14%;
+  width: 58vw;
+  height: 58vw;
+  background: radial-gradient(circle at 60% 55%, rgb(var(--c-brand-800) / 0.22), transparent 62%);
+  animation: cine-drift-b 58s ease-in-out infinite alternate;
+}
+.cine-bg__orb-c {
+  top: 34%;
+  left: 44%;
+  width: 34vw;
+  height: 34vw;
+  background: radial-gradient(circle at 50% 50%, rgb(var(--c-brand-400) / 0.07), transparent 60%);
+  animation: cine-drift-c 39s ease-in-out infinite alternate;
+}
+
+@keyframes cine-drift-a {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  50%  { transform: translate3d(9vw, 7vh, 0) scale(1.12); }
+  100% { transform: translate3d(-4vw, 12vh, 0) scale(0.96); }
+}
+@keyframes cine-drift-b {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  50%  { transform: translate3d(-8vw, -9vh, 0) scale(1.08); }
+  100% { transform: translate3d(5vw, -4vh, 0) scale(0.94); }
+}
+@keyframes cine-drift-c {
+  0%   { transform: translate3d(0, 0, 0) scale(0.9); opacity: 0.6; }
+  100% { transform: translate3d(-14vw, 6vh, 0) scale(1.15); opacity: 1; }
+}
+
+/* Timeline-inspired lines: thin horizontal rails with a soft playhead  */
+/* light sweeping across, at different heights and speeds.              */
+.cine-bg__lines {
+  position: absolute;
+  inset: 0;
+}
+.cine-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgb(var(--c-brand-400) / 0.05) 30%, rgb(var(--c-brand-400) / 0.05) 70%, transparent);
+}
+.cine-line::after {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: -30%;
+  width: 30%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, rgb(var(--c-brand-400) / 0.35), transparent);
+  filter: blur(1px);
+  animation-duration: inherit;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-name: cine-playhead;
+}
+.cine-line--a { top: 24%; animation: cine-playhead 34s linear infinite; }
+.cine-line--b { top: 58%; animation: cine-playhead 47s linear infinite; animation-delay: -18s; }
+.cine-line--c { top: 81%; animation: cine-playhead 41s linear infinite; animation-delay: -7s; opacity: 0.7; }
+
+@keyframes cine-playhead {
+  0%   { transform: translateX(-10%); }
+  100% { transform: translateX(460%); }
+}
+
+/* Slow diagonal light sweep crossing the whole viewport every ~36s.   */
+.cine-bg__sweep {
+  position: absolute;
+  top: -20%;
+  left: -30%;
+  width: 160%;
+  height: 140%;
+  background: linear-gradient(115deg, transparent 42%, rgb(var(--c-brand-300) / 0.045) 50%, transparent 58%);
+  transform: translateX(-40%);
+  animation: cine-sweep 36s ease-in-out infinite;
+}
+@keyframes cine-sweep {
+  0%, 55%  { transform: translateX(-40%); }
+  85%, 100% { transform: translateX(40%); }
+}
+
+/* Vignette that keeps edges dark and content readable. */
+.cine-bg__vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 42%, transparent 55%, rgb(var(--c-ink) / 0.55) 100%);
+}
+
+/* Light theme: lower the orb opacities so the airy look survives. */
+html.light .cine-bg__orb-a { background: radial-gradient(circle at 40% 40%, rgb(var(--c-brand-400) / 0.10), transparent 65%); }
+html.light .cine-bg__orb-b { background: radial-gradient(circle at 60% 55%, rgb(var(--c-brand-300) / 0.13), transparent 62%); }
+html.light .cine-line { background: linear-gradient(90deg, transparent, rgb(var(--c-brand-500) / 0.06) 30%, rgb(var(--c-brand-500) / 0.06) 70%, transparent); }
+html.light .cine-line::after { background: linear-gradient(90deg, transparent, rgb(var(--c-brand-500) / 0.30), transparent); }
+html.light .cine-bg__vignette { background: radial-gradient(ellipse at 50% 42%, transparent 55%, rgb(var(--c-ink) / 0.35) 100%); }
+
+/* ------------------------------------------------------------------ */
+/* Kinetic typography — per-letter entrance handled in React; these   */
+/* utilities provide the glow backdrop.                               */
+/* ------------------------------------------------------------------ */
+.kinetic-word {
+  display: inline-block;
+  white-space: nowrap;
+}
+.kinetic-letter {
+  display: inline-block;
+  will-change: transform, opacity, filter;
+}
+.kinetic-tail {
+  position: relative;
+  display: inline-block;
+}
+.kinetic-tail::before {
+  content: "";
+  position: absolute;
+  inset: -18% -12%;
+  background: radial-gradient(ellipse at 50% 55%, rgb(var(--c-brand-500) / 0.28), transparent 70%);
+  filter: blur(28px);
+  z-index: -1;
+  animation: cine-glow-pulse 5.5s ease-in-out infinite;
+}
+@keyframes cine-glow-pulse {
+  0%, 100% { opacity: 0.55; transform: scale(1); }
+  50%      { opacity: 1; transform: scale(1.06); }
+}
+
+/* Mouse-following spotlight (desktop pointers only). */
+.spotlight {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(600px circle at var(--spot-x, 50%) var(--spot-y, 40%), rgb(var(--c-brand-500) / 0.08), transparent 55%);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+.spotlight--on { opacity: 1; }
+
+/* Card lighting sweep on hover — a soft sheen crossing the thumbnail. */
+.sheen {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.sheen::before {
+  content: "";
+  position: absolute;
+  top: -60%;
+  bottom: -60%;
+  left: -80%;
+  width: 55%;
+  background: linear-gradient(100deg, transparent, rgb(255 255 255 / 0.09), transparent);
+  transform: skewX(-18deg);
+}
+.group:hover .sheen::before {
+  animation: cine-sheen 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@keyframes cine-sheen {
+  to { left: 130%; }
+}
+
+/* Viewfinder corner brackets for the showreel frame. */
+.viewfinder::before,
+.viewfinder::after {
+  content: "";
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  border: 2px solid rgb(var(--c-brand-400) / 0.55);
+  z-index: 2;
+}
+.viewfinder::before {
+  top: -2px;
+  left: -2px;
+  border-right: none;
+  border-bottom: none;
+  border-top-left-radius: 4px;
+}
+.viewfinder::after {
+  bottom: -2px;
+  right: -2px;
+  border-left: none;
+  border-top: none;
+  border-bottom-right-radius: 4px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Reduced motion — freeze every ambient layer, keep content visible. */
+/* ------------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  .cine-bg__orb-a,
+  .cine-bg__orb-b,
+  .cine-bg__orb-c,
+  .cine-bg__sweep,
+  .cine-line,
+  .cine-line::after,
+  .kinetic-tail::before {
+    animation: none !important;
+  }
+}

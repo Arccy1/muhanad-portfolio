@@ -34,7 +34,7 @@ export default function FeaturedProjects({ projects }: { projects: ProjectDTO[] 
 
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {projects.map((project, i) => (
-            <Reveal key={project.id} delay={0.08 * i}>
+            <Reveal key={project.id} delay={0.08 * i} variant="cinematic">
               <ProjectCard project={project} className="h-full" />
             </Reveal>
           ))}
