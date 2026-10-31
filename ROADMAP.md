@@ -37,6 +37,26 @@ from a great demo into a live, revenue-generating portfolio.
 - [ ] Add the site to Google Search Console and submit `/sitemap.xml`
       (needs your Google account — verify ownership, then submit the sitemap URL)
 
+## Phase 2.5 — Full-Stack Migration: Vercel + Supabase (IN PROGRESS)
+
+- [x] **Code converted** — static export removed (`next.config.mjs` is now a
+      standard full-stack config), all pages read the database live
+      (`force-dynamic`), API routes fixed for non-GET methods, `asset()`
+      simplified to pass-through.
+- [x] **Supabase Storage integration** — `src/lib/supabase.ts` + upload API
+      route store media in a public `media` bucket via REST API.
+- [x] **Migration tooling** — `scripts/migrate-to-supabase.mjs` (data copy +
+      media upload with SHA-256 dedupe + URL rewrite, re-runnable),
+      `scripts/compress-videos.mjs` (ffmpeg, fits the 50 MB free upload limit).
+- [x] **Migration guide** — `DEPLOY-VERCEL.md` (account setup + steps).
+- [x] **Pre-migration backups** — `backup-supabase-migration/` (pg_dump +
+      git bundle + uploads copy; gitignored, kept locally).
+- [ ] **USER: create Supabase project + bucket** (see DEPLOY-VERCEL.md Part 1A)
+- [ ] **USER: create Vercel account + authorize GitHub** (Part 1B)
+- [ ] Compress oversized videos → migrate DB → migrate media → deploy → verify
+- [ ] Set `NEXT_PUBLIC_SITE_URL` to the `*.vercel.app` domain
+- [ ] Cutover: GitHub Pages retired, local dev points at Supabase
+
 ## Phase 3 — Hardening & Operations
 
 - [x] **Rate limiting** — login (5/15 min per IP), contact form (5/hour per IP),

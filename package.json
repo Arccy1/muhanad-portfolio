@@ -12,8 +12,8 @@
     "db:seed": "tsx prisma/seed.ts",
     "db:backup": "node scripts/backup-database.mjs",
     "admin:add": "node --import tsx scripts/add-admin.mjs",
-    "build:static": "node scripts/build-static.mjs",
-    "deploy:pages": "node scripts/deploy-pages.mjs",
+    "compress:videos": "node scripts/compress-videos.mjs",
+    "migrate:supabase": "node scripts/migrate-to-supabase.mjs",
     "placeholders": "node scripts/generate-placeholders.mjs"
   },
   "prisma": {
