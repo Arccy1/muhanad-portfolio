@@ -52,3 +52,5 @@ ck.txt
 # deploy artifacts 
 .deploy-status.json 
 deploy.log
+/backup/
+/backup/

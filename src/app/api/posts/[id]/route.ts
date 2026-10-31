@@ -4,10 +4,6 @@ import { requireAdmin, unauthorized } from "@/lib/auth";
 import { slugify } from "@/lib/utils";
 import { serializePost } from "@/lib/data";
 
-export async function generateStaticParams() { return []; }
-
-export const dynamicParams = false;
-
 type Ctx = { params: { id: string } };
 
 export async function PUT(req: NextRequest, ctx: Ctx) {
