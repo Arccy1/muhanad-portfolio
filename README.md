@@ -85,28 +85,27 @@ The session lasts 7 days.
 
 ---
 
-## Hosting on GitHub Pages (the public website)
+## Hosting on Vercel + Supabase (live website, full-stack)
 
-The visitor-facing site is hosted **live on GitHub Pages**:
-**https://arccy1.github.io/muhanad-portfolio/**
+The whole site — public pages, admin panel, database and media — is hosted
+**live on Vercel** (free Hobby plan) with Supabase (free plan) as the database
+and media storage:
 
-It works as a two-part system:
+**https://muhanad-portfolio-jade.vercel.app/**
 
-| Part | Where | What visitors see |
+| Part | Where | Notes |
 | --- | --- | --- |
-| Public website | GitHub Pages (auto-updated) | Home, portfolio + project pages, about, services, showreel, contact (contact form opens the visitor's email app) |
-| Admin panel + database + inbox | Your PC via `start.bat` | Not public — where you manage content |
-
-**Publishing workflow:** edit content in the admin panel (`start.bat` → /admin), then
-double-click **`deploy-pages.bat`** (or run `npm run deploy:pages`). It rebuilds the
-static site from your current database, pushes it to the `gh-pages` branch, and waits
-until the live URL responds. Takes a couple of minutes.
+| Website + admin panel | Vercel (Next.js full-stack) | Updates are **instant** — save in the admin panel and the live site reflects it immediately |
+| Database | Supabase PostgreSQL | All projects, posts, testimonials, CV, messages, ratings, site content |
+| Media (videos/images) | Supabase Storage (`media` public bucket) | Uploaded through the admin panel, served from Supabase's CDN |
+| Admin login | Same email/password as before | `/admin` on the Vercel URL |
 
 Notes:
-- The static build snapshots your local database — run it from this PC (where `dev.db` lives).
-- Media uploaded through the admin panel stays local; for images on the live site put the
-  files into `public/images/` (they're part of the repo) or use external URLs (YouTube etc.).
-- `/admin` and the API are intentionally excluded from the static build.
+- Every push to `main` on GitHub auto-deploys to Vercel.
+- Environment variables live in `.env` (local) and the Vercel project settings.
+- `DEPLOY-VERCEL.md` documents the full hosting setup.
+- The old GitHub Pages site (`arccy1.github.io/muhanad-portfolio`) is retired —
+  it stays online as a frozen snapshot until disabled in repo Settings → Pages.
 
 ## Database
 

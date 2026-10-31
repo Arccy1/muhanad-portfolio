@@ -37,25 +37,29 @@ from a great demo into a live, revenue-generating portfolio.
 - [ ] Add the site to Google Search Console and submit `/sitemap.xml`
       (needs your Google account — verify ownership, then submit the sitemap URL)
 
-## Phase 2.5 — Full-Stack Migration: Vercel + Supabase (IN PROGRESS)
+## Phase 2.5 — Full-Stack Migration: Vercel + Supabase ✅ DONE
 
-- [x] **Code converted** — static export removed (`next.config.mjs` is now a
-      standard full-stack config), all pages read the database live
-      (`force-dynamic`), API routes fixed for non-GET methods, `asset()`
-      simplified to pass-through.
-- [x] **Supabase Storage integration** — `src/lib/supabase.ts` + upload API
-      route store media in a public `media` bucket via REST API.
-- [x] **Migration tooling** — `scripts/migrate-to-supabase.mjs` (data copy +
-      media upload with SHA-256 dedupe + URL rewrite, re-runnable),
-      `scripts/compress-videos.mjs` (ffmpeg, fits the 50 MB free upload limit).
-- [x] **Migration guide** — `DEPLOY-VERCEL.md` (account setup + steps).
-- [x] **Pre-migration backups** — `backup-supabase-migration/` (pg_dump +
-      git bundle + uploads copy; gitignored, kept locally).
-- [ ] **USER: create Supabase project + bucket** (see DEPLOY-VERCEL.md Part 1A)
-- [ ] **USER: create Vercel account + authorize GitHub** (Part 1B)
-- [ ] Compress oversized videos → migrate DB → migrate media → deploy → verify
-- [ ] Set `NEXT_PUBLIC_SITE_URL` to the `*.vercel.app` domain
-- [ ] Cutover: GitHub Pages retired, local dev points at Supabase
+- [x] **Code converted** — static export removed, all pages read the database
+      live (`force-dynamic`), API routes fixed for non-GET methods.
+- [x] **Supabase Storage integration** — media uploads go to a public `media`
+      bucket via REST API (`src/lib/supabase.ts`), 50 MB free-plan guard.
+- [x] **Migration executed** — Supabase project created, all 12 tables copied
+      (7 projects, posts, testimonials, CV, services, skills, admin account),
+      21 media files uploaded (6 duplicates deduped), database URLs rewritten
+      to Supabase Storage.
+- [x] **Deployed to Vercel** — https://muhanad-portfolio-jade.vercel.app
+      (env vars: DATABASE_URL via IPv4 pooler, AUTH_SECRET, SUPABASE_URL,
+      SUPABASE_SERVICE_KEY, SUPABASE_BUCKET, NEXT_PUBLIC_SITE_URL).
+- [x] **Videos compressed** — 742 MB → 406 MB total (ffmpeg, portrait-aware
+      720p, durations verified identical); everything fits Supabase's 1 GB.
+- [x] **Admin auth fixed on cloud** — password hash re-synced to the documented
+      login; login/contact/analytics APIs verified live (200/201).
+- [x] **Instant updates** — "Publish Now" removed; saving in the admin panel
+      appears on the live site immediately (no build step).
+- [x] **Cutover** — local dev now runs on the same Supabase database as
+      production; GitHub Pages site retired (frozen snapshot).
+- [x] **Backups kept** — `backup-supabase-migration/` (pg_dump + git bundle +
+      original uncompressed uploads).
 
 ## Phase 3 — Hardening & Operations
 
