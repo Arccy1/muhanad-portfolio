@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import { FileVideo, ImagePlus, Loader2, X } from "lucide-react";
+import { uploadFile } from "@/lib/uploadClient";
 
 type Props = {
   value: string;
@@ -22,17 +23,9 @@ export default function ImageUpload({ value, onChange, label, accept = "image/*"
     setUploading(true);
     setError("");
     try {
-      const form = new FormData();
-      form.append("file", file);
-      const res = await fetch("/api/upload", { method: "POST", body: form });
-      const data = await res.json();
-      if (!res.ok) {
-        setError(data.error || "Upload failed.");
-      } else {
-        onChange(data.url);
-      }
-    } catch {
-      setError("Upload failed — check your connection.");
+      onChange(await uploadFile(file));
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Upload failed — check your connection.");
     } finally {
       setUploading(false);
     }
@@ -115,20 +108,20 @@ export function MultiImageUpload({
   label: string;
 }) {
   const [uploading, setUploading] = useState(false);
+  const [error, setError] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
   async function upload(files: FileList) {
     setUploading(true);
+    setError("");
     try {
       const uploaded: string[] = [];
       for (const file of Array.from(files)) {
-        const form = new FormData();
-        form.append("file", file);
-        const res = await fetch("/api/upload", { method: "POST", body: form });
-        const data = await res.json();
-        if (res.ok) uploaded.push(data.url);
+        uploaded.push(await uploadFile(file));
       }
       onChange([...values, ...uploaded]);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Upload failed.");
     } finally {
       setUploading(false);
     }
@@ -162,6 +155,7 @@ export function MultiImageUpload({
           {uploading ? <Loader2 size={18} className="animate-spin text-brand-500" /> : <ImagePlus size={18} />}
         </button>
       </div>
+      {error && <p className="mt-1.5 text-[11px] text-brand-400">{error}</p>}
       <input
         ref={inputRef}
         type="file"

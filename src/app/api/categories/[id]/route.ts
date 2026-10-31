@@ -4,9 +4,6 @@ import { requireAdmin, unauthorized } from "@/lib/auth";
 import { slugify, toJsonArray } from "@/lib/utils";
 
 
-// Required for output:export — prevents build error
-export async function generateStaticParams() { return []; }
-
 type Ctx = { params: { id: string } };
 
 export async function PUT(req: NextRequest, ctx: Ctx) {

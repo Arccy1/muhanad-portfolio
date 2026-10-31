@@ -5,9 +5,6 @@ import { normalizeProjectBody, uniqueSlug } from "@/lib/projectPayload";
 import { serializeProject } from "@/lib/data";
 
 
-// Required for output:export — prevents build error
-export async function generateStaticParams() { return []; }
-
 type Ctx = { params: { id: string } };
 
 export async function GET(_req: NextRequest, ctx: Ctx) {

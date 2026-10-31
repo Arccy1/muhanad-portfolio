@@ -53,3 +53,37 @@ export async function deleteFromSupabase(objectPath: string): Promise<boolean> {
   });
   return res.ok;
 }
+
+/**
+ * Create a short-lived signed upload URL so the browser can send large media
+ * directly to Supabase Storage — bypassing Vercel's 4.5 MB serverless body
+ * limit. The URL is scoped to a single object path and expires in 10 minutes.
+ */
+export async function createSignedUploadUrl(
+  filename: string,
+  folder = "media"
+): Promise<{ uploadUrl: string; publicUrl: string; path: string }> {
+  const supabaseUrl = SUPABASE_URL.replace(/\/$/, "");
+  const objectPath = `${folder}/${filename}`;
+
+  const res = await fetch(`${supabaseUrl}/storage/v1/object/upload/sign/${SUPABASE_BUCKET}/${objectPath}`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${SUPABASE_SERVICE_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ expiresIn: 600 }),
+  });
+  if (!res.ok) {
+    const text = await res.text().catch(() => "");
+    throw new Error(`Could not sign upload (${res.status}): ${text.slice(0, 200)}`);
+  }
+  const data = (await res.json()) as { url?: string };
+  if (!data.url) throw new Error("Supabase returned no signed upload URL.");
+
+  return {
+    uploadUrl: `${supabaseUrl}/storage/v1${data.url}`,
+    publicUrl: `${supabaseUrl}/storage/v1/object/public/${SUPABASE_BUCKET}/${objectPath}`,
+    path: objectPath,
+  };
+}
