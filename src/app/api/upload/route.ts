@@ -63,6 +63,14 @@ export async function POST(req: NextRequest) {
     const buffer = Buffer.from(await file.arrayBuffer());
 
     if (isStorageConfigured()) {
+      // Supabase free plan caps a single upload at 50 MB — fail early with a
+      // clear message instead of a raw storage error mid-request.
+      if (file.size > 50 * 1024 * 1024) {
+        return NextResponse.json(
+          { error: "File exceeds 50 MB (storage free-plan limit). Compress the video first." },
+          { status: 413 }
+        );
+      }
       // Upload to Supabase Storage
       const filename = `${Date.now()}-${randomUUID().slice(0, 8)}.${ext}`;
       const folder = folderFor(isImage, isVideo, isAudio);
